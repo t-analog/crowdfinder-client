@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "test-client",
-    "slug": "test-client",
+    "name": "crowdfinder-client",
+    "slug": "crowdfinder-client",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
