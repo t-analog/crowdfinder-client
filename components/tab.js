@@ -2,9 +2,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
-import HomeScreen from './screens/HomeScreen';
-import JoinScreen from './screens/JoinScreen';
-import SettingScreen from './screens/SettingScreen';
+import HomeScreen from '../screens/HomeScreen';
+import JoinScreen from '../screens/JoinScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +33,7 @@ const Tabs = () => {
           tabBarIcon:({focused}) => (
             <View>
             <Image
-              source={require('./eg.png')}
+              source={require('../assets/eg.png')}
               resizeMode="contain"
               style={{
                 width:25,
@@ -56,7 +56,7 @@ const Tabs = () => {
         tabBarIcon:({focused}) => (
           <View>
           <Image
-            source={require('./eg.png')}
+            source={require('../assets/eg.png')}
             resizeMode="contain"
             style={{
               width:25,
@@ -73,13 +73,13 @@ const Tabs = () => {
       }}
       />
       <Tab.Screen
-      name="SETTING"
-      component={SettingScreen}
+      name="PROFILE"
+      component={ProfileScreen}
       options={{
         tabBarIcon:({focused}) => (
           <View>
           <Image
-            source={require('./eg.png')}
+            source={require('../assets/eg.png')}
             resizeMode="contain"
             style={{
               width:25,
@@ -89,7 +89,7 @@ const Tabs = () => {
             />
             <Text
               style={{color:focused ? '#e32f45':'#748c94', fontSize: 8}}>
-              SETTING
+              PROFILE
               </Text>
           </View>
         ),
