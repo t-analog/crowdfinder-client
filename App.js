@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
-//import Inputs from './login.js';
+//import Inputs from './screens/login.js';
 import Tabs from './components/tab.js';
 
 export default function App() {
@@ -11,5 +11,6 @@ export default function App() {
     <NavigationContainer>
       <Tabs />
     </NavigationContainer>
+  //  <Inputs />
   );
 }
