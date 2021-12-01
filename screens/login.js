@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 
 class Inputs extends Component {
    state = {
@@ -18,6 +18,10 @@ class Inputs extends Component {
    render() {
       return (
          <View style = {styles.container}>
+            <Image
+              style={styles.logo}
+              source={require('../assets/cflogo.png')} />
+
             <TextInput style = {styles.input}
                underlineColorAndroid = "transparent"
                placeholder = "Email/Username"
@@ -56,7 +60,16 @@ export default Inputs
 
 const styles = StyleSheet.create({
    container: {
-      paddingTop: 300
+      paddingTop: 100
+   },
+   logo: {
+      aspectRatio:1.81,
+      width: undefined,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginRight: 15,
+      marginLeft: 15,
+      resizeMode: 'contain'
    },
    input: {
       paddingHorizontal: 10,
@@ -69,9 +82,9 @@ const styles = StyleSheet.create({
       borderWidth: 1
    },
    forgot: {
-     paddingLeft: 230,
-     marginTop: 15,
+     padding: 15,
      color: 'blue',
+     textAlign: 'right',
    },
    loginButton: {
       backgroundColor: 'black',
