@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {SafeAreaView, View, Text, Button, StyleSheet, TouchableOpacity, TextInput,Image} from 'react-native';
 
 const HomeScreen= ({navigation}) => {
-  const [shouldShow, setshouldShow] = useState(false);
+  const [shouldShow, setshouldShow] = useState(true);
   	return (
   	<SafeAreaView style={{flex: 1}}>
   <View style={styles.container}>
@@ -39,25 +39,27 @@ const HomeScreen= ({navigation}) => {
            placeholderTextColor
            autoCapitalize = "none"/>
 
+         <View style={styles.row}>
          <TouchableOpacity
-           style = {styles.input}
+           style = {styles.buttonCancel}
            onPress={() => setshouldShow(!shouldShow)}>
            <Text style = {styles.ButtonText}> Cancel </Text>
           </TouchableOpacity>
 
          <TouchableOpacity
-           style = {styles.loginButton}
+           style = {styles.buttonCreate}
            >
            <Text style = {styles.ButtonText}> Create </Text>
           </TouchableOpacity>
+         </View>
       </View>
   	) : null
   }
-
-  <Button
-   title="Create Activity"
-   onPress={() => setshouldShow(!shouldShow)}
-  />
+  <TouchableOpacity
+     style = {styles.buttonActivity}
+     onPress={() => setshouldShow(!shouldShow)}>
+     <Text style = {styles.ButtonText}> Create Activity </Text>
+  </TouchableOpacity>
   </View>
   </SafeAreaView>
   	);
@@ -66,29 +68,62 @@ const HomeScreen= ({navigation}) => {
 export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
+     paddingTop: 100,
+     backgroundColor: 'white'
+  },
+  row: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#8fcbbc'
-},
-input: {
-   paddingHorizontal: 10,
-   marginTop: 15,
-   marginRight: 15,
-   marginLeft: 15,
-   marginBottom: 0,
-   height: 40,
-   borderColor: 'black',
-   borderWidth: 1
-},
-loginButton: {
-  paddingHorizontal: 10,
-  marginTop: 15,
-  marginRight: 15,
-  marginLeft: 15,
-  marginBottom: 150,
-  height: 40,
-  borderColor: 'black',
-  borderWidth: 1
-}
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  logo: {
+     aspectRatio:1.81,
+     width: undefined,
+     justifyContent: 'center',
+     alignItems: 'center',
+     marginRight: 15,
+     marginLeft: 15,
+     resizeMode: 'contain'
+  },
+  input: {
+     paddingHorizontal: 10,
+     marginTop: 15,
+     marginRight: 15,
+     marginLeft: 15,
+     marginBottom: 0,
+     height: 40,
+     borderColor: 'black',
+     borderWidth: 1
+  },
+  buttonActivity: {
+     backgroundColor: 'black',
+     padding: 10,
+     margin: 15,
+     height: 40,
+     alignItems: 'center',
+     justifyContent: 'center',
+  },
+  buttonCancel: {
+     backgroundColor: 'black',
+     padding: 10,
+     paddingRight: 63,
+     paddingLeft: 63,
+     margin: 15,
+     height: 40,
+     alignItems: 'left',
+     justifyContent: 'center',
+  },
+  buttonCreate: {
+     backgroundColor: 'black',
+     padding: 10,
+     paddingRight: 63,
+     paddingLeft: 63,
+     margin: 15,
+     height: 40,
+     alignItems: 'right',
+     justifyContent: 'center',
+  },
+  ButtonText:{
+     color: 'white'
+  }
 });
