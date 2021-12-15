@@ -30,7 +30,10 @@ function Login({ navigation }) {
         <Text style={styles.forgot}>Forgot your password?</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.loginButton}>
+        style={styles.loginButton}
+        onPress={
+          () => navigation.navigate("Home Screen")
+        }>
         <Text style={styles.ButtonText}> Login </Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -109,6 +112,10 @@ export default function App() {
         <Stack.Screen
           name="Register Account"
           component={RegisterAccount}
+        />
+        <Stack.Screen
+          name="Home Screen"
+          component={Tabs}
         />
       </Stack.Navigator>
     </NavigationContainer>
