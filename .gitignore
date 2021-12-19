@@ -12,3 +12,14 @@ web-build/
 
 # macOS
 .DS_Store
+
+.idea
+*.log
+tmp/
+
+*.tern-port
+yarn-debug.log*
+yarn-error.log*
+*.tsbuildinfo
+.npm
+.eslintcache
