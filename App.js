@@ -18,7 +18,7 @@ function Login({ navigation }) {
         placeholder="Email/Username"
         placeholderTextColor="black"
         autoCapitalize="none" />
-      <TextInput style={styles.input}
+      <TextInput secureTextEntry={true} style={styles.input}
         underlineColorAndroid="transparent"
         placeholder="Password"
         placeholderTextColor="black"
@@ -76,12 +76,12 @@ function RegisterAccount() {
         placeholder="Email"
         placeholderTextColor="black"
         autoCapitalize="none" />
-      <TextInput style={styles.input}
+      <TextInput secureTextEntry={true} style={styles.input}
         underlineColorAndroid="transparent"
         placeholder="Password"
         placeholderTextColor="black"
         autoCapitalize="none" />
-      <TextInput style={styles.input}
+      <TextInput secureTextEntry={true} style={styles.input}
         underlineColorAndroid="transparent"
         placeholder="Confirm Password"
         placeholderTextColor="black"
