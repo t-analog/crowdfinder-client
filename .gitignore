@@ -74,3 +74,11 @@ web-build/
 dist/
 
 # @end expo-cli
+
+tmp/
+
+*.tern-port
+yarn-debug.log*
+*.tsbuildinfo
+.npm
+.eslintcache
