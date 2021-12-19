@@ -18,7 +18,7 @@ function Login({ navigation }) {
         placeholder="Email/Username"
         placeholderTextColor="black"
         autoCapitalize="none" />
-      <TextInput style={styles.input}
+      <TextInput secureTextEntry={true} style={styles.input}
         underlineColorAndroid="transparent"
         placeholder="Password"
         placeholderTextColor="black"
@@ -66,30 +66,36 @@ function ForgotPassword() {
 function RegisterAccount() {
   return (
     <View style={styles.container}>
+
       <TextInput style={styles.input}
         underlineColorAndroid="transparent"
         placeholder="Username"
         placeholderTextColor="black"
         autoCapitalize="none" />
+
       <TextInput style={styles.input}
         underlineColorAndroid="transparent"
         placeholder="Email"
         placeholderTextColor="black"
         autoCapitalize="none" />
-      <TextInput style={styles.input}
+
+      <TextInput secureTextEntry={true} style={styles.input}
         underlineColorAndroid="transparent"
         placeholder="Password"
         placeholderTextColor="black"
         autoCapitalize="none" />
-      <TextInput style={styles.input}
+
+      <TextInput secureTextEntry={true} style={styles.input}
         underlineColorAndroid="transparent"
         placeholder="Confirm Password"
         placeholderTextColor="black"
         autoCapitalize="none" />
+
       <TouchableOpacity
         style={styles.registerButton}>
         <Text style={styles.ButtonText}> Register Account </Text>
       </TouchableOpacity>
+
     </View>
   )
 }
