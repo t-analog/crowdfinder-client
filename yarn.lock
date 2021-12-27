@@ -3293,10 +3293,10 @@
   "resolved" "https://registry.npmjs.org/expo-application/-/expo-application-4.0.1.tgz"
   "version" "4.0.1"
 
-"expo-asset@~8.4.4":
-  "integrity" "sha512-0yxAOJo8bnYvnRNOWikQ1xFP+YQViJ/px3MofZFUPGw02iaSSUzArcKDfMtpJNmH/EC7HE7GJSZpkoxx+zsHWA=="
-  "resolved" "https://registry.npmjs.org/expo-asset/-/expo-asset-8.4.4.tgz"
-  "version" "8.4.4"
+"expo-asset@~8.4.5":
+  "integrity" "sha512-4E+VzFdgSjeCC+x80VuL+moY04U19SRV6vrL8DekQSyPbwkNR1QdvSx/7O7XTOspB9duwebQ1ue7JHFWOwyaMQ=="
+  "resolved" "https://registry.npmjs.org/expo-asset/-/expo-asset-8.4.5.tgz"
+  "version" "8.4.5"
   dependencies:
     "blueimp-md5" "^2.10.0"
     "invariant" "^2.2.4"
@@ -3394,10 +3394,10 @@
     "find-up" "^5.0.0"
     "fs-extra" "^9.1.0"
 
-"expo-modules-autolinking@0.5.1":
-  "integrity" "sha512-UaqISyuWDTFWBeQv6BniPzAWOJ0R6MCL/uNt6BSMkZW+b8PUq4wYFpSNXSWUJTqY/raYWs5hcSR4HPGkqnVQlg=="
-  "resolved" "https://registry.npmjs.org/expo-modules-autolinking/-/expo-modules-autolinking-0.5.1.tgz"
-  "version" "0.5.1"
+"expo-modules-autolinking@0.5.2":
+  "integrity" "sha512-0mh9XpU8smGaZYT/D/lkGoYRw+gwUrUZs/LiHH7Z7vlUS6jhjvM13Vi2PgfdHjMuOgHy9GjqRrIoDsjuzjfnGQ=="
+  "resolved" "https://registry.npmjs.org/expo-modules-autolinking/-/expo-modules-autolinking-0.5.2.tgz"
+  "version" "0.5.2"
   dependencies:
     "chalk" "^4.1.0"
     "commander" "^7.2.0"
@@ -3432,9 +3432,9 @@
   "version" "0.5.0"
 
 "expo@*", "expo@^44.0.0":
-  "integrity" "sha512-N8bykKCT1EIk9L0UBsWXRtnbUtlmWkmVYXNacAEpHixVLBA8HBhs7BnSG5zd+O7beHWUA9FZmCK4CgduNFzBVQ=="
-  "resolved" "https://registry.npmjs.org/expo/-/expo-44.0.0.tgz"
-  "version" "44.0.0"
+  "integrity" "sha512-r3UXg8d2ypcK2I8ds5r9WP6luOLKH4tTqtdgOS+rQt3jpMpkF89VRnNB/Ux3GnzxHnxIHcEmTYBmfoI3qA4abg=="
+  "resolved" "https://registry.npmjs.org/expo/-/expo-44.0.1.tgz"
+  "version" "44.0.1"
   dependencies:
     "@babel/runtime" "^7.14.0"
     "@expo/metro-config" "~0.2.6"
@@ -3442,12 +3442,12 @@
     "babel-preset-expo" "~9.0.2"
     "cross-spawn" "^6.0.5"
     "expo-application" "~4.0.1"
-    "expo-asset" "~8.4.4"
+    "expo-asset" "~8.4.5"
     "expo-constants" "~13.0.0"
     "expo-file-system" "~13.1.0"
     "expo-font" "~10.0.4"
     "expo-keep-awake" "~10.0.1"
-    "expo-modules-autolinking" "0.5.1"
+    "expo-modules-autolinking" "0.5.2"
     "expo-modules-core" "0.6.3"
     "fbemitter" "^2.1.1"
     "invariant" "^2.2.4"
