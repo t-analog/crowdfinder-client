@@ -2,26 +2,26 @@ import React from 'react';
 import {View, Text, Image, Button, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 
 const ProfileScreen= ({navigation}) => {
-return (
-  <View style={styles.container}>
-    <Text style={styles.header}>Your Profile</Text>
-     <Image
-       style={styles.profile}
-       source={require('../assets/profile.jpeg')} />
-     <Text style={styles.data}>@xijinping</Text>
-     <Text style={styles.data}>xi@cpc.cn</Text>
-     <Text style={styles.data}>Skudai</Text>
-     <TextInput secureTextEntry={false} multiline={true} style={styles.input}
-       underlineColorAndroid="transparent"
-       placeholder="President of the People's Republic of China & General Secretary of the Communist Party of China."
-       placeholderTextColor="black"
-       autoCapitalize="none"
-       editable={false} />
-     <TouchableOpacity
-       style={styles.button}>
-       <Text style={styles.ButtonText}>Edit Profile</Text>
-     </TouchableOpacity>
-  </View>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Your Profile</Text>
+       <Image
+         style={styles.profile}
+         source={require('../assets/profile.jpeg')} />
+       <Text style={styles.data}>@xijinping</Text>
+       <Text style={styles.data}>xi@cpc.cn</Text>
+       <Text style={styles.data}>Skudai</Text>
+       <TextInput secureTextEntry={false} multiline={true} style={styles.input}
+         underlineColorAndroid="transparent"
+         placeholder="President of the People's Republic of China & General Secretary of the Communist Party of China."
+         placeholderTextColor="black"
+         autoCapitalize="none"
+         editable={false} />
+       <TouchableOpacity
+         style={styles.button}>
+         <Text style={styles.ButtonText}>Edit Profile</Text>
+       </TouchableOpacity>
+    </View>
   );
 };
 
