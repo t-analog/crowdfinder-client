@@ -1,123 +1,79 @@
-import React, { useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import React from 'react';
+import {View, Text, Image, Button, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
 
-const HomeScreen = () => {
-  const [shouldShow, setshouldShow] = useState(true);
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
+const ProfileScreen= ({navigation}) => {
+return (
       <View style={styles.container}>
-        {
-          shouldShow ? (
-            <View>
-              <TextInput style={styles.input}
-                underlineColorAndroid="transparent"
-                placeholder="Event's Name"
-                placeholderTextColor="black"
-                autoCapitalize="none" />
-              <TextInput style={styles.input}
-                underlineColorAndroid="transparent"
-                placeholder="Description"
-                placeholderTextColor="black"
-                autoCapitalize="none" />
-              <TextInput style={styles.input}
-                underlineColorAndroid="transparent"
-                placeholder="Capacity"
-                placeholderTextColor="black"
-                autoCapitalize="none" />
-              <TextInput style={styles.input}
-                underlineColorAndroid="transparent"
-                placeholder="Category"
-                placeholderTextColor="black"
-                autoCapitalize="none" />
-              <TextInput style={styles.input}
-                underlineColorAndroid="transparent"
-                placeholder="Location"
-                placeholderTextColor
-                autoCapitalize="none" />
-              <View style={styles.row}>
-                <TouchableOpacity
-                  style={styles.buttonCancel}
-                  onPress={() => setshouldShow(!shouldShow)}>
-                  <Text style={styles.ButtonText}> Cancel </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.buttonCreate} >
-                  <Text style={styles.ButtonText}> Create </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          ) : null
-        }
-        <TouchableOpacity
-          style={styles.buttonActivity}
-          onPress={() => setshouldShow(!shouldShow)}>
-          <Text style={styles.ButtonText}> Create Activity </Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+      <Text style={styles.header}>Your Profile</Text>
+      <Image
+        style={styles.profile}
+        source={require('../assets/profile.jpeg')}
+      />
+      <Text style={styles.data}>@xijinping</Text>
+      <Text style={styles.data}>xi@cpc.cn</Text>
+      <Text style={styles.data}>Skudai</Text>
+      <TextInput secureTextEntry={false} multiline={true} style={styles.input}
+        underlineColorAndroid="transparent"
+        placeholder="President of the People's Republic of China & General Secretary of the Communist Party of China."
+        placeholderTextColor="black"
+        autoCapitalize="none"
+        editable={false}
+      />
+      <TouchableOpacity
+        style={styles.button}>
+        <Text style={styles.ButtonText}>Edit Profile</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
+export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     paddingTop: 100,
     backgroundColor: 'white'
   },
-  row: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  logo: {
-    aspectRatio: 1.81,
-    width: undefined,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 15,
+  header: {
+    marginTop: 20,
+    marginBottom: 5,
     marginLeft: 15,
-    resizeMode: 'contain'
+    fontSize: 40
+  },
+  data: {
+    marginLeft: 15,
+    fontSize: 15
+  },
+  profile: {
+    width: 120, 
+    height: 120, 
+    borderRadius: 120/ 2,
+    position: 'absolute',
+    right: 10,
+    top: 5
   },
   input: {
     paddingHorizontal: 10,
+    paddingVertical: 10,
     marginTop: 15,
     marginRight: 15,
     marginLeft: 15,
     marginBottom: 0,
-    height: 40,
+    height: 60,
     borderColor: 'black',
     borderWidth: 1
   },
-  buttonActivity: {
+  button: {
     backgroundColor: 'black',
     padding: 10,
-    margin: 15,
+    marginTop: 30,
+    marginBottom: 365,
+    marginLeft: 15,
+    marginRight: 15,
     height: 40,
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonCancel: {
-    backgroundColor: 'black',
-    padding: 10,
-    paddingRight: 63,
-    paddingLeft: 63,
-    margin: 15,
-    height: 40,
-    alignItems: 'left',
-    justifyContent: 'center',
-  },
-  buttonCreate: {
-    backgroundColor: 'black',
-    padding: 10,
-    paddingRight: 63,
-    paddingLeft: 63,
-    margin: 15,
-    height: 40,
-    alignItems: 'right',
     justifyContent: 'center',
   },
   ButtonText: {
     color: 'white'
   }
 });
-
-export default HomeScreen;
