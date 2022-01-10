@@ -1,15 +1,15 @@
 import React from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
-const JoinScreen= ({navigation}) => {
-return (
-  <View style={styles.container}>
-    <Text>JoinScreen</Text>
-    <Button
-      title="Click Here"
-      onPress={() => alert('Button Clicked!')}
-    />
-  </View>
+const JoinScreen = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <Text>JoinScreen</Text>
+      <Button
+        title="Click Here"
+        onPress={() => alert('Button Clicked!')}
+      />
+    </View>
   );
 };
 
@@ -20,5 +20,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#8fcbbc'
-},
+  },
 });
