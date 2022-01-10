@@ -1,7 +1,5 @@
 import Realm from 'realm';
-
-const id = "crowdfinder-byjrt";
-const app = new Realm.App({ id });
+import { app } from './realm';
 
 /**
  * Log in user into Realm app
@@ -26,4 +24,4 @@ const login = async ({ username, password }) => {
   }
 };
 
-export { app, login };
+export default login;
