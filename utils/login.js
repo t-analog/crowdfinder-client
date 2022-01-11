@@ -24,4 +24,10 @@ const login = async ({ username, password }) => {
   }
 };
 
-export default login;
+const logout = async () => {
+  const user = app.currentUser;
+  await user.logOut();
+  return user.isLoggedIn;
+}
+
+export { login, logout };
