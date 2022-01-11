@@ -1,5 +1,5 @@
 import React from 'react';
-import login from '../utils/login';
+import { login } from '../utils/user';
 import { View, Image, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
