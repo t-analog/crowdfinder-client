@@ -44,7 +44,7 @@ const LoginScreen = ({ navigation }) => {
         onPress={
           async () => {
             const user = await login({ username, password });
-            { user != 1 ? navigation.navigate("Home") : console.error("Failed to log in") };
+            if (user) navigation.navigate("Home");
           }
         }>
         <Text style={styles.ButtonText}>Login</Text>

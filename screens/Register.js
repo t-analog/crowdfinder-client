@@ -48,7 +48,7 @@ const RegisterAccountScreen = ({ navigation }) => {
               return;
             }
             const user = await register({ username, password });
-            { user != 1 ? navigation.navigate("Home") : console.error("Failed to register") };
+            if (user) navigation.navigate("Home");
           }
         }>
         <Text style={styles.ButtonText}>Register</Text>

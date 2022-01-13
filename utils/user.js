@@ -7,13 +7,18 @@ import { app } from './realm';
  * @param password The end-user password.
  * @returns
  * If success, returns user's `accessToken`.
- * Else, return `1`.
+ * Else, print error to `stderr`, then return `false`.
  * */
 const register = async ({ username, password }) => {
-  await app.emailPasswordAuth.registerUser({
-    email: username,
-    password
-  });
+  try {
+    await app.emailPasswordAuth.registerUser({
+      email: username,
+      password
+    });
+  } catch (err) {
+    console.error(`Failed to register: ${err.message}`);
+    return false;
+  }
   const credentials = Realm.Credentials.emailPassword(
     username,
     password
@@ -22,7 +27,7 @@ const register = async ({ username, password }) => {
     const user = await app.logIn(credentials);
     return user;
   } catch (err) {
-    return 1;
+    return false;
   }
 };
 
@@ -33,7 +38,7 @@ const register = async ({ username, password }) => {
  * @returns
  * If success, returns user's `accessToken`.
  * If `magicword` is given as `username`, return `magicword`.
- * Else, return `1`.
+ * Else, print error to `stderr`, then return `false`.
  * */
 const login = async ({ username, password }) => {
   if (username == "magicword") return username;
@@ -45,7 +50,8 @@ const login = async ({ username, password }) => {
     const user = await app.logIn(credentials);
     return user.accessToken;
   } catch (err) {
-    return 1;
+    console.error(`Failed to login: ${err.message}`);
+    return false;
   }
 };
 
@@ -53,12 +59,17 @@ const login = async ({ username, password }) => {
  * Log out user from Realm app
  * @returns
  * If success, returns `true`.
- * Else, return `false`.
+ * Else, print error to `stderr`, then return `false`.
  * */
 const logout = async () => {
   const user = app.currentUser;
-  await user.logOut();
-  return !user.isLoggedIn;
+  try {
+    await user.logOut();
+    return !user.isLoggedIn;
+  } catch (err) {
+    console.error(`Failed to logout: ${err.message}`);
+    return false;
+  }
 }
 
 export { register, login, logout };
