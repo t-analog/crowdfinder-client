@@ -1,81 +1,62 @@
 import React from 'react';
-import Tabs from '../components/HomeTab';
-import RegisterScreen from './Register';
-import ForgotPasswordScreen from './ForgotPassword';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { login } from '../utils/user';
 import { View, Image, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 
-const Stack = createStackNavigator();
-
 const LoginScreen = ({ navigation }) => {
+  const [username, onChangeUsername] = React.useState("");
+  const [password, onChangePassword] = React.useState("");
   return (
     <View style={styles.container}>
+      {/* show variable only for debugging */}
+      <Text>
+        Value of username: {username}{"\n"}
+        Value of password: {password}
+      </Text>
       <Image
         style={styles.logo}
         source={require('../assets/cflogo.png')}
       />
-      <TextInput style={styles.input}
-        underlineColorAndroid="transparent"
+      <TextInput
+        autoCapitalize="none"
+        onChangeText={onChangeUsername}
         placeholder="Email/Username"
         placeholderTextColor="black"
-        autoCapitalize="none"
-      />
-      <TextInput secureTextEntry={true} style={styles.input}
+        style={styles.input}
         underlineColorAndroid="transparent"
+      />
+      <TextInput
+        autoCapitalize="none"
+        onChangeText={onChangePassword}
         placeholder="Password"
         placeholderTextColor="black"
-        autoCapitalize="none"
+        secureTextEntry={true}
+        style={styles.input}
+        underlineColorAndroid="transparent"
       />
       <TouchableOpacity
         onPress={
-          () => navigation.navigate("Forgot Password")
+          () => navigation.navigate("ForgotPassword")
         }>
         <Text style={styles.forgot}>Forgot your password?</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.loginButton}
         onPress={
-          () => navigation.navigate("Home Screen")
+          async () => {
+            const user = await login({ username, password });
+            if (user) navigation.navigate("Home");
+          }
         }>
         <Text style={styles.ButtonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.createAccButton}
         onPress={
-          () => navigation.navigate("Register Account")
+          () => navigation.navigate("Register")
         }>
         <Text style={styles.ButtonText}>Register Account</Text>
       </TouchableOpacity>
     </View>
-  );
-}
-
-const LoginStack = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            header: () => null
-          }}
-        />
-        <Stack.Screen
-          name="Forgot Password"
-          component={ForgotPasswordScreen}
-        />
-        <Stack.Screen
-          name="Register Account"
-          component={RegisterScreen}
-        />
-        <Stack.Screen
-          name="Home Screen"
-          component={Tabs}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
   );
 }
 
@@ -131,4 +112,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginStack;
+export default LoginScreen;
