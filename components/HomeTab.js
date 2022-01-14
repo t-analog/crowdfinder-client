@@ -1,10 +1,10 @@
 import React from 'react';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text, View, Image } from 'react-native';
 
-import HomeScreen from '../screens/HomeScreen';
 import JoinScreen from '../screens/JoinScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import CreateActivityScreen from '../screens/CreateActivityScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,87 +12,37 @@ const HomeTab = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarShowLabel: false,
+        tabBarActiveTintColor: 'tomato',
+        tabBarIcon: () => ( <Ionicons name={'home'} color={'white'} size={20}/> ),
+        tabBarInactiveTintColor: 'gray',
+        tabBarShowLabel: true,
+        tabBarLabelStyle: {
+          position: 'relative',
+          bottom: 20
+        },
         tabBarStyle: {
-          position: 'absolute',
-          bottom: 25,
-          left: 20,
-          right: 20,
-          elevation: 0,
-          backgroundColor: '#ff0000',
+          backgroundColor: '#0D1117',
           borderRadius: 15,
-          height: 90
+          bottom: 25,
+          elevation: 0,
+          height: 90,
+          left: 20,
+          position: 'absolute',
+          right: 20
         }
       }}
     >
       <Tab.Screen
-        name="HOME"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View>
-              <Image
-                source={require('../assets/eg.png')}
-                resizeMode="contain"
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? '#666666' : '#767312',
-                }}
-              />
-              <Text
-                style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 8 }}>
-                HOME
-              </Text>
-            </View>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="ACTIVITY"
+        name="NearbyActivity"
         component={JoinScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View>
-              <Image
-                source={require('../assets/eg.png')}
-                resizeMode="contain"
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? '#666666' : '#767312',
-                }}
-              />
-              <Text
-                style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 8 }}>
-                ACTIVITY
-              </Text>
-            </View>
-          ),
-        }}
       />
       <Tab.Screen
-        name="PROFILE"
+        name="CreateActivity"
+        component={CreateActivityScreen}
+      />
+      <Tab.Screen
+        name="ProfileScreen"
         component={ProfileScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <View>
-              <Image
-                source={require('../assets/eg.png')}
-                resizeMode="contain"
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? '#666666' : '#767312',
-                }}
-              />
-              <Text
-                style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 8 }}>
-                PROFILE
-              </Text>
-            </View>
-          ),
-        }}
       />
     </Tab.Navigator>
   );

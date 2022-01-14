@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 
-const HomeScreen = () => {
+const CreateActivityScreen = () => {
   const [shouldShow, setshouldShow] = useState(true);
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomeScreen;
+export default CreateActivityScreen;
