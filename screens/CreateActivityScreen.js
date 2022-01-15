@@ -1,66 +1,118 @@
-import React, { useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import React from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 
 const CreateActivityScreen = () => {
-  const [shouldShow, setshouldShow] = useState(true);
+  const [capacity, onChangeCapacity] = React.useState("");
+  const [cat, onChangeCat] = React.useState("");
+  const [desc, onChangeDesc] = React.useState("");
+  const [loc, onChangeLoc] = React.useState("");
+  const [title, onChangeTitle] = React.useState("");
+
+  const [shouldShow, setshouldShow] = React.useState(true);
+
+  const submitActivity = async () => {
+    if (title == "") {
+      console.error("Title cannot be empty!");
+      return false;
+    } else {
+      alert("Activity Created")
+      return true;
+    };
+  };
+
+  const clearText = () => {
+    onChangeCapacity("");
+    onChangeCat("");
+    onChangeDesc("");
+    onChangeLoc("");
+    onChangeTitle("");
+  }
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        {
-          shouldShow ? (
-            <View>
-              <TextInput style={styles.input}
-                underlineColorAndroid="transparent"
-                placeholder="Event's Name"
-                placeholderTextColor="black"
-                autoCapitalize="none" />
-              <TextInput style={styles.input}
-                underlineColorAndroid="transparent"
-                placeholder="Description"
-                placeholderTextColor="black"
-                autoCapitalize="none" />
-              <TextInput style={styles.input}
-                underlineColorAndroid="transparent"
-                placeholder="Capacity"
-                placeholderTextColor="black"
-                autoCapitalize="none" />
-              <TextInput style={styles.input}
-                underlineColorAndroid="transparent"
-                placeholder="Category"
-                placeholderTextColor="black"
-                autoCapitalize="none" />
-              <TextInput style={styles.input}
-                underlineColorAndroid="transparent"
-                placeholder="Location"
-                placeholderTextColor
-                autoCapitalize="none" />
-              <View style={styles.row}>
-                <TouchableOpacity
-                  style={styles.buttonCancel}
-                  onPress={() => setshouldShow(!shouldShow)}>
-                  <Text style={styles.ButtonText}> Cancel </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.buttonCreate} >
-                  <Text style={styles.ButtonText}> Create </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          ) : null
-        }
+    <View style={styles.container}>
+      {
+        shouldShow ? (
+          <View>
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Title"
+              placeholderTextColor
+              style={styles.input}
+              underlineColorAndroid="transparent"
+              onChangeText={onChangeTitle}
+              value={title}
+            />
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Description"
+              placeholderTextColor
+              style={styles.inputdesc}
+              underlineColorAndroid="transparent"
+              onChangeText={onChangeDesc}
+              value={desc}
+            />
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Category"
+              placeholderTextColor
+              style={styles.input}
+              onChangeText={onChangeCat}
+              underlineColorAndroid="transparent"
+              value={cat}
+            />
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Capacity"
+              placeholderTextColor
+              style={styles.input}
+              onChangeText={onChangeCapacity}
+              underlineColorAndroid="transparent"
+              value={capacity}
+            />
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Location"
+              placeholderTextColor
+              style={styles.input}
+              onChangeText={onChangeLoc}
+              underlineColorAndroid="transparent"
+              value={loc}
+            />
+          </View>
+        ) : null
+      }
+      <View style={styles.row}>
         <TouchableOpacity
-          style={styles.buttonActivity}
-          onPress={() => setshouldShow(!shouldShow)}>
-          <Text style={styles.ButtonText}> Create Activity </Text>
+          style={styles.buttonCancel}
+          onPress={
+            () => clearText()
+          }
+        >
+          <Text style={styles.ButtonText}>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonConfirm}
+          onPress={
+            async () => submitActivity()
+          }
+        >
+          <Text style={styles.ButtonText}>Confirm</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 100,
+    paddingTop: 10,
+    paddingVertical: 100,
     backgroundColor: 'white'
   },
   row: {
@@ -85,7 +137,31 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     height: 40,
     borderColor: 'black',
-    borderWidth: 1
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 2,
+  },
+  inputdesc: {
+    paddingHorizontal: 10,
+    marginTop: 15,
+    marginRight: 15,
+    marginLeft: 15,
+    marginBottom: 0,
+    height: 150,
+    borderColor: 'black',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 2,
   },
   buttonActivity: {
     backgroundColor: 'black',
@@ -96,24 +172,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonCancel: {
-     backgroundColor: 'black',
-     padding: 10,
-     paddingRight: 63,
-     paddingLeft: 63,
-     margin: 15,
-     height: 40,
-     alignItems: 'flex-start',
-     justifyContent: 'center',
+    backgroundColor: 'black',
+    padding: 10,
+    paddingRight: 56,
+    paddingLeft: 56,
+    margin: 15,
+    height: 40,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    backgroundColor: '#3F5EFB',
+    borderRadius: 10,
+    textAlign: 'center',
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
   },
-  buttonCreate: {
-     backgroundColor: 'black',
-     padding: 10,
-     paddingRight: 63,
-     paddingLeft: 63,
-     margin: 15,
-     height: 40,
-     alignItems: 'flex-end',
-     justifyContent: 'center',
+  buttonConfirm: {
+    backgroundColor: 'black',
+    padding: 10,
+    paddingRight: 56,
+    paddingLeft: 56,
+    margin: 15,
+    height: 40,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    backgroundColor: '#3F5EFB',
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
+    borderRadius: 10,
+    textAlign: 'center'
   },
   ButtonText: {
     color: 'white'
