@@ -1,24 +1,45 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import * as React from 'react';
+import Activity from '../components/Activity';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import * as activityExample from '../examples/activityExample.json'
 
 const JoinScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>JoinScreen</Text>
-      <Button
-        title="Click Here"
-        onPress={() => alert('Button Clicked!')}
-      />
+    <View style={styles.activityWrapper}>
+      <Text style={styles.sectionTitle}>Activity Nearby</Text>
+      <ScrollView style={styles.items}>
+        {activityExample.activities.map((activity, id) => (
+          <Activity
+            key={id}
+            title={activity.title}
+            description={activity.description}
+            location={activity.location}
+            categories={activity.categories}
+          />
+        ))}
+      </ScrollView>
     </View>
   );
-};
+}
 
-export default JoinScreen;
 const styles = StyleSheet.create({
-  container: {
+  activityWrapper: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#8fcbbc'
+    backgroundColor: '#EBEAED',
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    marginTop: '33%',
+    borderRadius: 20,
+    paddingBottom: 40,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    paddingTop: 10,
+  },
+  items: {
+    marginTop: 20
   },
 });
+
+export default JoinScreen;
