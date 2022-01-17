@@ -1,11 +1,17 @@
 import React from 'react';
+import {useState} from 'react';
 import { login } from '../utils/user';
-import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Image, Text, TouchableOpacity, StyleSheet, Pressable} from 'react-native';
 import { TextInput } from "react-native-paper";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useTogglePasswordVisibility } from '../components/TogglePassword';
 
 const LoginScreen = ({ navigation }) => {
   const [username, onChangeUsername] = React.useState("");
   const [password, onChangePassword] = React.useState("");
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+    useTogglePasswordVisibility();
+  const [Password, setPassword] = useState('');
   return (
     <View style={styles.container}>
       {/* show variable only for debugging */}
@@ -26,16 +32,25 @@ const LoginScreen = ({ navigation }) => {
         underlineColorAndroid="transparent"
         left={<TextInput.Icon name="account" />}
       />
-      <TextInput
-        autoCapitalize="none"
-        onChangeText={onChangePassword}
+      <View style={styles.inputContainer}>
+      <TextInput secureTextEntry={true} style={styles.input}
+        name="Password"
+        underlineColorAndroid="transparent"
         placeholder="Password"
         placeholderTextColor="black"
-        secureTextEntry={true}
-        style={styles.input}
-        underlineColorAndroid="transparent"
+        autoCapitalize="none"
+        autoCorrect={false}
         left={<TextInput.Icon name="form-textbox-password" />}
+        onChangeText={text => setPassword(text)}
+        textContentType="newPassword"
+        secureTextEntry={passwordVisibility}
+        value={Password}
+        enablesReturnKeyAutomatically
       />
+        <Pressable style={styles.inputIcon} onPress={handlePasswordVisibility}>
+          <MaterialCommunityIcons name={rightIcon} size={22} color="#232323" />
+        </Pressable>
+      </View>
       <TouchableOpacity
         onPress={
           () => navigation.navigate("ForgotPassword")
@@ -85,6 +100,13 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: 'black',
     borderWidth: 1
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  inputIcon:{
+    paddingTop: 10
   },
   forgot: {
     padding: 15,
