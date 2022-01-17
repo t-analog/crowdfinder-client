@@ -3,7 +3,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import JoinScreen from '../screens/JoinScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import ProfileScreen from '../components/Drawer.js';
 import CreateActivityScreen from '../screens/CreateActivityScreen';
 
 const Tab = createBottomTabNavigator();
