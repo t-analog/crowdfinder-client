@@ -1,6 +1,7 @@
 import React from 'react';
 import { login } from '../utils/user';
-import { View, Image, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { TextInput } from "react-native-paper";
 
 const LoginScreen = ({ navigation }) => {
   const [username, onChangeUsername] = React.useState("");
@@ -23,6 +24,7 @@ const LoginScreen = ({ navigation }) => {
         placeholderTextColor="black"
         style={styles.input}
         underlineColorAndroid="transparent"
+        left={<TextInput.Icon name="account" />}
       />
       <TextInput
         autoCapitalize="none"
@@ -32,6 +34,7 @@ const LoginScreen = ({ navigation }) => {
         secureTextEntry={true}
         style={styles.input}
         underlineColorAndroid="transparent"
+        left={<TextInput.Icon name="form-textbox-password" />}
       />
       <TouchableOpacity
         onPress={
