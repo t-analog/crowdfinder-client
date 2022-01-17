@@ -2,8 +2,11 @@ import * as React from 'react';
 import Activity from '../components/Activity';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import * as activityExample from '../examples/activityExample.json'
+import { createActivity, getActivities } from '../utils/activity';
 
 const JoinScreen = ({ navigation }) => {
+  console.log(createActivity());
+  console.log(getActivities());
   return (
     <View style={styles.activityWrapper}>
       <Text style={styles.sectionTitle}>Activity Nearby</Text>
