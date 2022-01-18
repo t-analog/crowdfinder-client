@@ -10,7 +10,7 @@ import Logout from '../screens/Logout.js';
 
 const Stack = createStackNavigator();
 
-const Menu = (navigation) => {
+const Menu = ({navigation}) => {
   const [shouldShow, setShouldShow] = useState(false);
    const handleMore = () => setShouldShow(!shouldShow);
    const goActivitySettings = () => navigation.navigate("Activity Settings");
