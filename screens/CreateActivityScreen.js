@@ -5,31 +5,39 @@ import {
   Pressable,
   TextInput,
   StyleSheet,
-  TouchableOpacity,
 } from 'react-native';
+import { createActivity } from '../utils/activity';
 
 const CreateActivityScreen = () => {
   const [capacity, onChangeCapacity] = React.useState("");
-  const [cat, onChangeCat] = React.useState("");
-  const [desc, onChangeDesc] = React.useState("");
-  const [loc, onChangeLoc] = React.useState("");
-  const [title, onChangeTitle] = React.useState("");
+  const [categories, onChangeCategories] = React.useState("");
+  const [description, onChangeDescription] = React.useState("");
+  const [location, onChangeLocation] = React.useState("");
+  const [name, onChangeName] = React.useState("");
   const [shouldShow, setshouldShow] = React.useState(true);
+
+  const clearText = () => {
+    onChangeCapacity("");
+    onChangeCategories("");
+    onChangeDescription("");
+    onChangeLocation("");
+    onChangeName("");
+  };
   const submitActivity = async () => {
-    if (title == "") {
-      console.error("Title cannot be empty!");
+    if (name == "") {
+      console.error("Name cannot be empty!");
       return false;
     } else {
+      createActivity(
+        name,
+        description,
+        Number(capacity),
+        categories.split(' '),
+        { latitude: 1.2, longitude: 3.4 }
+      );
       alert("Activity Created")
       return true;
     };
-  };
-  const clearText = () => {
-    onChangeCapacity("");
-    onChangeCat("");
-    onChangeDesc("");
-    onChangeLoc("");
-    onChangeTitle("");
   };
   return (
     <View style={styles.container}>
@@ -38,12 +46,12 @@ const CreateActivityScreen = () => {
           <View>
             <TextInput
               autoCapitalize="none"
-              placeholder="Title"
+              placeholder="Name"
               placeholderTextColor
               style={styles.input}
               underlineColorAndroid="transparent"
-              onChangeText={onChangeTitle}
-              value={title}
+              onChangeText={onChangeName}
+              value={name}
             />
             <TextInput
               autoCapitalize="none"
@@ -51,17 +59,17 @@ const CreateActivityScreen = () => {
               placeholderTextColor
               style={styles.inputdesc}
               underlineColorAndroid="transparent"
-              onChangeText={onChangeDesc}
-              value={desc}
+              onChangeText={onChangeDescription}
+              value={description}
             />
             <TextInput
               autoCapitalize="none"
               placeholder="Category"
               placeholderTextColor
               style={styles.input}
-              onChangeText={onChangeCat}
+              onChangeText={onChangeCategories}
               underlineColorAndroid="transparent"
-              value={cat}
+              value={categories}
             />
             <TextInput
               autoCapitalize="none"
@@ -77,9 +85,9 @@ const CreateActivityScreen = () => {
               placeholder="Location"
               placeholderTextColor
               style={styles.input}
-              onChangeText={onChangeLoc}
+              onChangeText={onChangeLocation}
               underlineColorAndroid="transparent"
-              value={loc}
+              value={location}
             />
           </View>
         ) : null
@@ -92,6 +100,9 @@ const CreateActivityScreen = () => {
         </Pressable>
         <Pressable
           style={styles.buttonConfirm}
+          onPress={() => {
+            submitActivity();
+          }}
         >
           <Text style={styles.ButtonText}>Confirm</Text>
         </Pressable>

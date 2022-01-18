@@ -6,12 +6,7 @@ import {
   StyleSheet
 } from 'react-native';
 import { logout } from '../utils/user';
-import { getActivities } from '../utils/activity';
-import {
-  gql,
-  useQuery,
-  useMutation,
-} from "@apollo/client";
+import { createActivity, getActivities } from '../utils/activity';
 
 const ProfileScreen = ({ navigation }) => {
   return (
@@ -27,7 +22,19 @@ const ProfileScreen = ({ navigation }) => {
       />
       <Button
         title="GetActivities"
-        onPress={getActivities}
+        onPress={
+          async () => {
+            console.log(await getActivities())
+          }
+        }
+      />
+      <Button
+        title="CreateActivity"
+        onPress={
+          async () => {
+            console.log(await createActivity())
+          }
+        }
       />
     </View>
   );

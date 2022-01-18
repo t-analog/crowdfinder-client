@@ -1,63 +1,92 @@
 import {
   gql,
-  useQuery,
-  useMutation,
-} from "@apollo/client";
+} from 'graphql-request';
+import client from '../utils/graphql';
+import { app } from '../utils/realm';
 
-const createActivity = () => {
-  const INSERT_ONE_ACTIVITY = gql`
-    mutation {
+/**
+ * @param {String} name Name of the activity
+ * @param {String} description Description of the activity
+ * @param {String} creator Creator of the activity
+ * @param {Number} capacity Capacity of the activity
+ * @param {String[]} categories Categories of the activity
+ * @param {{latitude: String, longitude: String}} location Location of the activity
+ * */
+const createActivity = async (
+  name,
+  description,
+  capacity,
+  categories,
+  location
+) => {
+  const createActivityQuery = gql`
+    mutation InsertOneActivity(
+      $name: String,
+      $partition: String!,
+      $description: String,
+      $creator: String,
+      $capacity: Int,
+      $categories: [String],
+      $participants: [String],
+      $location: ActivityLocationInsertInput
+    ) {
       insertOneActivity(data: {
-        name: "graphql test"
-        _partition: "LOL"
+        name: $name
+        _partition: $partition
+        description: $description
+        creator: $creator
+        capacity: $capacity
+        categories: $categories
+        participants: $participants
+        location: $location
       }) {
         name
         _partition
+        description
+        creator
+        creator
+        capacity
+        categories
+        participants
+        location {
+          latitude
+          longitude
+        }
       }
     }
   `;
-  const [ insertOneActivity, { loading, error, data } ] = useMutation(INSERT_ONE_ACTIVITY);
-  insertOneActivity();
-  if (loading) {
-    return (
-      `Loading`
-    );
-  }
-  if (error) {
-    console.log(error);
-    return (
-      `Error`
-    );
-  }
-  return (
-    JSON.stringify(data)
-  );
+  const vars = {
+    "name": name,
+    "partition": `activity=${app.currentUser.id}`,
+    "description": description,
+    "creator": app.currentUser.customData.name,
+    "capacity": capacity,
+    "categories": categories,
+    "participants": [],
+    "location": location
+  };
+  return await client.request(createActivityQuery, vars);
 };
 
 /** Retrieve activities list from Atlas using GraphQL */
-const getActivities = () => {
-  const GET_ACTIVITIES = gql`
+const getActivities = async () => {
+  const getActivitiesQuery = gql`
     query {
       activities {
         name
+        _partition
+        description
+        creator
+        categories
+        participants
+        location {
+          latitude
+          longitude
+        }
       }
     }
   `;
-  const { loading, error, data } = useQuery(GET_ACTIVITIES);
-  if (loading) {
-    return (
-      `Loading`
-    );
-  }
-  if (error) {
-    console.log(error);
-    return (
-      `Error`
-    );
-  }
-  return (
-    JSON.stringify(data)
-  );
+  return await client.request(getActivitiesQuery);
 };
 
 export { createActivity, getActivities };
