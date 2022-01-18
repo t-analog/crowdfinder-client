@@ -6,7 +6,7 @@ import {
 
 const createActivity = () => {
   const INSERT_ONE_ACTIVITY = gql`
-    mutation InsertOneActivity() {
+    mutation {
       insertOneActivity(data: {
         name: "graphql test"
         _partition: "LOL"
@@ -16,7 +16,8 @@ const createActivity = () => {
       }
     }
   `;
-  const { loading, error, data } = useMutation(INSERT_ONE_ACTIVITY);
+  const [ insertOneActivity, { loading, error, data } ] = useMutation(INSERT_ONE_ACTIVITY);
+  insertOneActivity();
   if (loading) {
     return (
       `Loading`
@@ -29,7 +30,7 @@ const createActivity = () => {
     );
   }
   return (
-    JSON.stringify(data.insertOneActivity)
+    JSON.stringify(data)
   );
 };
 
@@ -55,7 +56,7 @@ const getActivities = () => {
     );
   }
   return (
-    JSON.stringify(data.activities)
+    JSON.stringify(data)
   );
 };
 

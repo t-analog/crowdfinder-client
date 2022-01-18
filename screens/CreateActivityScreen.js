@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
+  Pressable,
   TextInput,
   StyleSheet,
   TouchableOpacity,
@@ -13,9 +14,7 @@ const CreateActivityScreen = () => {
   const [desc, onChangeDesc] = React.useState("");
   const [loc, onChangeLoc] = React.useState("");
   const [title, onChangeTitle] = React.useState("");
-
   const [shouldShow, setshouldShow] = React.useState(true);
-
   const submitActivity = async () => {
     if (title == "") {
       console.error("Title cannot be empty!");
@@ -25,15 +24,13 @@ const CreateActivityScreen = () => {
       return true;
     };
   };
-
   const clearText = () => {
     onChangeCapacity("");
     onChangeCat("");
     onChangeDesc("");
     onChangeLoc("");
     onChangeTitle("");
-  }
-
+  };
   return (
     <View style={styles.container}>
       {
@@ -88,22 +85,16 @@ const CreateActivityScreen = () => {
         ) : null
       }
       <View style={styles.row}>
-        <TouchableOpacity
+        <Pressable
           style={styles.buttonCancel}
-          onPress={
-            () => clearText()
-          }
         >
           <Text style={styles.ButtonText}>Cancel</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </Pressable>
+        <Pressable
           style={styles.buttonConfirm}
-          onPress={
-            async () => submitActivity()
-          }
         >
           <Text style={styles.ButtonText}>Confirm</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

@@ -6,6 +6,12 @@ import {
   StyleSheet
 } from 'react-native';
 import { logout } from '../utils/user';
+import { getActivities } from '../utils/activity';
+import {
+  gql,
+  useQuery,
+  useMutation,
+} from "@apollo/client";
 
 const ProfileScreen = ({ navigation }) => {
   return (
@@ -18,6 +24,10 @@ const ProfileScreen = ({ navigation }) => {
             if (await logout()) navigation.navigate("Login");
           }
         }
+      />
+      <Button
+        title="GetActivities"
+        onPress={getActivities}
       />
     </View>
   );
