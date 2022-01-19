@@ -43,6 +43,9 @@ const HomeTab = () => {
       <Tab.Screen
         name="ProfileScreen"
         component={ProfileScreen}
+        options={{
+          header: () => null
+        }}
       />
     </Tab.Navigator>
   );
