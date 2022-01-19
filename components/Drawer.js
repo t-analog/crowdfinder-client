@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useState} from 'react';
 import {SafeAreaView, View, Text, Image, Button, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
+import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu';
 import { NavigationContainer }	from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Appbar, List } from 'react-native-paper';
@@ -10,37 +11,36 @@ import Logout from '../screens/Logout.js';
 
 const Stack = createStackNavigator();
 
-const Menu = ({navigation}) => {
-  const [shouldShow, setShouldShow] = useState(false);
-   const handleMore = () => setShouldShow(!shouldShow);
+const MenuDot = ({navigation}) => {
+   const [visible, setVisible] = useState(false);
+   const hideMenu = () => setVisible(false);
+   const showMenu = () => setVisible(true);
    const goActivitySettings = () => navigation.navigate("Activity Settings");
    const goSupportUs = () => navigation.navigate("Support Us");
    const goLogout = () => navigation.navigate("Logout");
   return (
-    <SafeAreaView>
-      <Appbar.Header>
-        <Appbar.Action icon="dots-vertical" onPress={handleMore}/>
-      </Appbar.Header>
-      <View >
-        {shouldShow ? (
-          <List.Section>
-            <List.Item title="Activity Settings" onPress={goActivitySettings}/>
-            <List.Item title="Support Us" onPress={goSupportUs}/>
-            <List.Item title="Logout" onPress={goLogout}/>
-          </List.Section>
-        ) : null}
-      </View>
-    </SafeAreaView>
+    <View>
+      <Menu
+        visible={visible}
+        anchor={<Appbar.Header>
+        <Appbar.Action icon="dots-vertical" onPress={showMenu}/>
+      </Appbar.Header>}
+        onRequestClose={hideMenu}
+        >
+        <MenuItem onPress={goActivitySettings} onRequestClose={hideMenu}>Activity Settings</MenuItem>
+        <MenuItem onPress={goSupportUs} onRequestClose={hideMenu}>Support Us</MenuItem>
+        <MenuItem onPress={goLogout} onRequestClose={hideMenu}>Logout</MenuItem>
+      </Menu>
+    </View>
   );
 };
-
 const MenuBar = () => {
   return (
-    <NavigationContainer independent={true}>
+    <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Menu"
-          component={Menu}
+          name="MenuDot"
+          component={MenuDot}
           options={{
             header: () => null
           }}
