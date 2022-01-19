@@ -29,6 +29,9 @@ const LoginStack = () => {
         <Stack.Screen
           name="Home"
           component={HomeTab}
+          options={{
+            header: () => null
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
