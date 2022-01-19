@@ -68,6 +68,28 @@ const createActivity = async (
   return await client.request(createActivityQuery, vars);
 };
 
+const getActivity = async () => {
+  const getActivityQuery = gql`
+    query GetActivity($id: ObjectId) {
+      activity(query: {
+        _id: $id
+      }) {
+        name
+        _partition
+        description
+        creator
+        categories
+        participants
+        location {
+          latitude
+          longitude
+        }
+      }
+    }
+  `;
+  return await client.request(getActivityQuery);
+};
+
 /** Retrieve activities list from Atlas using GraphQL */
 const getActivities = async () => {
   const getActivitiesQuery = gql`
@@ -89,4 +111,70 @@ const getActivities = async () => {
   return await client.request(getActivitiesQuery);
 };
 
-export { createActivity, getActivities };
+const updateActivity = async () => {
+  const updateActivityQuery = gql`
+    mutation UpdateActivity(
+      $id: ObjectId
+      $name: String,
+      $description: String,
+      $creator: String,
+      $capacity: Int,
+      $categories: [String],
+      $participants: [String],
+      $location: ActivityLocationInsertInput
+    ) {
+      updateOneActivity(query: {
+        _id: $id
+      }, set: {
+        name: $name
+        description: $description
+        creator: $creator
+        capacity: $capacity
+        categories: $categories
+        participants: $participants
+        location: $location
+      }) {
+        name
+        _partition
+        description
+        creator
+        categories
+        participants
+        location {
+          latitude
+          longitude
+        }
+      }
+    }
+  `;
+  return await client.request(updateActivityQuery);
+};
+
+const deleteActivity = async () => {
+  const deleteActivityQuery = gql`
+    mutation DeleteActivity($id: ObjectId) {
+      deleteOneActivity(query: {
+        _id: $id
+      }) {
+        name
+        _partition
+        description
+        creator
+        categories
+        participants
+        location {
+          latitude
+          longitude
+        }
+      }
+    }
+  `;
+  return await client.request(deleteActivityQuery);
+};
+
+export {
+  createActivity,
+  getActivity,
+  getActivities,
+  deleteActivity
+};
