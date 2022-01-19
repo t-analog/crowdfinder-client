@@ -29,13 +29,13 @@ const ProfileScreen = ({ navigation }) => {
         <Menu.Item
           title="Activity Settings"
           onPress={() => {
-            alert("Activity Settings clicked");
+            navigation.navigate("Activity Settings")
           }}
         />
         <Menu.Item
           title="Support Us"
           onPress={() => {
-            alert("Support Us clicked");
+            navigation.navigate("Support Us")
           }}
         />
         <Menu.Item

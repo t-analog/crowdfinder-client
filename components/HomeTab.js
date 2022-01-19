@@ -3,7 +3,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import JoinScreen from '../screens/JoinScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import ProfileStack from '../components/ProfileStack';
 import CreateActivityScreen from '../screens/CreateActivityScreen';
 
 const Tab = createBottomTabNavigator();
@@ -33,16 +33,16 @@ const HomeTab = () => {
       }}
     >
       <Tab.Screen
-        name="NearbyActivity"
+        name="Nearby Activity"
         component={JoinScreen}
       />
       <Tab.Screen
-        name="CreateActivity"
+        name="Create Activity"
         component={CreateActivityScreen}
       />
       <Tab.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
+        name="Profile Stack"
+        component={ProfileStack}
         options={{
           header: () => null
         }}
