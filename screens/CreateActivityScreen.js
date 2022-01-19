@@ -95,6 +95,9 @@ const CreateActivityScreen = () => {
       <View style={styles.row}>
         <Pressable
           style={styles.buttonCancel}
+          onPress={() => {
+            clearText();
+          }}
         >
           <Text style={styles.ButtonText}>Cancel</Text>
         </Pressable>

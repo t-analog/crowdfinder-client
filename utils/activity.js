@@ -5,12 +5,26 @@ import client from '../utils/graphql';
 import { app } from '../utils/realm';
 
 /**
- * @param {String} name Name of the activity
- * @param {String} description Description of the activity
- * @param {String} creator Creator of the activity
- * @param {Number} capacity Capacity of the activity
- * @param {String[]} categories Categories of the activity
- * @param {{latitude: String, longitude: String}} location Location of the activity
+ * @typedef {Object} Activity
+ * @property {String} _id Activity id
+ * @property {String} name Activity name
+ * @property {String} _partition Activity partition
+ * @property {String} description Activity description
+ * @property {String} creator Activity creator
+ * @property {Number} capacity Activity capacity
+ * @property {String[]} categories Activity categories
+ * @property {String[]}  participants Activity participants list
+ * @property {{latitude: String, longitude: String}} location Activity location, in latitude and longitude
+ * */
+
+/**
+ * @param {String} name Activity name
+ * @param {String} description Activity description
+ * @param {Number} capacity Activity capacity
+ * @param {String[]} categories Activity categories
+ * @param {{latitude: String, longitude: String}} location Activity location, in latitude and longitude
+ *
+ * @returns {Activity} `Activity` object
  * */
 const createActivity = async (
   name,
@@ -30,16 +44,19 @@ const createActivity = async (
       $participants: [String],
       $location: ActivityLocationInsertInput
     ) {
-      insertOneActivity(data: {
-        name: $name
-        _partition: $partition
-        description: $description
-        creator: $creator
-        capacity: $capacity
-        categories: $categories
-        participants: $participants
-        location: $location
-      }) {
+      insertOneActivity(
+        data: {
+          name: $name
+          _partition: $partition
+          description: $description
+          creator: $creator
+          capacity: $capacity
+          categories: $categories
+          participants: $participants
+          location: $location
+        }
+      ) {
+        _id
         name
         _partition
         description
@@ -68,12 +85,22 @@ const createActivity = async (
   return await client.request(createActivityQuery, vars);
 };
 
-const getActivity = async () => {
+/**
+ * @param {Number} id Activity id to be fetched
+ *
+ * @returns {Activity} `Activity` object
+ * */
+const getActivity = async (
+  id
+) => {
   const getActivityQuery = gql`
     query GetActivity($id: ObjectId) {
-      activity(query: {
+      activity(
+        query: {
         _id: $id
-      }) {
+        }
+      ) {
+        _id
         name
         _partition
         description
@@ -87,14 +114,20 @@ const getActivity = async () => {
       }
     }
   `;
-  return await client.request(getActivityQuery);
+  const vars = {
+    "id": id
+  };
+  return await client.request(getActivityQuery, vars);
 };
 
-/** Retrieve activities list from Atlas using GraphQL */
+/**
+ * @returns {Activity[]} Array of `Activity` object
+ * */
 const getActivities = async () => {
   const getActivitiesQuery = gql`
     query {
       activities {
+        _id
         name
         _partition
         description
@@ -111,29 +144,46 @@ const getActivities = async () => {
   return await client.request(getActivitiesQuery);
 };
 
-const updateActivity = async () => {
+/**
+ * @param {String} id Activity id
+ * @param {String} name Activity name
+ * @param {String} description Activity description
+ * @param {Number} capacity Activity capacity
+ * @param {String[]} categories Activity categories
+ * @param {{latitude: String, longitude: String}} location Activity location, in latitude and longitude
+ *
+ * @returns {Activity} `Activity` object
+ * */
+const updateActivity = async (
+  id,
+  name,
+  description,
+  capacity,
+  categories,
+  location
+) => {
   const updateActivityQuery = gql`
     mutation UpdateActivity(
       $id: ObjectId
       $name: String,
       $description: String,
-      $creator: String,
       $capacity: Int,
       $categories: [String],
-      $participants: [String],
       $location: ActivityLocationInsertInput
     ) {
-      updateOneActivity(query: {
-        _id: $id
-      }, set: {
-        name: $name
-        description: $description
-        creator: $creator
-        capacity: $capacity
-        categories: $categories
-        participants: $participants
-        location: $location
-      }) {
+      updateOneActivity(
+        query: {
+          _id: $id
+        }
+        set: {
+          name: $name
+          description: $description
+          capacity: $capacity
+          categories: $categories
+          location: $location
+        }
+      ) {
+        _id
         name
         _partition
         description
@@ -147,15 +197,33 @@ const updateActivity = async () => {
       }
     }
   `;
-  return await client.request(updateActivityQuery);
+  const vars = {
+    "id": id,
+    "name": name,
+    "description": description,
+    "capacity": capacity,
+    "categories": categories,
+    "location": location
+  };
+  return await client.request(updateActivityQuery, vars);
 };
 
-const deleteActivity = async () => {
+/**
+ * @param {Number} id Activity id to be deleted
+ *
+ * @returns {Activity} `Activity` object
+ * */
+const deleteActivity = async (
+  id
+) => {
   const deleteActivityQuery = gql`
     mutation DeleteActivity($id: ObjectId) {
-      deleteOneActivity(query: {
-        _id: $id
-      }) {
+      deleteOneActivity(
+        query: {
+          _id: $id
+        }
+      ) {
+        _id
         name
         _partition
         description
@@ -169,12 +237,16 @@ const deleteActivity = async () => {
       }
     }
   `;
-  return await client.request(deleteActivityQuery);
+  const vars = {
+    "id": id
+  };
+  return await client.request(deleteActivityQuery, vars);
 };
 
 export {
   createActivity,
   getActivity,
   getActivities,
+  updateActivity,
   deleteActivity
 };
