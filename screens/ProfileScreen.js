@@ -6,7 +6,7 @@ import {
   StyleSheet
 } from 'react-native';
 import {
-  Menu,
+  Menu, Appbar
 } from 'react-native-paper';
 import { logout } from '../utils/user';
 
@@ -16,16 +16,16 @@ const ProfileScreen = ({ navigation }) => {
   const closeMenu = () => setMenuVisible(false);
 
   return (
-    <View style={styles.container}>
-      <Text>ProfileScreen</Text>
+    <View>
       <Menu
         visible={menuVisible}
+        style={styles.rightmenu}
         onDismiss={closeMenu}
-        /* change this anchor component into triple-dot + style */
-        anchor={<Button
-                  title="View Menu"
-                  onPress={openMenu}
-                />}>
+        anchor={ <Appbar.Header style={styles.color}>
+                  <Appbar.Content title=""/>
+                  <Appbar.Action icon="dots-vertical" onPress={openMenu}/>
+                  </Appbar.Header>
+                }>
         <Menu.Item
           title="Activity Settings"
           onPress={() => {
@@ -52,10 +52,11 @@ const ProfileScreen = ({ navigation }) => {
 
 export default ProfileScreen;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#8fcbbc'
+  rightmenu: {
+    top: 19,
+    left: 176
   },
+  color: {
+    backgroundColor: 'white',
+  }
 });
