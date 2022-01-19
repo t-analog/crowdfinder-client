@@ -23,7 +23,7 @@ const MenuDot = ({navigation}) => {
         style={styles.rightmenu}
         visible={visible}
         anchor={
-          <Appbar.Header>
+          <Appbar.Header style={styles.color}>
             <Appbar.Content title=""/>
             <Appbar.Action icon="dots-vertical"  style = {styles.zindexnegative} onPress={toggleMenu}/>
             </Appbar.Header>}
@@ -72,6 +72,9 @@ const styles = StyleSheet.create({
   },
   zindexnegative: {
     elevation: -3
+  },
+  color: {
+    backgroundColor: 'white',
   }
 });
 
