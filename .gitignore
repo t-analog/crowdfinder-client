@@ -83,3 +83,5 @@ yarn-debug.log*
 *.tsbuildinfo
 .npm
 .eslintcache
+
+*.env

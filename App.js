@@ -1,3 +1,10 @@
 import LoginStack from './components/LoginStack';
+import 'core-js/stable';
 
-export default LoginStack;
+const App = () => {
+  return (
+    <LoginStack />
+  )
+};
+
+export default App;
