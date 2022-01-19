@@ -4,7 +4,7 @@ import {SafeAreaView, View, Text, Image, Button, TextInput, TouchableOpacity, St
 import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu';
 import { NavigationContainer }	from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Appbar, List } from 'react-native-paper';
+import { Appbar } from 'react-native-paper';
 import ActivitySettings from '../screens/ActivitySettings.js';
 import SupportUs from '../screens/SupportUs.js';
 import Logout from '../screens/Logout.js';
@@ -20,12 +20,14 @@ const MenuDot = ({navigation}) => {
   return (
     <View>
       <Menu
+        style={styles.rightmenu}
         visible={visible}
-        anchor={<Appbar.Header>
-        <Appbar.Content title=""/>
-        <Appbar.Action icon="dots-vertical" onPress={toggleMenuMenu}/>
-      </Appbar.Header>}
-        onRequestClose={toggleMenu}
+        anchor={
+          <Appbar.Header>
+            <Appbar.Content title=""/>
+            <Appbar.Action icon="dots-vertical"  style = {styles.zindexnegative} onPress={toggleMenu}/>
+            </Appbar.Header>}
+          onRequestClose={toggleMenu}
         >
         <MenuItem onPress={goActivitySettings} onRequestClose={toggleMenu}>Activity Settings</MenuItem>
         <MenuItem onPress={goSupportUs} onRequestClose={toggleMenu}>Support Us</MenuItem>
@@ -34,9 +36,10 @@ const MenuDot = ({navigation}) => {
     </View>
   );
 };
+
 const MenuBar = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer style = {styles.zindex} independent="true">
       <Stack.Navigator>
         <Stack.Screen
           name="MenuDot"
@@ -48,7 +51,6 @@ const MenuBar = () => {
         <Stack.Screen
           name="Activity Settings"
           component={ActivitySettings}
-          independent={false}
         />
         <Stack.Screen
           name="Support Us"
@@ -62,5 +64,15 @@ const MenuBar = () => {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  rightmenu: {
+    top: 19,
+    left: 176
+  },
+  zindexnegative: {
+    elevation: -3
+  }
+});
 
 export default MenuBar;
