@@ -13,8 +13,7 @@ const Stack = createStackNavigator();
 
 const MenuDot = ({navigation}) => {
    const [visible, setVisible] = useState(false);
-   const hideMenu = () => setVisible(false);
-   const showMenu = () => setVisible(true);
+   const toggleMenu = () => setVisible(!visible);
    const goActivitySettings = () => navigation.navigate("Activity Settings");
    const goSupportUs = () => navigation.navigate("Support Us");
    const goLogout = () => navigation.navigate("Logout");
