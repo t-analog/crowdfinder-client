@@ -22,13 +22,14 @@ const MenuDot = ({navigation}) => {
       <Menu
         visible={visible}
         anchor={<Appbar.Header>
-        <Appbar.Action icon="dots-vertical" onPress={showMenu}/>
+        <Appbar.Content title=""/>
+        <Appbar.Action icon="dots-vertical" onPress={toggleMenuMenu}/>
       </Appbar.Header>}
-        onRequestClose={hideMenu}
+        onRequestClose={toggleMenu}
         >
-        <MenuItem onPress={goActivitySettings} onRequestClose={hideMenu}>Activity Settings</MenuItem>
-        <MenuItem onPress={goSupportUs} onRequestClose={hideMenu}>Support Us</MenuItem>
-        <MenuItem onPress={goLogout} onRequestClose={hideMenu}>Logout</MenuItem>
+        <MenuItem onPress={goActivitySettings} onRequestClose={toggleMenu}>Activity Settings</MenuItem>
+        <MenuItem onPress={goSupportUs} onRequestClose={toggleMenu}>Support Us</MenuItem>
+        <MenuItem onPress={goLogout} onRequestClose={toggleMenu}>Logout</MenuItem>
       </Menu>
     </View>
   );
