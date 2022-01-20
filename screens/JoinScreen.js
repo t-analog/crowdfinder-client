@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Activity from '../components/Activity';
 import { View, Text, StyleSheet, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import * as activityExample from '../examples/activityExample.json'
