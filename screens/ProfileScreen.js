@@ -92,12 +92,30 @@ const ProfileScreen = ({ navigation }) => {
                 autoCapitalize="none"
                 editable={edit} />
             </View>
-            <Pressable
-              style={styles.button}
-              onPress={toggleEdit}
-              >
-              <Text style={styles.ButtonText}>Edit Profile</Text>
-            </Pressable >
+            {
+              edit?(
+                <View style={styles.row}>
+                  <Pressable
+                    style={styles.buttonSplit}
+                    onPress={toggleEdit}
+                    >
+                    <Text style={styles.ButtonText}>Confirm</Text>
+                  </Pressable>
+                  <Pressable
+                    style={styles.buttonSplit}
+                    onPress={toggleEdit}
+                    >
+                    <Text style={styles.ButtonText}>Cancel</Text>
+                  </Pressable>
+                </View>
+              )
+              :<Pressable
+                style={styles.button}
+                onPress={toggleEdit}
+                >
+                <Text style={styles.ButtonText}>Edit Profile</Text>
+              </Pressable>
+            }
           </View>
     </View>
   );
@@ -176,7 +194,17 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     marginTop: 30,
-    marginBottom: 365,
+    marginLeft: 15,
+    marginRight: 15,
+    height: 40,
+    backgroundColor: 'black',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttonSplit: {
+    padding: 10,
+    marginTop: 30,
     marginLeft: 15,
     marginRight: 15,
     height: 40,
@@ -184,9 +212,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
+    width:176,
+    justifyContent: 'space-between'
   },
   ButtonText: {
     color: 'white',
     fontSize: 16
+  },
+  row: {
+    flexDirection: 'row',
   }
 });
