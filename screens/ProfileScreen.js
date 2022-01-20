@@ -13,6 +13,8 @@ import {
 import { logout } from '../utils/user';
 
 const ProfileScreen = ({ navigation }) => {
+  const [edit, setEdit] = useState(false);
+  const toggleEdit = () => setEdit(!edit);
   const [menuVisible, setMenuVisible] = useState(false);
   const openMenu = () => setMenuVisible(true);
   const closeMenu = () => setMenuVisible(false);
@@ -60,7 +62,7 @@ const ProfileScreen = ({ navigation }) => {
                 placeholder="@xijinping"
                 placeholderTextColor="black"
                 autoCapitalize="none"
-                editable={false} />
+                editable={edit} />
             </View>
             <View style={styles.boxA}>
               <Text style={styles.data}>Email</Text>
@@ -69,7 +71,7 @@ const ProfileScreen = ({ navigation }) => {
                 placeholder="xi@cpc.cn"
                 placeholderTextColor="black"
                 autoCapitalize="none"
-                editable={false} />
+                editable={edit} />
             </View>
             <View style={styles.boxA}>
               <Text style={styles.data}>Location</Text>
@@ -78,7 +80,7 @@ const ProfileScreen = ({ navigation }) => {
                 placeholder="Skudai"
                 placeholderTextColor="black"
                 autoCapitalize="none"
-                editable={false} />
+                editable={edit} />
             </View>
             <View style={styles.boxA}>
               <Text style={styles.data}>Bio</Text>
@@ -88,13 +90,12 @@ const ProfileScreen = ({ navigation }) => {
                 placeholder="President of the People's Republic of China & General Secretary of the Communist Party of China."
                 placeholderTextColor="black"
                 autoCapitalize="none"
-                editable={false} />
+                editable={edit} />
             </View>
             <Pressable
               style={styles.button}
-              onPress={
-                () => alert('Edit Profile!')
-              }>
+              onPress={toggleEdit}
+              >
               <Text style={styles.ButtonText}>Edit Profile</Text>
             </Pressable >
           </View>
