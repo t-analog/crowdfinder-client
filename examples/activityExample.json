@@ -1,7 +1,7 @@
 {
   "activities": [
     {
-      "title": "House Moving",
+      "title": "House Moving 1",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat ultrices blandit.",
       "location": "Jalan Resak, Skudai",
       "categories": [
@@ -11,7 +11,7 @@
       ]
     },
     {
-      "title": "House Moving",
+      "title": "House Moving 2",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat ultrices blandit.",
       "location": "Jalan Resak, Skudai",
       "categories": [
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "title": "House Moving",
+      "title": "House Moving 3",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat ultrices blandit.",
       "location": "Jalan Resak, Skudai",
       "categories": [
