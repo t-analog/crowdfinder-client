@@ -2,11 +2,11 @@ import React, { useRef, useState } from "react";
 import {
   Text,
   View,
+  Easing,
   Animated,
   StyleSheet,
   Dimensions,
   PanResponder,
-  Easing,
 } from "react-native";
 
 const { width, height } = Dimensions.get('window');
@@ -16,26 +16,43 @@ const DrawerState = {
   Closed: 0
 };
 
-const BottomDrawer = () => {
+const BottomDrawer = ({ children }) => {
   const pan = useRef(new Animated.Value(DrawerState.Closed)).current;
   const state = useRef(new Animated.Value(DrawerState.Closed)).current;
   const margin = 0.1 * height;
 
-  const [interpolateDy, setInterpolateDy] = useState(0);
-
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
-      onPanResponderGrant: () => {
+      // onMoveShouldSetPanResponder: (_, { y0 }) => {
+      //   console.log(`${state._value}, ${height * 3 / 4}, ${y0}`);
+      //   return (
+      //     (state._value == DrawerState.Closed && (height * 3 / 4) < y0 && y0 < ((height * 3 / 4) + 40))
+      //     // || (state._value == DrawerState.Open && -40 < dy && dy < (height / 2))
+      //     // (state._value == DrawerState.Closed && (height * 3 / 4) < y0 && y0 < ((height * 3 / 4) + 40) && -(height / 2) < dy && dy < 40)
+      //     // || (state._value == DrawerState.Open && (height * 1 / 4) < y0 && y0 < ((height * 1 / 4) + 40) && -40 < dy && dy < (height / 2))
+      //   ) ? true
+      //     : false
+      // },
+      onMoveShouldSetPanResponder: (_, { y0 }) => {
+        return true;
+      },
+      onPanResponderGrant: (_, { y0 }) => {
+        // console.log(`y: ${event.nativeEvent.pageY}`);
+        // console.log(`y: ${gestureState.y0}`);
+        console.log(`${state._value}, ${height * 3 / 4}, ${height * 1 / 4}, ${y0}`);
         pan.setOffset(pan._value);
       },
       onPanResponderMove: (
         _,
-        { dy }
+        { y0, dy }
       ) => {
         return (
-          (state._value == DrawerState.Closed &&  -(height / 2) < dy && dy < 20)
-            || (state._value == DrawerState.Open && -20 < dy && dy < (height / 2))
+          // (state._value == DrawerState.Closed && -(height / 2) < dy && dy < 40)
+          // || (state._value == DrawerState.Open && -40 < dy && dy < (height / 2))
+          (state._value == DrawerState.Closed && (height * 3 / 4) < y0 && y0 < ((height * 3 / 4) + 40) && -(height / 2) < dy && dy < 40)
+          || (state._value == DrawerState.Open && (height * 1 / 4) + 20 < y0 && y0 < ((height * 1 / 4) + 60) && -40 < dy && dy < (height / 2))
+          // true
         ) ? Animated.event(
           [
             null,
@@ -44,38 +61,48 @@ const BottomDrawer = () => {
           {
             useNativeDriver: false,
             listener: (_, gestureState) => {
-              console.log(`dy: ${gestureState.dy}`);
+              // console.log(`dy: ${gestureState.dy}`);
             }
           }
         )(_, { dy }) : null;
       },
       onPanResponderRelease: (
         _,
-        { dy }
+        { y0, dy }
       ) => {
+        if (
+        //   // (state._value == DrawerState.Closed && (height * 3 / 4) < y0 && y0 < ((height * 3 / 4) + 40))
+        //   // || (state._value == DrawerState.Open && (height * 1 / 4) < y0 && y0 < ((height * 1 / 4) + 40))
+          (state._value == DrawerState.Closed && (height * 3 / 4) < y0 && y0 < ((height * 3 / 4) + 40))
+          || (state._value == DrawerState.Open && (height * 1 / 4) + 20 < y0 && y0 < ((height * 1 / 4) + 60))
+        //   true
+        ) {
         pan.flattenOffset();
-        console.log(`---`);
-        console.log(`pan value: ${pan._value}`);
         const nextState = getNextState(state._value, -dy, margin);
-        console.log(`nxState: ${nextState}`);
         state.setValue(nextState);
         animateMove(pan, nextState);
+        // console.log(`---`);
+        // console.log(`pan value: ${pan._value}`);
+        // console.log(`nxState: ${nextState}, y0: ${y0}, height: ${height}`);
+        }
       }
     })
   ).current;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText}>Drag this box!</Text>
       <Animated.View
         style={{
           position: 'absolute',
-          bottom: -(height / 2),
+          bottom: -(height * 6 / 4),
+          /* bottom: 0, */
           transform: [{ translateY: pan }]
         }}
         {...panResponder.panHandlers}
       >
-        <View style={styles.box} />
+        <View style={styles.box}>
+          {children}
+        </View>
       </Animated.View>
     </View>
   );
@@ -96,7 +123,7 @@ const getNextState = (
   val,
   margin,
 ) => {
-  console.log(`cState: ${currentState}, val: ${val}, margin: ${margin}`);
+  // console.log(`cState: ${currentState}, val: ${val}, margin: ${margin}`);
   switch (currentState) {
     case DrawerState.Open:
       return val < -margin
@@ -125,9 +152,12 @@ const styles = StyleSheet.create({
   box: {
     height: height * 3 / 4,
     width,
-    backgroundColor: "blue",
+    backgroundColor: "#666",
+    borderWidth: 1,
+    borderColor: "black",
     borderTopLeftRadius: 20,
-    borderTopRightRadius: 20
+    borderTopRightRadius: 20,
+    paddingTop: 40
   }
 });
 

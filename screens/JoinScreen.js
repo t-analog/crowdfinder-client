@@ -1,12 +1,18 @@
+import {
+  Text,
+  View,
+  StyleSheet,
+} from 'react-native';
+
 import Activity from '../components/Activity';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import BottomDrawer from '../components/BottomDrawer';
 import * as activityExample from '../examples/activityExample.json'
 
 const JoinScreen = ({ navigation }) => {
   return (
-    <View style={styles.activityWrapper}>
-      <Text style={styles.sectionTitle}>Activity Nearby</Text>
-      <ScrollView style={styles.items}>
+    <View>
+      {/* <Text>Lol</Text> */}
+      <BottomDrawer>
         {activityExample.activities.map((activity, id) => (
           <Activity
             key={id}
@@ -16,7 +22,7 @@ const JoinScreen = ({ navigation }) => {
             categories={activity.categories}
           />
         ))}
-      </ScrollView>
+      </BottomDrawer>
     </View>
   );
 }
@@ -37,7 +43,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   items: {
-    marginTop: 20
+    marginHorizontal: 10
   },
 });
 
