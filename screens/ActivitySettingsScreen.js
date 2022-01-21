@@ -22,7 +22,7 @@ const ActivitySettingsScreen = ({ navigation }) => {
       />
       <Text style={styles.header}>Activity Settings</Text>
       <Text style={styles.dataActivitySettings}></Text>
-      <TextInput secureTextEntry={false} multiline={true} style={styles.input}
+      <TextInput secureTextEntry={false} multiline={true} style={styles.inputActivitySettings}
         underlineColorAndroid="transparent"
         placeholder="Preferred activity notification"
         placeholderTextColor="black"
@@ -31,7 +31,7 @@ const ActivitySettingsScreen = ({ navigation }) => {
       />
       {
         isEnabled &&
-        <TextInput secureTextEntry={false} multiline={true} style={styles.input}
+        <TextInput secureTextEntry={false} multiline={true} style={styles.inputActivitySettings}
           underlineColorAndroid="transparent"
           placeholder="Preferred activity"
           placeholderTextColor="black"
