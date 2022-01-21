@@ -10,7 +10,8 @@ export default StyleSheet.create({
   },
   container: {
     paddingTop: 100,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    paddingBottom: 200
   },
   header: {
     marginTop: 20,
@@ -110,7 +111,7 @@ export default StyleSheet.create({
     marginLeft: 15,
     fontSize: 15
   },
-  input: {
+  inputActivitySettings: {
     paddingHorizontal: 10,
     paddingVertical: 10,
     marginTop: 15,
@@ -164,15 +165,17 @@ export default StyleSheet.create({
     marginTop: 20,
     textAlign: 'center'
   },
-  buttonContainer: {
-    marginTop: 10,
-    height: 45,
+  inputDesc: {
+    paddingHorizontal: 10,
+    marginTop: 15,
+    marginRight: 15,
+    marginLeft: 15,
+    marginBottom: 0,
+    height: 150,
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 5,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-    width: 250,
-    borderRadius: 30,
-    backgroundColor: "#00BFFF",
+    justifyContent: 'space-between'
   }
 });
