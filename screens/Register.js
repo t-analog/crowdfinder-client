@@ -1,6 +1,7 @@
 import React from 'react';
 import { register } from '../utils/user';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import styles from '../styles/stylesheet';
 
 const RegisterAccountScreen = ({ navigation }) => {
   const [username, onChangeUsername] = React.useState("");
@@ -40,7 +41,7 @@ const RegisterAccountScreen = ({ navigation }) => {
         underlineColorAndroid="transparent"
       />
       <TouchableOpacity
-        style={styles.registerButton}
+        style={styles.applyRegisterButton}
         onPress={
           async () => {
             if (password != confirmPassword) {
@@ -56,32 +57,5 @@ const RegisterAccountScreen = ({ navigation }) => {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 100
-  },
-  input: {
-    paddingHorizontal: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    height: 40,
-    borderColor: 'black',
-    borderWidth: 1
-  },
-  registerButton: {
-    backgroundColor: 'black',
-    padding: 10,
-    margin: 15,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  ButtonText: {
-    color: 'white'
-  }
-});
 
 export default RegisterAccountScreen;
