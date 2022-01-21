@@ -11,7 +11,7 @@ export default StyleSheet.create({
   container: {
     paddingTop: 100,
     backgroundColor: 'white',
-    paddingBottom: 380
+    paddingBottom: 550
   },
   header: {
     marginTop: 20,
@@ -221,12 +221,15 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  applyRegisterButton: {
+  applyButton: {
     backgroundColor: 'black',
     padding: 10,
     margin: 15,
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  ButtonText: {
+    color: 'white'
   }
 });
