@@ -1,9 +1,14 @@
-import LoginStack from './components/LoginStack';
 import 'core-js/stable';
+import {
+  Provider
+} from 'react-native-paper';
+import LoginStack from './components/LoginStack';
 
 const App = () => {
   return (
-    <LoginStack />
+    <Provider>
+      <LoginStack />
+    </Provider>
   )
 };
 
