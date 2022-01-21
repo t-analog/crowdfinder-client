@@ -41,7 +41,7 @@ const RegisterAccountScreen = ({ navigation }) => {
         underlineColorAndroid="transparent"
       />
       <TouchableOpacity
-        style={styles.applyRegisterButton}
+        style={styles.applyButton}
         onPress={
           async () => {
             if (password != confirmPassword) {
