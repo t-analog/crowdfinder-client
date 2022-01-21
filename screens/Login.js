@@ -1,6 +1,7 @@
 import React from 'react';
 import { login } from '../utils/user';
 import { View, Image, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import styles from '../styles/stylesheet';
 
 const LoginScreen = ({ navigation }) => {
   const [username, onChangeUsername] = React.useState("");
@@ -50,7 +51,7 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.ButtonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.createAccButton}
+        style={styles.registerButton}
         onPress={
           () => navigation.navigate("Register")
         }>
@@ -59,57 +60,5 @@ const LoginScreen = ({ navigation }) => {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 100
-  },
-  logo: {
-    aspectRatio: 1.81,
-    width: undefined,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 15,
-    marginLeft: 15,
-    resizeMode: 'contain'
-  },
-  input: {
-    paddingHorizontal: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    height: 40,
-    borderColor: 'black',
-    borderWidth: 1
-  },
-  forgot: {
-    padding: 15,
-    color: 'blue',
-    textAlign: 'right',
-  },
-  loginButton: {
-    backgroundColor: 'black',
-    padding: 10,
-    margin: 15,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  createAccButton: {
-    backgroundColor: 'black',
-    padding: 10,
-    marginTop: -5,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 15,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  ButtonText: {
-    color: 'white'
-  }
-});
 
 export default LoginScreen;

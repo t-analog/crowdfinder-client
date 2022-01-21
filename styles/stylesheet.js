@@ -177,5 +177,48 @@ export default StyleSheet.create({
     borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  logo: {
+    aspectRatio: 1.81,
+    width: undefined,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 15,
+    marginLeft: 15,
+    resizeMode: 'contain'
+  },
+  input: {
+    paddingHorizontal: 10,
+    marginTop: 15,
+    marginRight: 15,
+    marginLeft: 15,
+    marginBottom: 0,
+    height: 40,
+    borderColor: 'black',
+    borderWidth: 1
+  },
+  forgot: {
+    padding: 15,
+    color: 'blue',
+    textAlign: 'right',
+  },
+  loginButton: {
+    backgroundColor: 'black',
+    padding: 10,
+    margin: 15,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  registerButton: {
+    backgroundColor: 'black',
+    padding: 10,
+    marginTop: -5,
+    marginRight: 15,
+    marginLeft: 15,
+    marginBottom: 15,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });
