@@ -99,5 +99,33 @@ export default StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+  },
+  containerActivitySettings: {
+    paddingTop: 100,
+    paddingBottom: 470,
+    backgroundColor: 'white',
+    display: 'flex'
+  },
+  dataActivitySettings: {
+    marginLeft: 15,
+    fontSize: 15
+  },
+  input: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    marginTop: 15,
+    marginRight: 15,
+    marginLeft: 15,
+    marginBottom: 0,
+    height: 60,
+    borderColor: 'black',
+    borderWidth: 1,
+  },
+  suisActivitySettings: {
+    display: 'flex',
+    position: 'relative',
+    top: 100,
+    right: 20
   }
+
 });
