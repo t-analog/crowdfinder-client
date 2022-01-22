@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { Text, View, Pressable, TextInput, StyleSheet } from 'react-native'
 import styles from '../styles/stylesheet';
 
 const ForgotPasswordScreen = () => {
@@ -11,10 +11,10 @@ const ForgotPasswordScreen = () => {
         placeholderTextColor="black"
         autoCapitalize="none"
       />
-      <TouchableOpacity
+      <Pressable
         style={styles.applyButton}>
         <Text style={styles.ButtonText}>Submit</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 }

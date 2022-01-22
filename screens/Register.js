@@ -1,6 +1,6 @@
 import React from 'react';
 import { register } from '../utils/user';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { View, Text, Pressable, TextInput, StyleSheet } from 'react-native';
 import styles from '../styles/stylesheet';
 
 const RegisterAccountScreen = ({ navigation }) => {
@@ -40,7 +40,7 @@ const RegisterAccountScreen = ({ navigation }) => {
         style={styles.input}
         underlineColorAndroid="transparent"
       />
-      <TouchableOpacity
+      <Pressable
         style={styles.applyButton}
         onPress={
           async () => {
@@ -53,7 +53,7 @@ const RegisterAccountScreen = ({ navigation }) => {
           }
         }>
         <Text style={styles.ButtonText}>Register</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 }

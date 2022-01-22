@@ -1,6 +1,6 @@
 import React from 'react';
 import { login } from '../utils/user';
-import { View, Image, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { View, Image, Text, Pressable, TextInput, StyleSheet } from 'react-native';
 import styles from '../styles/stylesheet';
 
 const LoginScreen = ({ navigation }) => {
@@ -34,13 +34,13 @@ const LoginScreen = ({ navigation }) => {
         style={styles.input}
         underlineColorAndroid="transparent"
       />
-      <TouchableOpacity
+      <Pressable
         onPress={
           () => navigation.navigate("ForgotPassword")
         }>
         <Text style={styles.forgot}>Forgot your password?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
+      </Pressable>
+      <Pressable
         style={styles.loginButton}
         onPress={
           async () => {
@@ -49,14 +49,14 @@ const LoginScreen = ({ navigation }) => {
           }
         }>
         <Text style={styles.ButtonText}>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
+      </Pressable>
+      <Pressable
         style={styles.registerButton}
         onPress={
           () => navigation.navigate("Register")
         }>
         <Text style={styles.ButtonText}>Register Account</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 }
