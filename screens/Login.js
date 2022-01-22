@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { login } from '../utils/user';
 import { View, Image, Text, Pressable, TextInput, StyleSheet } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useTogglePasswordVisibility } from '../components/TogglePassword';
 import styles from '../styles/stylesheet';
 
 const LoginScreen = ({ navigation }) => {
   const [username, onChangeUsername] = React.useState("");
   const [password, onChangePassword] = React.useState("");
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+    useTogglePasswordVisibility();
+  const [Password, setPassword] = useState('');
   return (
     <View style={styles.container}>
       {/* show variable only for debugging */}
@@ -25,15 +30,25 @@ const LoginScreen = ({ navigation }) => {
         style={styles.input}
         underlineColorAndroid="transparent"
       />
+      <View style={styles.inputContainer}>
       <TextInput
         autoCapitalize="none"
         onChangeText={onChangePassword}
         placeholder="Password"
         placeholderTextColor="black"
-        secureTextEntry={true}
-        style={styles.input}
+        secureTextEntry={passwordVisibility}
+        style={styles.inputLeft}
         underlineColorAndroid="transparent"
       />
+      <Pressable style={styles.inputIcon} onPress={handlePasswordVisibility}>
+       <Ionicons
+        name={rightIcon}
+        color={'black'}
+        size={20}
+        style={styles.icons}
+       />
+      </Pressable>
+      </View>
       <Pressable
         onPress={
           () => navigation.navigate("ForgotPassword")
