@@ -1,6 +1,7 @@
 import React from 'react';
 import { login } from '../utils/user';
 import { View, Image, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const LoginScreen = ({ navigation }) => {
   const [username, onChangeUsername] = React.useState("");
@@ -16,23 +17,45 @@ const LoginScreen = ({ navigation }) => {
         style={styles.logo}
         source={require('../assets/cflogo.png')}
       />
-      <TextInput
-        autoCapitalize="none"
-        onChangeText={onChangeUsername}
-        placeholder="Email/Username"
-        placeholderTextColor="black"
+      <View
         style={styles.input}
-        underlineColorAndroid="transparent"
-      />
-      <TextInput
-        autoCapitalize="none"
-        onChangeText={onChangePassword}
-        placeholder="Password"
-        placeholderTextColor="black"
-        secureTextEntry={true}
+        >
+        <Ionicons 
+          name={'person'} 
+          color={'black'} 
+          size={20} 
+          style={styles.icons}
+        />
+        <TextInput
+          autoCapitalize="none"
+          onChangeText={onChangeUsername}
+          placeholder="Email/Username"
+          placeholderTextColor="black"
+          style={styles.loginInput}
+          underlineColorAndroid="transparent"
+        />
+      </View>
+
+      <View 
         style={styles.input}
-        underlineColorAndroid="transparent"
-      />
+        >
+        <Ionicons 
+          name={'lock-closed'} 
+          color={'black'} 
+          size={20} 
+          style={styles.icons}
+        />
+        <TextInput
+          autoCapitalize="none"
+          onChangeText={onChangePassword}
+          placeholder="Password"
+          placeholderTextColor="black"
+          secureTextEntry={true}
+          style={styles.loginInput}
+          underlineColorAndroid="transparent"
+        />
+      </View>
+
       <TouchableOpacity
         onPress={
           () => navigation.navigate("ForgotPassword")
@@ -74,29 +97,39 @@ const styles = StyleSheet.create({
     resizeMode: 'contain'
   },
   input: {
-    paddingHorizontal: 10,
+    padding: (10, 10, 15, 10),
     marginTop: 15,
     marginRight: 15,
     marginLeft: 15,
     marginBottom: 0,
     height: 40,
-    borderColor: 'black',
-    borderWidth: 1
+    flexDirection: 'row',
+    alignItems:'center',
+    justifyContent: 'center',
+    borderColor: '#000',
+    paddingBottom: 10,
+    borderWidth:1,
+    borderRadius: 10
   },
-  forgot: {
+  loginInput: {
+    flex: 1,
+    paddingHorizontal: 10
+    },
+    forgot: {
     padding: 15,
     color: 'blue',
     textAlign: 'right',
-  },
-  loginButton: {
+    },
+    loginButton: {
     backgroundColor: 'black',
     padding: 10,
     margin: 15,
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  createAccButton: {
+    borderRadius: 10
+    },
+    createAccButton: {
     backgroundColor: 'black',
     padding: 10,
     marginTop: -5,
@@ -106,10 +139,16 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  ButtonText: {
+    borderRadius: 10
+    },
+    ButtonText: {
     color: 'white'
-  }
+    },
+    icons: {
+    marginLeft: 5,
+    justifyContent: 'center',
+    alignSelf: 'center'
+    }
 });
 
 export default LoginScreen;
