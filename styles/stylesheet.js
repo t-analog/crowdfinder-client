@@ -197,6 +197,25 @@ export default StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1
   },
+  inputLeft: {
+    paddingHorizontal: 10,
+    paddingRight: 320,
+    marginTop: 15,
+    marginRight: -35,
+    marginLeft: 15,
+    marginBottom: 0,
+    height: 40,
+    borderColor: 'black',
+    borderWidth: 1
+  },
+  inputContainer: {
+   flexDirection: 'row',
+   alignItems: 'center'
+  },
+  inputIcon:{
+   flex: 1,
+   paddingTop: 15
+  },
   forgot: {
     padding: 15,
     color: 'blue',
