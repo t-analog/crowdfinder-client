@@ -1,5 +1,15 @@
 import { StyleSheet } from 'react-native';
 
+const textInput = {
+  height: 40,
+  marginTop: 20
+};
+
+const squareComponent = {
+  height: 40,
+  marginTop: 20
+}
+
 export default StyleSheet.create({
   rightmenu: {
     top: 19,
@@ -91,10 +101,10 @@ export default StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    width:176,
+    width: 176,
     justifyContent: 'space-between'
   },
-  ButtonText: {
+  buttonText: {
     color: 'white',
     fontSize: 16
   },
@@ -179,21 +189,25 @@ export default StyleSheet.create({
     justifyContent: 'space-between'
   },
   logo: {
-    aspectRatio: 1.81,
-    width: undefined,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 15,
-    marginLeft: 15,
     resizeMode: 'contain'
   },
+  rectangleRounded: {
+    borderColor: "black",
+    borderRadius: 10,
+  },
   input: {
+    marginHorizontal: 20,
     paddingHorizontal: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    height: 40,
+    height: textInput.height,
+    borderColor: 'black',
+    borderWidth: 1,
+  },
+  textInput: {
+    marginHorizontal: 20,
+    paddingHorizontal: 10,
+    height: textInput.height,
     borderColor: 'black',
     borderWidth: 1
   },
@@ -209,38 +223,32 @@ export default StyleSheet.create({
     borderWidth: 1
   },
   inputContainer: {
-   flexDirection: 'row',
-   alignItems: 'center'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
-  inputIcon:{
-    marginTop: 15,
+  inputIcon: {
     position: 'absolute',
-    right: 30,
+    right: 40,
     top: 10,
+  },
+  inputMarginTop: {
+    marginTop: textInput.marginTop,
   },
   forgot: {
     padding: 15,
     color: 'blue',
     textAlign: 'right',
   },
-  loginButton: {
-    backgroundColor: 'black',
-    padding: 10,
-    margin: 15,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
+  viewMarginTop: {
+    marginTop: squareComponent.marginTop,
   },
-  registerButton: {
-    backgroundColor: 'black',
-    padding: 10,
-    marginTop: -5,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 15,
-    height: 40,
+  pressableButton: {
     alignItems: 'center',
+    backgroundColor: 'black',
+    height: squareComponent.height,
     justifyContent: 'center',
+    marginHorizontal: 20,
+    padding: 10,
   },
   applyButton: {
     backgroundColor: 'black',
@@ -250,7 +258,4 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  ButtonText: {
-    color: 'white'
-  }
 });

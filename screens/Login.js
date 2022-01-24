@@ -27,17 +27,19 @@ const LoginScreen = ({ navigation }) => {
         onChangeText={onChangeUsername}
         placeholder="Email/Username"
         placeholderTextColor="black"
-        style={styles.input}
+        style={[styles.textInput, styles.rectangleRounded]}
         underlineColorAndroid="transparent"
       />
-      <View>
+      <View
+        style={styles.inputMarginTop}
+      >
         <TextInput
           autoCapitalize="none"
           onChangeText={onChangePassword}
           placeholder="Password"
           placeholderTextColor="black"
           secureTextEntry={passwordVisibility}
-          style={styles.input}
+          style={[styles.textInput, styles.rectangleRounded]}
           underlineColorAndroid="transparent"
         />
         <Pressable style={styles.inputIcon} onPress={handlePasswordVisibility}>
@@ -56,21 +58,21 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.forgot}>Forgot your password?</Text>
       </Pressable>
       <Pressable
-        style={styles.loginButton}
+        style={[ styles.pressableButton, styles.rectangleRounded ]}
         onPress={
           async () => {
             const user = await login({ username, password });
             if (user) navigation.navigate("Home");
           }
         }>
-        <Text style={styles.ButtonText}>Login</Text>
+        <Text style={styles.buttonText}>Login</Text>
       </Pressable>
       <Pressable
-        style={styles.registerButton}
+    style={[styles.pressableButton, styles.viewMarginTop, styles.rectangleRounded]}
         onPress={
           () => navigation.navigate("Register")
         }>
-        <Text style={styles.ButtonText}>Register Account</Text>
+        <Text style={styles.buttonText}>Register Account</Text>
       </Pressable>
     </View>
   );
