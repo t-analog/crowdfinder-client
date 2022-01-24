@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { login } from '../utils/user';
 import { View, Image, Text, Pressable, TextInput, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -30,24 +30,24 @@ const LoginScreen = ({ navigation }) => {
         style={styles.input}
         underlineColorAndroid="transparent"
       />
-      <View style={styles.inputContainer}>
-      <TextInput
-        autoCapitalize="none"
-        onChangeText={onChangePassword}
-        placeholder="Password"
-        placeholderTextColor="black"
-        secureTextEntry={passwordVisibility}
-        style={styles.inputLeft}
-        underlineColorAndroid="transparent"
-      />
-      <Pressable style={styles.inputIcon} onPress={handlePasswordVisibility}>
-       <Ionicons
-        name={rightIcon}
-        color={'black'}
-        size={20}
-        style={styles.icons}
-       />
-      </Pressable>
+      <View>
+        <TextInput
+          autoCapitalize="none"
+          onChangeText={onChangePassword}
+          placeholder="Password"
+          placeholderTextColor="black"
+          secureTextEntry={passwordVisibility}
+          style={styles.input}
+          underlineColorAndroid="transparent"
+        />
+        <Pressable style={styles.inputIcon} onPress={handlePasswordVisibility}>
+          <Ionicons
+            name={rightIcon}
+            color={'black'}
+            size={20}
+            style={styles.icons}
+          />
+        </Pressable>
       </View>
       <Pressable
         onPress={

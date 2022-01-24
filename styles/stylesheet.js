@@ -213,8 +213,10 @@ export default StyleSheet.create({
    alignItems: 'center'
   },
   inputIcon:{
-   flex: 1,
-   paddingTop: 15
+    marginTop: 15,
+    position: 'absolute',
+    right: 30,
+    top: 10,
   },
   forgot: {
     padding: 15,
