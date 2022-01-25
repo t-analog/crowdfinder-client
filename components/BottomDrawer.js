@@ -1,33 +1,32 @@
 import React, { useRef, useState } from "react";
 import {
-  Text,
   View,
   Easing,
   Animated,
+  Pressable,
   StyleSheet,
   Dimensions,
-  PanResponder,
-  Pressable,
 } from "react-native";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const { width, height } = Dimensions.get('window');
 const drawer = {
   height: height * 3 / 4,
   state: {
-    open: 0,
-    closed: (height * 3 / 4) / 2
+    open: (height * 3 / 4) / 2,
+    closed: 0
   },
 }
 
 
 const BottomDrawer = ({ children }) => {
-  const pan = useRef(new Animated.Value(drawer.state.open)).current;
-  const [drawerState, setDrawerState] = useState(drawer.state.open);
+  const pan = useRef(new Animated.Value(drawer.state.closed)).current;
+  const [drawerState, setDrawerState] = useState(drawer.state.closed);
 
 
   const drawerAnimateMove = (value, toValue) => {
     Animated.timing(value, {
-      toValue: toValue,
+      toValue: -toValue,
       useNativeDriver: false,
       easing: Easing.out(Easing.exp)
     }).start();
@@ -38,8 +37,7 @@ const BottomDrawer = ({ children }) => {
       <Animated.View
         style={{
           position: 'absolute',
-          /* bottom: -(drawer.height / 2), */
-          bottom: 0,
+          bottom: -(drawer.height / 2),
           transform: [{ translateY: pan }]
         }}
       >
@@ -54,9 +52,21 @@ const BottomDrawer = ({ children }) => {
               drawerAnimateMove(pan, drawer.state.closed);
               setDrawerState(drawer.state.closed);
             }
-            console.log(drawerState);
           }}
-        />
+        >
+          {drawerState == drawer.state.closed
+            ? <Ionicons
+              name={"arrow-up"}
+              color={"white"}
+              size={20}
+            />
+            : <Ionicons
+              name={"arrow-down"}
+              color={"white"}
+              size={20}
+            />
+          }
+        </Pressable>
         <View style={styles.drawer}>
           {children}
         </View>
@@ -67,8 +77,8 @@ const BottomDrawer = ({ children }) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     flex: 1,
+    alignItems: "center",
     justifyContent: "center",
   },
   drawer: {
@@ -79,6 +89,9 @@ const styles = StyleSheet.create({
     width,
   },
   drawerPressable: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "blue",
     borderColor: "black",
     borderTopLeftRadius: 20,
