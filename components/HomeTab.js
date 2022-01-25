@@ -13,7 +13,6 @@ const HomeTab = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: 'tomato',
-        tabBarIcon: () => ( <Ionicons name={'home'} color={'white'} size={20}/> ),
         tabBarInactiveTintColor: 'gray',
         tabBarShowLabel: true,
         tabBarLabelStyle: {
@@ -36,6 +35,7 @@ const HomeTab = () => {
         name="Nearby Activity"
         component={JoinScreen}
         options={{
+          tabBarIcon: () => ( <Ionicons name={'list-outline'} color={'white'} size={24}/> ),
           header: () => null
         }}
       />
@@ -43,6 +43,7 @@ const HomeTab = () => {
         name="Create Activity"
         component={CreateActivityScreen}
         options={{
+          tabBarIcon: () => ( <Ionicons name={'add-circle-outline'} color={'white'} size={24}/> ),
           header: () => null
         }}
       />
@@ -50,6 +51,7 @@ const HomeTab = () => {
         name="Profile Stack"
         component={ProfileStack}
         options={{
+          tabBarIcon: () => ( <Ionicons name={'person-outline'} color={'white'} size={24}/> ),
           header: () => null
         }}
       />
