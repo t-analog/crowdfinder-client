@@ -10,6 +10,7 @@ import {
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const { width, height } = Dimensions.get('window');
+
 const drawer = {
   height: height * 3 / 4,
   state: {
