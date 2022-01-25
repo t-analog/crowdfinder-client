@@ -45,6 +45,7 @@ const CreateActivityScreen = () => {
       {
         shouldShow ? (
           <View>
+            <Text style={styles.header}>Create Activity</Text>
             <TextInput
               autoCapitalize="none"
               placeholder="Name"
