@@ -35,10 +35,16 @@ const HomeTab = () => {
       <Tab.Screen
         name="Nearby Activity"
         component={JoinScreen}
+        options={{
+          header: () => null
+        }}
       />
       <Tab.Screen
         name="Create Activity"
         component={CreateActivityScreen}
+        options={{
+          header: () => null
+        }}
       />
       <Tab.Screen
         name="Profile Stack"
