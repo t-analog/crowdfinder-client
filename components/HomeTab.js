@@ -15,6 +15,7 @@ const HomeTab = () => {
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
         tabBarShowLabel: true,
+        tabBarHideOnKeyboard: true,
         tabBarLabelStyle: {
           position: 'relative',
           bottom: 20
