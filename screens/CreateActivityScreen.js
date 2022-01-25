@@ -100,7 +100,7 @@ const CreateActivityScreen = () => {
             clearText();
           }}
         >
-          <Text style={styles.ButtonText}>Cancel</Text>
+          <Text style={styles.buttonText}>Cancel</Text>
         </Pressable>
         <Pressable
           style={styles.buttonSplit}
@@ -108,7 +108,7 @@ const CreateActivityScreen = () => {
             submitActivity();
           }}
         >
-          <Text style={styles.ButtonText}>Confirm</Text>
+          <Text style={styles.buttonText}>Confirm</Text>
         </Pressable>
       </View>
     </View>
