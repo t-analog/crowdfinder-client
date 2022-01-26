@@ -46,7 +46,7 @@ const JoinScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   activityWrapper: {
     flex: 1,
-    backgroundColor: '#EBEAED',
+    backgroundColor: "aliceblue",
     padding: 20,
   },
   sectionTitle: {

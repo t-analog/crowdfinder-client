@@ -83,23 +83,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   drawer: {
-    backgroundColor: "#EBEAED",
-    borderColor: "black",
+    backgroundColor: "aliceblue",
+    borderColor: "gray",
     // borderWidth: 1,
     height: drawer.height,
     width,
+    elevation: 20,
   },
   drawerPressable: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#EBEAED",
+    backgroundColor: "aliceblue",
     borderColor: "gray",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    borderWidth: 1,
+    // borderWidth: 1,
     height: 40,
     width,
+    elevation: 20,
   }
 });
 

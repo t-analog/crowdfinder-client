@@ -9,32 +9,30 @@ const Stack = createStackNavigator();
 
 const LoginStack = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            header: () => null
-          }}
-        />
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPasswordScreen}
-        />
-        <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
-        />
-        <Stack.Screen
-          name="Home"
-          component={HomeTab}
-          options={{
-            header: () => null
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          header: () => null
+        }}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
+      />
+      <Stack.Screen
+        name="Register"
+        component={RegisterScreen}
+      />
+      <Stack.Screen
+        name="Home"
+        component={HomeTab}
+        options={{
+          header: () => null
+        }}
+      />
+    </Stack.Navigator>
   );
 }
 
