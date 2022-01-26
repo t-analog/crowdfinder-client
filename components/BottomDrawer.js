@@ -58,12 +58,12 @@ const BottomDrawer = ({ children }) => {
           {drawerState == drawer.state.closed
             ? <Ionicons
               name={"arrow-up"}
-              color={"white"}
+              color={"gray"}
               size={20}
             />
             : <Ionicons
               name={"arrow-down"}
-              color={"white"}
+              color={"gray"}
               size={20}
             />
           }
@@ -83,9 +83,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   drawer: {
-    backgroundColor: "#666",
+    backgroundColor: "#EBEAED",
     borderColor: "black",
-    borderWidth: 1,
+    // borderWidth: 1,
     height: drawer.height,
     width,
   },
@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "blue",
-    borderColor: "black",
+    backgroundColor: "#EBEAED",
+    borderColor: "gray",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderWidth: 1,
