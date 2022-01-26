@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -14,23 +14,27 @@ import { logout } from '../utils/user';
 import styles from '../styles/stylesheet';
 
 const ProfileScreen = ({ navigation }) => {
-  const [edit, setEdit] = useState(false);
-  const toggleEdit = () => setEdit(!edit);
-  const [menuVisible, setMenuVisible] = useState(false);
-  const openMenu = () => setMenuVisible(true);
-  const closeMenu = () => setMenuVisible(false);
+  const [isEditable, setIsEditable] = React.useState(false);
+  const [isVisible, setIsVisible] = React.useState(false);
+  const toggleIsEditable = () => setIsEditable(!isEditable);
+  const toggleIsVisible = () => setIsVisible(!isVisible);
+
+  const [email, setEmail] = React.useState("xi@cpc.cn");
+  const [location, setLocation] = React.useState("Skudai, Johor");
+  const [bio, setBio] = React.useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus nisl lectus, sed convallis odio lacinia eget.");
 
   return (
     <View>
       <Menu
-        visible={menuVisible}
-        style={styles.rightmenu}
-        onDismiss={closeMenu}
-        anchor={ <Appbar.Header style={styles.color}>
-                  <Appbar.Content title=""/>
-                  <Appbar.Action icon="dots-vertical" onPress={openMenu}/>
-                  </Appbar.Header>
-                }>
+        visible={isVisible}
+        style={styles.profileMenu}
+        onDismiss={toggleIsVisible}
+        anchor={
+          <Appbar.Header style={styles.headerBackground}>
+            <Appbar.Content title="" />
+            <Appbar.Action icon="dots-vertical" onPress={toggleIsVisible} />
+          </Appbar.Header>
+        }>
         <Menu.Item
           title="Activity Settings"
           onPress={() => {
@@ -46,78 +50,71 @@ const ProfileScreen = ({ navigation }) => {
         <Menu.Item
           title="Logout"
           onPress={async () => {
-              if (await logout()) navigation.navigate("Login");
-            }
-          }
+            if (await logout()) navigation.navigate("Login");
+          }}
         />
       </Menu>
       <View style={styles.container}>
-            <Text style={styles.header}>Your Profile</Text>
-            <Image
-              style={styles.profile}
-              source={require('../assets/profile.jpeg')} />
-            <View style={styles.boxA}>
-              <Text style={styles.data}>Username</Text>
-              <TextInput style={styles.boxB}
-                underlineColorAndroid="transparent"
-                placeholder="@xijinping"
-                placeholderTextColor="black"
-                autoCapitalize="none"
-                editable={edit} />
-            </View>
-            <View style={styles.boxA}>
-              <Text style={styles.data}>Email</Text>
-              <TextInput style={styles.boxB}
-                underlineColorAndroid="transparent"
-                placeholder="xi@cpc.cn"
-                placeholderTextColor="black"
-                autoCapitalize="none"
-                editable={edit} />
-            </View>
-            <View style={styles.boxA}>
-              <Text style={styles.data}>Location</Text>
-              <TextInput style={styles.boxB}
-                underlineColorAndroid="transparent"
-                placeholder="Skudai"
-                placeholderTextColor="black"
-                autoCapitalize="none"
-                editable={edit} />
-            </View>
-            <View style={styles.boxA}>
-              <Text style={styles.data}>Bio</Text>
-              <TextInput style={styles.boxB2}
-                multiline={true}
-                underlineColorAndroid="transparent"
-                placeholder="President of the People's Republic of China & General Secretary of the Communist Party of China."
-                placeholderTextColor="black"
-                autoCapitalize="none"
-                editable={edit} />
-            </View>
-            {
-              edit?(
-                <View style={styles.row}>
-                  <Pressable
-                    style={styles.buttonSplit}
-                    onPress={toggleEdit}
-                    >
-                    <Text style={styles.text}>Confirm</Text>
-                  </Pressable>
-                  <Pressable
-                    style={styles.buttonSplit}
-                    onPress={toggleEdit}
-                    >
-                    <Text style={styles.text}>Cancel</Text>
-                  </Pressable>
-                </View>
-              )
-              :<Pressable
-                style={[styles.buttonComponent, styles.button]}
-                onPress={toggleEdit}
-                >
-                <Text style={styles.text}>Edit Profile</Text>
+        <Text style={styles.header}>Your Profile</Text>
+        <Image
+          style={styles.profileImage}
+          source={require('../assets/profile.jpeg')} />
+        <TextInput
+          autoCapitalize="none"
+          onChangeText={setEmail}
+          placeholder="Email"
+          placeholderTextColor="black"
+          underlineColorAndroid="transparent"
+          value={email}
+          editable={isEditable}
+          style={[styles.textInputBase, styles.textInputSmall]}
+        />
+        <TextInput
+          autoCapitalize="none"
+          onChangeText={setLocation}
+          placeholder="Location"
+          placeholderTextColor="black"
+          underlineColorAndroid="transparent"
+          value={location}
+          editable={isEditable}
+          style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
+        />
+        <TextInput
+          autoCapitalize="none"
+          onChangeText={setBio}
+          placeholder="Bio"
+          placeholderTextColor="black"
+          underlineColorAndroid="transparent"
+          multiline={true}
+          value={bio}
+          editable={isEditable}
+          style={[styles.textInputBase, styles.textInputBig, styles.marginTop]}
+        />
+        {
+          isEditable ? (
+            <View style={[styles.spaceBetween, styles.marginTop]}>
+              <Pressable
+                style={[styles.buttonBase, styles.buttonHalf]}
+                onPress={toggleIsEditable}
+              >
+                <Text style={styles.text}>Confirm</Text>
               </Pressable>
-            }
-          </View>
+              <Pressable
+                style={[styles.buttonBase, styles.buttonHalf]}
+                onPress={toggleIsEditable}
+              >
+                <Text style={styles.text}>Cancel</Text>
+              </Pressable>
+            </View>
+          )
+            : <Pressable
+              style={[styles.buttonBase, styles.buttonFull, styles.marginTop]}
+              onPress={toggleIsEditable}
+            >
+              <Text style={styles.text}>Edit Profile</Text>
+            </Pressable>
+        }
+      </View>
     </View>
   );
 };

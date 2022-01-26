@@ -5,15 +5,23 @@ import styles from '../styles/stylesheet';
 const ForgotPasswordScreen = () => {
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input}
+      <TextInput
+        style={[
+          styles.textInputBase,
+          styles.textInputSmall,
+        ]}
         underlineColorAndroid="transparent"
-        placeholder="Email/Username"
+        placeholder="Email"
         placeholderTextColor="black"
         autoCapitalize="none"
       />
       <Pressable
-        style={styles.applyButton}>
-        <Text style={styles.ButtonText}>Submit</Text>
+        style={[
+          styles.buttonBase,
+          styles.buttonFull,
+          styles.marginTop,
+        ]}>
+        <Text style={styles.text}>Submit</Text>
       </Pressable>
     </View>
   );

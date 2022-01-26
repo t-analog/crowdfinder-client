@@ -7,6 +7,8 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import styles from '../styles/stylesheet';
+
 const Activity = (props) => {
   return (
     <View style={styles.item}>
@@ -46,47 +48,5 @@ const Category = (props) => {
     </View>
   )
 };
-
-const styles = StyleSheet.create({
-  item: {
-    backgroundColor: '#FFF',
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    marginBottom: 20,
-  },
-  category: {
-    minWidth: 40,
-    textAlign: "center",
-    height: 24,
-    marginVertical: 5,
-    backgroundColor: '#55BCF6',
-    opacity: 0.4,
-    borderRadius: 20,
-    marginRight: 10,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  itemTitle: {
-    flexWrap: "wrap",
-    fontWeight: 'bold',
-    marginVertical: 5,
-    fontSize: 16
-  },
-  itemText: {
-    flexWrap: "wrap",
-    alignSelf: "stretch",
-    marginVertical: 5,
-  },
-  textCategory: {
-    paddingHorizontal: 15,
-  },
-  itemBot: {
-    justifyContent: "space-between",
-    flexDirection: "row"
-  },
-});
 
 export default Activity;

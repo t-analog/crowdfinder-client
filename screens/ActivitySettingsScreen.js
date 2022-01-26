@@ -4,39 +4,42 @@ import {
   View,
   Switch,
   TextInput,
-  StyleSheet,
 } from 'react-native';
+
 import styles from '../styles/stylesheet';
 
 const ActivitySettingsScreen = ({ navigation }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   return (
-    <View style={styles.containerActivitySettings}>
-      <Switch
-        style={styles.suis}
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-      />
+    <View style={styles.container}>
       <Text style={styles.header}>Activity Settings</Text>
-      <Text style={styles.dataActivitySettings}></Text>
-      <TextInput secureTextEntry={false} multiline={true} style={styles.inputActivitySettings}
-        underlineColorAndroid="transparent"
-        placeholder="Preferred activity notification"
-        placeholderTextColor="black"
-        autoCapitalize="none"
-        editable={false}
-      />
+      <View>
+        <View
+          style={[styles.emptyBoxBase, styles.emptyBoxSmall]}
+        >
+          <Text>
+            Preferred activity notification
+          </Text>
+        </View>
+        <Switch
+          style={styles.toggleSwitch}
+          trackColor={{ false: "gray", true: "black" }}
+          thumbColor={isEnabled ? "white" : "white"}
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+      </View>
       {
         isEnabled &&
-        <TextInput secureTextEntry={false} multiline={true} style={styles.inputActivitySettings}
+        <TextInput
+          secureTextEntry={false}
+          multiline={true}
           underlineColorAndroid="transparent"
           placeholder="Preferred activity"
           placeholderTextColor="black"
           autoCapitalize="none"
-          editable={false}
+          style={[styles.textInputBase, styles.textInputMedium, styles.marginTop]}
         />
       }
     </View>

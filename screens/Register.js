@@ -15,7 +15,7 @@ const RegisterAccountScreen = ({ navigation }) => {
         Value of confirmPassword: {confirmPassword}
       </Text>
       <TextInput
-        style={[styles.textInput, styles.rectangleRounded]}
+        style={[styles.textInputBase, styles.textInputSmall]}
         autoCapitalize="none"
         onChangeText={onChangeUsername}
         placeholder="Email/Username"
@@ -28,7 +28,7 @@ const RegisterAccountScreen = ({ navigation }) => {
         placeholder="Password"
         placeholderTextColor="black"
         secureTextEntry={true}
-        style={[styles.textInput, styles.viewMarginTop, styles.rectangleRounded]}
+        style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
         underlineColorAndroid="transparent"
       />
       <TextInput
@@ -37,11 +37,11 @@ const RegisterAccountScreen = ({ navigation }) => {
         placeholder="Confirm Password"
         placeholderTextColor="black"
         secureTextEntry={true}
-        style={[styles.textInput, styles.viewMarginTop, styles.rectangleRounded]}
+        style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
         underlineColorAndroid="transparent"
       />
       <Pressable
-        style={[styles.pressableButton, styles.viewMarginTop, styles.rectangleRounded]}
+        style={[styles.buttonBase, styles.buttonFull, styles.marginTop]}
         onPress={
           async () => {
             if (password != confirmPassword) {
@@ -52,7 +52,7 @@ const RegisterAccountScreen = ({ navigation }) => {
             if (user) navigation.navigate("Home");
           }
         }>
-        <Text style={styles.buttonText}>Register</Text>
+        <Text style={styles.text}>Register</Text>
       </Pressable>
     </View>
   );

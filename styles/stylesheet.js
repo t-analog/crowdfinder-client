@@ -1,276 +1,170 @@
-import { StyleSheet } from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+} from 'react-native';
 
-const textInput = {
-  height: 40,
-  marginTop: 20
+const { width, height } = Dimensions.get('window');
+
+const boxComponent = {
+  height: {
+    small: 40,
+    medium: 80,
+    big: 120,
+  },
+  padding: {
+    horizontal: 10,
+  },
+  border: {
+    color: 'black',
+    radius: 10,
+    width: 1,
+  },
 };
-
-const squareComponent = {
-  height: 40,
-  marginTop: 20
-};
-
-const buttonComponent = {
-  backgroundColor: 'black',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: 10,
-  marginTop: 30,
-  marginLeft: 15,
-  marginRight: 15,
-  borderRadius: 10
-};
-
-const data = {
-  fontSize: 16
-}
 
 export default StyleSheet.create({
-  rightmenu: {
-    top: 19,
-    left: 258
+  item: {
+    backgroundColor: '#FFF',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    marginBottom: 20,
   },
-  color: {
-    backgroundColor: 'white',
+  category: {
+    minWidth: 40,
+    textAlign: "center",
+    height: 24,
+    marginVertical: 5,
+    backgroundColor: '#55BCF6',
+    opacity: 0.4,
+    borderRadius: 20,
+    marginRight: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  container: {
-    paddingTop: 100,
-    backgroundColor: 'white',
-    paddingBottom: 550
+  itemTitle: {
+    flexWrap: "wrap",
+    fontWeight: 'bold',
+    marginVertical: 5,
+    fontSize: 16
   },
-  containerActivitySettings: {
-    paddingTop: 100,
-    paddingBottom: 470,
-    backgroundColor: 'white',
-    display: 'flex'
+  itemText: {
+    flexWrap: "wrap",
+    alignSelf: "stretch",
+    marginVertical: 5,
   },
-  header: {
-    marginTop: 20,
-    marginBottom: 5,
-    marginLeft: 15,
-    fontSize: 40
+  textCategory: {
+    paddingHorizontal: 15,
   },
-  profile: {
-    width: 120,
-    height: 120,
-    borderRadius: 120 / 2,
-    position: 'absolute',
-    right: 10,
-    top: 5
-  },
-  box: {
-    paddingHorizontal: 8,
-    paddingVertical: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  boxA: {
-    paddingHorizontal: 8,
-    paddingVertical: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  boxB: {
-    marginTop: -5,
-    justifyContent: 'space-between',
-    color: "black",
-    fontSize: data.fontSize
-  },
-  boxB2: {
-    marginTop: -5,
-    marginRight: 9,
-    paddingTop: 28,
-    justifyContent: 'space-between',
-    color: "black",
-    fontSize: data.fontSize
-  },
-  text: {
-    color: 'white',
-    fontSize: data.fontSize
-  },
-  row: {
-    flexDirection: 'row',
+  itemBot: {
+    justifyContent: "space-between",
+    flexDirection: "row"
   },
 
-  dataActivitySettings: {
-    marginLeft: 15,
-    fontSize: 15
+  container: {
+    padding: 20,
+    backgroundColor: 'white',
   },
-  inputActivitySettings: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    height: 60,
-    borderColor: 'black',
-    borderWidth: 1,
+  textInputBase: {
+    paddingHorizontal: boxComponent.padding.horizontal,
+    borderColor: boxComponent.border.color,
+    borderWidth: boxComponent.border.width,
+    borderRadius: boxComponent.border.radius,
   },
-  suisActivitySettings: {
-    display: 'flex',
-    position: 'relative',
-    top: 100,
-    right: 20
+  textInputSmall: {
+    height: boxComponent.height.small,
   },
-  headerBackground: {
-    backgroundColor: "#00BFFF",
-    height: 200,
+  textInputMedium: {
+    height: boxComponent.height.medium,
   },
-  avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 4,
-    borderColor: "white",
-    marginBottom: 10,
-    alignSelf: 'center',
+  textInputBig: {
+    height: boxComponent.height.big,
+  },
+  emptyBoxBase: {
+    paddingHorizontal: boxComponent.padding.horizontal,
+    borderColor: boxComponent.border.color,
+    borderWidth: boxComponent.border.width,
+    borderRadius: boxComponent.border.radius,
+    justifyContent: 'center',
+  },
+  emptyBoxSmall: {
+    height: boxComponent.height.small,
+  },
+  emptyBoxMedium: {
+    height: boxComponent.height.medium,
+  },
+  emptyBoxBig: {
+    height: boxComponent.height.big,
+  },
+  toggleSwitch: {
     position: 'absolute',
-    marginTop: 130
+    top: 5,
+    right: 10,
   },
-  body: {
-    marginTop: 40,
+  buttonBase: {
+    paddingHorizontal: boxComponent.padding.horizontal,
+    backgroundColor: 'black',
+    borderRadius: boxComponent.border.radius,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: boxComponent.height.small,
   },
-  name: {
-    fontSize: 28,
-    color: "#696969",
-    fontWeight: "600",
-    marginTop: 50,
-    marginLeft: 20
+  buttonFull: {
+    // marginHorizontal: 20,
   },
-  info: {
-    fontSize: data.fontSize,
-    color: "#00BFFF",
-    marginTop: 60
+  buttonHalf: {
+    width: width * 1 / 2 - 30,
   },
-  center: {
-    alignSelf: 'center',
-    textAlign: 'center'
+  marginBot: {
+    marginBottom: 20,
   },
-  description: {
-    fontSize: data.fontSize,
-    color: "#696969",
-    marginTop: squareComponent.marginTop
+  marginTop: {
+    marginTop: 20,
   },
-  inputDesc: {
-    paddingHorizontal: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    height: 150,
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 5,
+  spaceBetween: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+  },
+  flexEnd: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   logo: {
     justifyContent: 'center',
     alignItems: 'center',
     resizeMode: 'contain'
   },
-  rectangleRounded: {
-    borderColor: "black",
-    borderRadius: 10,
-  },
-  input: {
-    marginHorizontal: 20,
-    paddingHorizontal: 10,
-    height: textInput.height,
-    borderColor: 'black',
-    borderWidth: 1,
-  },
-  textInput: {
-    marginHorizontal: 20,
-    paddingHorizontal: 10,
-    height: textInput.height,
-    borderColor: 'black',
-    borderWidth: 1
-  },
-  inputLeft: {
-    paddingHorizontal: 10,
-    paddingRight: 320,
-    marginTop: 15,
-    marginRight: -35,
-    marginLeft: 15,
-    marginBottom: 0,
-    height: 40,
-    borderColor: 'black',
-    borderWidth: 1
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
   icon: {
     position: 'absolute',
-    right: 40,
+    right: 20,
     top: 10,
   },
-  inputMarginTop: {
-    marginTop: textInput.marginTop,
+  text: {
+    color: 'white',
+    fontSize: 16,
   },
   forgot: {
-    padding: 15,
     color: 'blue',
-    textAlign: 'right',
   },
-  viewMarginTop: {
-    marginTop: squareComponent.marginTop,
+  profileMenu: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
   },
-  button: {
-    backgroundColor: buttonComponent.backgroundColor,
-    alignItems: buttonComponent.alignItems,
-    justifyContent: buttonComponent.justifyContent,
-    padding: buttonComponent.padding,
-    marginTop: buttonComponent.marginTop,
-    marginLeft: buttonComponent.marginLeft,
-    marginRight: buttonComponent.marginRight,
-    borderRadius: buttonComponent.borderRadius,
-    height: squareComponent.height
+  profileImage: {
+    width: 120,
+    height: 120,
+    borderRadius: 120 / 2,
+    position: 'absolute',
+    right: 0,
+    marginRight: 20,
   },
-  buttonSplit: {
-    backgroundColor: buttonComponent.backgroundColor,
-    alignItems: buttonComponent.alignItems,
-    justifyContent: buttonComponent.justifyContent,
-    padding: buttonComponent.padding,
-    marginTop: buttonComponent.marginTop,
-    marginLeft: buttonComponent.marginLeft,
-    marginRight: buttonComponent.marginRight,
-    borderRadius: buttonComponent.borderRadius,
-    height: squareComponent.height,
-    width: 176,
-    justifyContent: 'space-between'
+  header: {
+    marginTop: 100,
+    marginBottom: 20,
+    fontSize: 40
   },
-  pressableButton: {
-    backgroundColor: buttonComponent.backgroundColor,
-    alignItems: buttonComponent.alignItems,
-    justifyContent: buttonComponent.justifyContent,
-    height: squareComponent.height,
-    padding: buttonComponent.padding,
-    marginHorizontal: 20
-  },
-  applyButton: {
-    backgroundColor: buttonComponent.backgroundColor,
-    alignItems: buttonComponent.alignItems,
-    justifyContent: buttonComponent.justifyContent,
-    height: squareComponent.height,
-    padding: buttonComponent.padding,
-    margin: 15,
+  headerBackground: {
+    backgroundColor: 'white',
   },
 });
