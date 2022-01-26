@@ -100,21 +100,21 @@ const ProfileScreen = ({ navigation }) => {
                     style={styles.buttonSplit}
                     onPress={toggleEdit}
                     >
-                    <Text style={styles.buttonText}>Confirm</Text>
+                    <Text style={styles.text}>Confirm</Text>
                   </Pressable>
                   <Pressable
                     style={styles.buttonSplit}
                     onPress={toggleEdit}
                     >
-                    <Text style={styles.buttonText}>Cancel</Text>
+                    <Text style={styles.text}>Cancel</Text>
                   </Pressable>
                 </View>
               )
               :<Pressable
-                style={styles.button}
+                style={[styles.buttonComponent, styles.button]}
                 onPress={toggleEdit}
                 >
-                <Text style={styles.buttonText}>Edit Profile</Text>
+                <Text style={styles.text}>Edit Profile</Text>
               </Pressable>
             }
           </View>

@@ -16,6 +16,7 @@ const CreateActivityScreen = () => {
   const [location, onChangeLocation] = React.useState("");
   const [name, onChangeName] = React.useState("");
   const [shouldShow, setshouldShow] = React.useState(true);
+  const togglePanel = () => setshouldShow(!shouldShow);
 
   const clearText = () => {
     onChangeCapacity("");
@@ -91,27 +92,36 @@ const CreateActivityScreen = () => {
               underlineColorAndroid="transparent"
               value={location}
             />
+            <View style={styles.row}>
+              <Pressable
+                style={styles.buttonSplit}
+                onPress={() => {
+                  clearText(), togglePanel();
+                }}
+              >
+                <Text style={styles.text}>Cancel</Text>
+              </Pressable>
+              <Pressable
+                style={styles.buttonSplit}
+                onPress={() => {
+                  submitActivity();
+                }}
+              >
+                <Text style={styles.text}>Confirm</Text>
+              </Pressable>
+            </View>
           </View>
-        ) : null
+        ) :
+        <Pressable
+          style={styles.button}
+          onPress={() => {
+            togglePanel();
+          }}
+        >
+          <Text style={styles.buttonText}>Create Activity</Text>
+        </Pressable>
       }
-      <View style={styles.row}>
-        <Pressable
-          style={styles.buttonSplit}
-          onPress={() => {
-            clearText();
-          }}
-        >
-          <Text style={styles.buttonText}>Cancel</Text>
-        </Pressable>
-        <Pressable
-          style={styles.buttonSplit}
-          onPress={() => {
-            submitActivity();
-          }}
-        >
-          <Text style={styles.buttonText}>Confirm</Text>
-        </Pressable>
-      </View>
+
     </View>
   );
 };

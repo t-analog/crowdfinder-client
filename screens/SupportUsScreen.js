@@ -16,8 +16,8 @@ const SupportUsScreen = () => {
       <Image style={styles.avatar} source={{ uri: 'https://media.istockphoto.com/vectors/social-love-heart-icon-isolated-on-white-background-vector-vector-id949849640?k=20&m=949849640&s=170667a&w=0&h=udCunpF_5uAceYrs8Lkk6qjmuXfbGK2LNw4myEbwcWY=' }} />
       <View style={styles.body}>
         <View style={styles.bodyContent}>
-          <Text style={styles.info}>Do you like this app?</Text>
-          <Text style={styles.description}>You could buy us some coffee!</Text>
+          <Text style={[styles.info, styles.center]}>Do you like this app?</Text>
+          <Text style={[styles.description, styles.center]}>You could buy us some coffee!</Text>
         </View>
       </View>
     </View>

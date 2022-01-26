@@ -42,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
           style={[styles.textInput, styles.rectangleRounded]}
           underlineColorAndroid="transparent"
         />
-        <Pressable style={styles.inputIcon} onPress={handlePasswordVisibility}>
+        <Pressable style={styles.icon} onPress={handlePasswordVisibility}>
           <Ionicons
             name={rightIcon}
             color={'black'}
@@ -65,14 +65,14 @@ const LoginScreen = ({ navigation }) => {
             if (user) navigation.navigate("Home");
           }
         }>
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.text}>Login</Text>
       </Pressable>
       <Pressable
     style={[styles.pressableButton, styles.viewMarginTop, styles.rectangleRounded]}
         onPress={
           () => navigation.navigate("Register")
         }>
-        <Text style={styles.buttonText}>Register Account</Text>
+        <Text style={styles.text}>Register Account</Text>
       </Pressable>
     </View>
   );

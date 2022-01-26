@@ -8,6 +8,21 @@ const textInput = {
 const squareComponent = {
   height: 40,
   marginTop: 20
+};
+
+const buttonComponent = {
+  backgroundColor: 'black',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: 10,
+  marginTop: 30,
+  marginLeft: 15,
+  marginRight: 15,
+  borderRadius: 10
+};
+
+const data = {
+  fontSize: 16
 }
 
 export default StyleSheet.create({
@@ -23,14 +38,17 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     paddingBottom: 550
   },
+  containerActivitySettings: {
+    paddingTop: 100,
+    paddingBottom: 470,
+    backgroundColor: 'white',
+    display: 'flex'
+  },
   header: {
     marginTop: 20,
     marginBottom: 5,
     marginLeft: 15,
     fontSize: 40
-  },
-  data: {
-    fontSize: 16
   },
   profile: {
     width: 120,
@@ -70,7 +88,7 @@ export default StyleSheet.create({
     marginTop: -5,
     justifyContent: 'space-between',
     color: "black",
-    fontSize: 16
+    fontSize: data.fontSize
   },
   boxB2: {
     marginTop: -5,
@@ -78,45 +96,16 @@ export default StyleSheet.create({
     paddingTop: 28,
     justifyContent: 'space-between',
     color: "black",
-    fontSize: 16
+    fontSize: data.fontSize
   },
-  button: {
-    padding: 10,
-    marginTop: 30,
-    marginLeft: 15,
-    marginRight: 15,
-    height: 40,
-    backgroundColor: 'black',
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  buttonSplit: {
-    padding: 10,
-    marginTop: 30,
-    marginLeft: 15,
-    marginRight: 15,
-    height: 40,
-    backgroundColor: 'black',
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 176,
-    justifyContent: 'space-between'
-  },
-  buttonText: {
+  text: {
     color: 'white',
-    fontSize: 16
+    fontSize: data.fontSize
   },
   row: {
     flexDirection: 'row',
   },
-  containerActivitySettings: {
-    paddingTop: 100,
-    paddingBottom: 470,
-    backgroundColor: 'white',
-    display: 'flex'
-  },
+
   dataActivitySettings: {
     marginLeft: 15,
     fontSize: 15
@@ -164,16 +153,18 @@ export default StyleSheet.create({
     marginLeft: 20
   },
   info: {
-    fontSize: 16,
+    fontSize: data.fontSize,
     color: "#00BFFF",
-    marginTop: 60,
-    alignSelf: 'center'
+    marginTop: 60
+  },
+  center: {
+    alignSelf: 'center',
+    textAlign: 'center'
   },
   description: {
-    fontSize: 16,
+    fontSize: data.fontSize,
     color: "#696969",
-    marginTop: 20,
-    textAlign: 'center'
+    marginTop: squareComponent.marginTop
   },
   inputDesc: {
     paddingHorizontal: 10,
@@ -226,7 +217,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
-  inputIcon: {
+  icon: {
     position: 'absolute',
     right: 40,
     top: 10,
@@ -242,20 +233,44 @@ export default StyleSheet.create({
   viewMarginTop: {
     marginTop: squareComponent.marginTop,
   },
-  pressableButton: {
-    alignItems: 'center',
-    backgroundColor: 'black',
+  button: {
+    backgroundColor: buttonComponent.backgroundColor,
+    alignItems: buttonComponent.alignItems,
+    justifyContent: buttonComponent.justifyContent,
+    padding: buttonComponent.padding,
+    marginTop: buttonComponent.marginTop,
+    marginLeft: buttonComponent.marginLeft,
+    marginRight: buttonComponent.marginRight,
+    borderRadius: buttonComponent.borderRadius,
+    height: squareComponent.height
+  },
+  buttonSplit: {
+    backgroundColor: buttonComponent.backgroundColor,
+    alignItems: buttonComponent.alignItems,
+    justifyContent: buttonComponent.justifyContent,
+    padding: buttonComponent.padding,
+    marginTop: buttonComponent.marginTop,
+    marginLeft: buttonComponent.marginLeft,
+    marginRight: buttonComponent.marginRight,
+    borderRadius: buttonComponent.borderRadius,
     height: squareComponent.height,
-    justifyContent: 'center',
-    marginHorizontal: 20,
-    padding: 10,
+    width: 176,
+    justifyContent: 'space-between'
+  },
+  pressableButton: {
+    backgroundColor: buttonComponent.backgroundColor,
+    alignItems: buttonComponent.alignItems,
+    justifyContent: buttonComponent.justifyContent,
+    height: squareComponent.height,
+    padding: buttonComponent.padding,
+    marginHorizontal: 20
   },
   applyButton: {
-    backgroundColor: 'black',
-    padding: 10,
+    backgroundColor: buttonComponent.backgroundColor,
+    alignItems: buttonComponent.alignItems,
+    justifyContent: buttonComponent.justifyContent,
+    height: squareComponent.height,
+    padding: buttonComponent.padding,
     margin: 15,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
