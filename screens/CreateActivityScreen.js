@@ -96,7 +96,7 @@ const CreateActivityScreen = () => {
               <Pressable
                 style={styles.buttonSplit}
                 onPress={() => {
-                  clearText(), togglePanel();
+                  clearText();
                 }}
               >
                 <Text style={styles.text}>Cancel</Text>
