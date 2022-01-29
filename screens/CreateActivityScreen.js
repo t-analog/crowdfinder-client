@@ -6,7 +6,9 @@ import {
   TextInput,
   StyleSheet,
 } from 'react-native';
+
 import { createActivity } from '../utils/activity';
+import BottomDrawer from '../components/BottomDrawer';
 
 const CreateActivityScreen = () => {
   const [capacity, onChangeCapacity] = React.useState("");
@@ -14,7 +16,6 @@ const CreateActivityScreen = () => {
   const [description, onChangeDescription] = React.useState("");
   const [location, onChangeLocation] = React.useState("");
   const [name, onChangeName] = React.useState("");
-  const [shouldShow, setshouldShow] = React.useState(true);
 
   const clearText = () => {
     onChangeCapacity("");
@@ -40,85 +41,87 @@ const CreateActivityScreen = () => {
     };
   };
   return (
-    <View style={styles.container}>
-      {
-        shouldShow ? (
-          <View>
-            <TextInput
-              autoCapitalize="none"
-              placeholder="Name"
-              placeholderTextColor
-              style={styles.input}
-              underlineColorAndroid="transparent"
-              onChangeText={onChangeName}
-              value={name}
-            />
-            <TextInput
-              autoCapitalize="none"
-              placeholder="Description"
-              placeholderTextColor
-              style={styles.inputdesc}
-              underlineColorAndroid="transparent"
-              onChangeText={onChangeDescription}
-              value={description}
-            />
-            <TextInput
-              autoCapitalize="none"
-              placeholder="Category"
-              placeholderTextColor
-              style={styles.input}
-              onChangeText={onChangeCategories}
-              underlineColorAndroid="transparent"
-              value={categories}
-            />
-            <TextInput
-              autoCapitalize="none"
-              placeholder="Capacity"
-              placeholderTextColor
-              style={styles.input}
-              onChangeText={onChangeCapacity}
-              underlineColorAndroid="transparent"
-              value={capacity}
-            />
-            <TextInput
-              autoCapitalize="none"
-              placeholder="Location"
-              placeholderTextColor
-              style={styles.input}
-              onChangeText={onChangeLocation}
-              underlineColorAndroid="transparent"
-              value={location}
-            />
-          </View>
-        ) : null
-      }
-      <View style={styles.row}>
-        <Pressable
-          style={styles.buttonCancel}
-          onPress={() => {
-            clearText();
-          }}
-        >
-          <Text style={styles.ButtonText}>Cancel</Text>
-        </Pressable>
-        <Pressable
-          style={styles.buttonConfirm}
-          onPress={() => {
-            submitActivity();
-          }}
-        >
-          <Text style={styles.ButtonText}>Confirm</Text>
-        </Pressable>
+    <BottomDrawer>
+      <View style={styles.container}>
+        <Text style={styles.sectionTitle}>Activity Nearby</Text>
+        <View>
+          <TextInput
+            autoCapitalize="none"
+            placeholder="Name"
+            placeholderTextColor
+            style={styles.input}
+            underlineColorAndroid="transparent"
+            onChangeText={onChangeName}
+            value={name}
+          />
+          <TextInput
+            autoCapitalize="none"
+            placeholder="Description"
+            placeholderTextColor
+            style={styles.inputdesc}
+            underlineColorAndroid="transparent"
+            onChangeText={onChangeDescription}
+            value={description}
+          />
+          <TextInput
+            autoCapitalize="none"
+            placeholder="Category"
+            placeholderTextColor
+            style={styles.input}
+            onChangeText={onChangeCategories}
+            underlineColorAndroid="transparent"
+            value={categories}
+          />
+          <TextInput
+            autoCapitalize="none"
+            placeholder="Capacity"
+            placeholderTextColor
+            style={styles.input}
+            onChangeText={onChangeCapacity}
+            underlineColorAndroid="transparent"
+            value={capacity}
+          />
+          <TextInput
+            autoCapitalize="none"
+            placeholder="Location"
+            placeholderTextColor
+            style={styles.input}
+            onChangeText={onChangeLocation}
+            underlineColorAndroid="transparent"
+            value={location}
+          />
+        </View>
+        <View style={styles.row}>
+          <Pressable
+            style={styles.buttonCancel}
+            onPress={() => {
+              clearText();
+            }}
+          >
+            <Text style={styles.ButtonText}>Cancel</Text>
+          </Pressable>
+          <Pressable
+            style={styles.buttonConfirm}
+            onPress={() => {
+              submitActivity();
+            }}
+          >
+            <Text style={styles.ButtonText}>Confirm</Text>
+          </Pressable>
+        </View>
       </View>
-    </View>
+    </BottomDrawer>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 10,
-    paddingVertical: 100,
-    backgroundColor: 'white'
+    padding: 20,
+    backgroundColor: "aliceblue",
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
   },
   row: {
     flex: 1,

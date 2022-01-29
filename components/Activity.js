@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    marginBottom: 20,
   },
   category: {
     minWidth: 40,

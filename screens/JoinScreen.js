@@ -1,43 +1,62 @@
 import Activity from '../components/Activity';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+
+import BottomDrawer from '../components/BottomDrawer';
 import * as activityExample from '../examples/activityExample.json'
 
 const JoinScreen = ({ navigation }) => {
   return (
-    <View style={styles.activityWrapper}>
-      <Text style={styles.sectionTitle}>Activity Nearby</Text>
-      <ScrollView style={styles.items}>
-        {activityExample.activities.map((activity, id) => (
-          <Activity
-            key={id}
-            title={activity.title}
-            description={activity.description}
-            location={activity.location}
-            categories={activity.categories}
-          />
-        ))}
-      </ScrollView>
-    </View>
+    <BottomDrawer>
+      <View style={styles.activityWrapper}>
+        <Text style={styles.sectionTitle}>Activity Nearby</Text>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.items}
+        >
+          {activityExample.activities.map((element, index, array) => (
+            /* logic so that we only place marginBottom except the last */
+            (index + 1 !== array.length)
+              ?
+              <View key={index}>
+                <Activity
+                  title={element.title}
+                  description={element.description}
+                  location={element.location}
+                  categories={element.categories}
+                />
+                <View
+                  style={{ marginBottom: 20 }}
+                />
+              </View>
+              :
+              <Activity
+                key={index}
+                title={element.title}
+                description={element.description}
+                location={element.location}
+                categories={element.categories}
+              />
+          ))}
+        </ScrollView>
+      </View>
+    </BottomDrawer>
   );
 }
 
 const styles = StyleSheet.create({
   activityWrapper: {
     flex: 1,
-    backgroundColor: '#EBEAED',
-    paddingTop: 20,
-    paddingHorizontal: 20,
-    marginTop: '33%',
-    borderRadius: 20,
-    paddingBottom: 40,
+    backgroundColor: "aliceblue",
+    padding: 20,
   },
   sectionTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    paddingTop: 10,
   },
   items: {
-    marginTop: 20
+    marginTop: 20,
+    borderRadius: 20,
+    overflow: 'hidden',
   },
 });
 
