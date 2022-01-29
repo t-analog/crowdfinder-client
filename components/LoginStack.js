@@ -2,7 +2,6 @@ import HomeTab from './HomeTab';
 import LoginScreen from '../screens/Login';
 import RegisterScreen from '../screens/Register';
 import ForgotPasswordScreen from '../screens/ForgotPassword';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();

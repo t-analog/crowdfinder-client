@@ -3,12 +3,15 @@ import {
   Provider
 } from 'react-native-paper';
 import LoginStack from './components/LoginStack';
+import { NavigationContainer } from '@react-navigation/native';
 
 const App = () => {
   return (
-    <Provider>
-      <LoginStack />
-    </Provider>
+    <NavigationContainer>
+      <Provider>
+        <LoginStack />
+      </Provider>
+    </NavigationContainer>
   )
 };
 
