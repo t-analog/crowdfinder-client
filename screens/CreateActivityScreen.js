@@ -6,6 +6,7 @@ import {
   TextInput,
   StyleSheet,
 } from 'react-native';
+import MapView from 'react-native-maps';
 
 import { createActivity } from '../utils/activity';
 import BottomDrawer from '../components/BottomDrawer';
@@ -41,81 +42,113 @@ const CreateActivityScreen = () => {
     };
   };
   return (
-    <BottomDrawer>
-      <View style={styles.container}>
-        <Text style={styles.sectionTitle}>Activity Nearby</Text>
-        <View>
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Name"
-            placeholderTextColor
-            style={styles.input}
-            underlineColorAndroid="transparent"
-            onChangeText={onChangeName}
-            value={name}
-          />
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Description"
-            placeholderTextColor
-            style={styles.inputdesc}
-            underlineColorAndroid="transparent"
-            onChangeText={onChangeDescription}
-            value={description}
-          />
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Category"
-            placeholderTextColor
-            style={styles.input}
-            onChangeText={onChangeCategories}
-            underlineColorAndroid="transparent"
-            value={categories}
-          />
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Capacity"
-            placeholderTextColor
-            style={styles.input}
-            onChangeText={onChangeCapacity}
-            underlineColorAndroid="transparent"
-            value={capacity}
-          />
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Location"
-            placeholderTextColor
-            style={styles.input}
-            onChangeText={onChangeLocation}
-            underlineColorAndroid="transparent"
-            value={location}
-          />
+    <View style={styles.container}>
+      <MapView
+        style={styles.map}
+        initialRegion={{
+          latitude: 1.56139,
+          longitude: 103.62924,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
+        }}
+      />
+      <BottomDrawer>
+        <View style={styles.drawerContainer}>
+          <Text style={styles.sectionTitle}>Activity Nearby</Text>
+          <View>
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Name"
+              placeholderTextColor
+              style={styles.input}
+              underlineColorAndroid="transparent"
+              onChangeText={onChangeName}
+              value={name}
+            />
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Description"
+              placeholderTextColor
+              style={styles.inputdesc}
+              underlineColorAndroid="transparent"
+              onChangeText={onChangeDescription}
+              value={description}
+            />
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Category"
+              placeholderTextColor
+              style={styles.input}
+              onChangeText={onChangeCategories}
+              underlineColorAndroid="transparent"
+              value={categories}
+            />
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Capacity"
+              placeholderTextColor
+              style={styles.input}
+              onChangeText={onChangeCapacity}
+              underlineColorAndroid="transparent"
+              value={capacity}
+            />
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Location"
+              placeholderTextColor
+              style={styles.input}
+              onChangeText={onChangeLocation}
+              underlineColorAndroid="transparent"
+              value={location}
+            />
+          </View>
+          <View style={styles.row}>
+            <Pressable
+              style={styles.buttonCancel}
+              onPress={() => {
+                clearText();
+              }}
+            >
+              <Text style={styles.ButtonText}>Cancel</Text>
+            </Pressable>
+            <Pressable
+              style={styles.buttonConfirm}
+              onPress={() => {
+                submitActivity();
+              }}
+            >
+              <Text style={styles.ButtonText}>Confirm</Text>
+            </Pressable>
+          </View>
         </View>
-        <View style={styles.row}>
-          <Pressable
-            style={styles.buttonCancel}
-            onPress={() => {
-              clearText();
-            }}
-          >
-            <Text style={styles.ButtonText}>Cancel</Text>
-          </Pressable>
-          <Pressable
-            style={styles.buttonConfirm}
-            onPress={() => {
-              submitActivity();
-            }}
-          >
-            <Text style={styles.ButtonText}>Confirm</Text>
-          </Pressable>
-        </View>
-      </View>
-    </BottomDrawer>
+      </BottomDrawer>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  map: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  text: {
+    fontSize: 20,
+    elevation: 1,
+  },
+  drawerContainer: {
     padding: 20,
     backgroundColor: "aliceblue",
   },
