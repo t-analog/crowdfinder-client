@@ -72,78 +72,105 @@ const ProfileScreen = ({ navigation }) => {
             style={styles.profileImage}
             source={require('../assets/profile.jpeg')} />
         </View>
-        <View>
-        <Text style={{
-          position: 'absolute',
-          left: 10,
-          top: 12,
-        }}>Email</Text>
-        <TextInput
-          autoCapitalize="none"
-          onChangeText={setEmail}
-          placeholder="Email"
-          placeholderTextColor="black"
-          underlineColorAndroid="transparent"
-          value={email}
-          editable={isEditable}
-          style={[styles.textInputBase, styles.textInputSmall, styles.right]}
-        />
+        <View style={styles.contentCenter}>
+          <Text style={{
+            position: 'absolute',
+            left: 10,
+          }}>Email</Text>
+          <TextInput
+            autoCapitalize="none"
+            onChangeText={setEmail}
+            placeholder="Email"
+            placeholderTextColor="black"
+            underlineColorAndroid="transparent"
+            value={email}
+            editable={isEditable}
+            style={[
+              styles.textInputBase,
+              styles.textInputSmall,
+              styles.right
+            ]}
+          />
         </View>
-        <View>
-        <Text style={{
-          position: 'absolute',
-          left: 10,
-          top: 32,
-        }}>Location</Text>
-        <TextInput
-          autoCapitalize="none"
-          onChangeText={setLocation}
-          placeholder="Location"
-          placeholderTextColor="black"
-          underlineColorAndroid="transparent"
-          value={location}
-          editable={isEditable}
-          style={[styles.textInputBase, styles.textInputSmall, styles.marginTop, styles.right]}
-        />
+        <View style={[
+          styles.contentCenter,
+          styles.marginTop
+        ]}>
+          <Text style={{
+            position: 'absolute',
+            left: 10,
+          }}>Location</Text>
+          <TextInput
+            autoCapitalize="none"
+            onChangeText={setLocation}
+            placeholder="Location"
+            placeholderTextColor="black"
+            underlineColorAndroid="transparent"
+            value={location}
+            editable={isEditable}
+            style={[
+              styles.textInputBase,
+              styles.textInputSmall,
+              styles.right
+            ]}
+          />
         </View>
-        <View>
-        <Text style={{
-          position: 'absolute',
-          left: 10,
-          top: 32,
-        }}>Bio</Text>
-        <TextInput
-          autoCapitalize="none"
-          onChangeText={setBio}
-          placeholder="Bio"
-          placeholderTextColor="black"
-          underlineColorAndroid="transparent"
-          multiline={true}
-          value={bio}
-          editable={isEditable}
-          style={[styles.textInputBase, styles.textInputBig, styles.marginTop]}
-        />
+        <View style={[
+          styles.marginTop
+        ]}>
+          <Text style={{
+            position: 'absolute',
+            left: 10,
+            top: 10,
+          }}>Bio</Text>
+          <TextInput
+            autoCapitalize="none"
+            onChangeText={setBio}
+            placeholder="Bio"
+            placeholderTextColor="black"
+            underlineColorAndroid="transparent"
+            multiline={true}
+            value={bio}
+            editable={isEditable}
+            style={[
+              styles.textInputBase,
+              styles.textInputBig
+            ]}
+          />
         </View>
         {
           isEditable ? (
-            <View style={[styles.spaceBetween, styles.marginTop]}>
+            <View style={[
+              styles.spaceBetween,
+              styles.marginTop
+            ]}>
               <Pressable
-                style={[styles.buttonBase, styles.buttonHalf]}
                 onPress={toggleIsEditable}
-              >
-                <Text style={styles.text}>Confirm</Text>
-              </Pressable>
-              <Pressable
-                style={[styles.buttonBase, styles.buttonHalf]}
-                onPress={toggleIsEditable}
+                style={[
+                  styles.buttonBase,
+                  styles.buttonHalf
+                ]}
               >
                 <Text style={styles.text}>Cancel</Text>
+              </Pressable>
+              <Pressable
+                onPress={toggleIsEditable}
+                style={[
+                  styles.buttonBase,
+                  styles.buttonHalf
+                ]}
+              >
+                <Text style={styles.text}>Confirm</Text>
               </Pressable>
             </View>
           )
             : <Pressable
-              style={[styles.buttonBase, styles.buttonFull, styles.marginTop]}
               onPress={toggleIsEditable}
+              style={[
+                styles.buttonBase,
+                styles.buttonFull,
+                styles.marginTop
+              ]}
             >
               <Text style={styles.text}>Edit Profile</Text>
             </Pressable>

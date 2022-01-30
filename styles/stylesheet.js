@@ -21,7 +21,44 @@ const boxComponent = {
   },
 };
 
+const drawer = {
+  height: height * 3 / 4,
+  state: {
+    open: (height * 3 / 4) / 2,
+    closed: 0
+  },
+};
+
 export default StyleSheet.create({
+  drawerContainer: {
+    flex: 1,
+    alignItems: "center",
+  },
+  drawer: {
+    backgroundColor: "white",
+    borderColor: "black",
+    height: drawer.height,
+    width,
+    elevation: 20,
+  },
+  drawerPressable: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    borderColor: "whitesmoke",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomWidth: 1,
+    // borderWidth: 1,
+    height: 40,
+    width,
+    elevation: 20,
+  },
+
+
+
+
   scrollView: {
     overflow: 'hidden',
   },
@@ -126,6 +163,9 @@ export default StyleSheet.create({
   },
   flexRow: {
     flexDirection: 'row',
+  },
+  contentCenter: {
+    justifyContent: 'center',
   },
   logo: {
     justifyContent: 'center',

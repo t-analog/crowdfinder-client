@@ -35,8 +35,19 @@ const Activity = (props) => {
         /*   alignItems: 'center' */
         /* } */
       ]}>
-        {props.categories.map((category, id) => (
-          <Category key={id} text={category} />
+        {props.categories.map((element, index) => (
+          (index == 0)
+            ?
+            <View key={index}>
+              <Category text={element} />
+            </View>
+            :
+            <View
+              key={index}
+              style={{ marginLeft: 5 }}
+            >
+              <Category text={element} />
+            </View>
         ))}
       </View>
       <View style={[
@@ -51,7 +62,7 @@ const Activity = (props) => {
         styles.marginTop
       ]}>
         <View style={[
-        styles.flexStart,
+          styles.flexStart,
           styles.emptyBoxBase,
           styles.emptyBoxSmall
         ]}>
