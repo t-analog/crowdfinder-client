@@ -10,7 +10,7 @@ const ProfileStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Profile"
+        name="Profile Screen"
         component={ProfileScreen}
         options={{
           header: () => null
@@ -19,10 +19,16 @@ const ProfileStack = () => {
       <Stack.Screen
         name="Activity Settings"
         component={ActivitySettingsScreen}
+        options={{
+          header: () => null
+        }}
       />
       <Stack.Screen
         name="Support Us"
         component={SupportUsScreen}
+        options={{
+          header: () => null
+        }}
       />
     </Stack.Navigator>
   );

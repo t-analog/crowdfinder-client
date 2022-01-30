@@ -2,38 +2,82 @@ import React from 'react';
 import {
   View,
   Text,
-  Button,
-  TextInput,
-  StyleSheet,
+  Pressable,
 } from 'react-native';
+
+import styles from '../styles/stylesheet';
 
 const Activity = (props) => {
   return (
-    <View style={styles.item}>
-      <View style={styles.textItems}>
-        <Text style={styles.itemTitle}>{props.title}</Text>
-        <Text style={styles.itemText}>{props.description}</Text>
-        <View style={{ flexDirection: "row" }}>
-          {props.categories.map((category, id) => (
-            <Category key={id} text={category} />
-          ))}
+    <View style={{
+
+    }}>
+      <View style={[
+        styles.flexStart,
+        styles.emptyBoxBase,
+        styles.emptyBoxSmall,
+      ]}>
+        <Text>{props.title}</Text>
+      </View>
+      <View style={[
+        styles.flexStart,
+        styles.emptyBoxBase,
+        styles.emptyBoxMedium,
+        styles.marginTop]}>
+        <Text>{props.description}</Text>
+      </View>
+      <View style={[
+        styles.flexStart,
+        styles.emptyBoxBase,
+        styles.emptyBoxSmall,
+        styles.marginTop,
+        /* { */
+        /*   alignItems: 'center' */
+        /* } */
+      ]}>
+        {props.categories.map((element, index) => (
+          (index == 0)
+            ?
+            <View key={index}>
+              <Category text={element} />
+            </View>
+            :
+            <View
+              key={index}
+              style={{ marginLeft: 5 }}
+            >
+              <Category text={element} />
+            </View>
+        ))}
+      </View>
+      <View style={[
+        styles.flexStart,
+        styles.emptyBoxBase,
+        styles.emptyBoxSmall,
+        styles.marginTop]}>
+        <Text>{props.location}</Text>
+      </View>
+      <View style={[
+        styles.spaceBetween,
+        styles.marginTop
+      ]}>
+        <View style={[
+          styles.flexStart,
+          styles.emptyBoxBase,
+          styles.emptyBoxSmall
+        ]}>
+          <Text>
+            0 / 3
+          </Text>
         </View>
-        <Text style={styles.itemText}>{props.location}</Text>
-        <View style={styles.itemBot}>
-          <TextInput
-            autoCapitalize="none"
-            placeholder="0 / 3"
-            placeholderTextColor="black"
-            style={styles.input}
-            underlineColorAndroid="transparent"
-          />
-          <Button
-            title="   Join    "
-            onPress={
-              () => alert('Joined!')
-            }
-          />
-        </View>
+        <Pressable
+          style={[styles.buttonBase, styles.buttonHalf]}
+          onPress={
+            () => alert('Joined!')
+          }
+        >
+          <Text style={styles.text}>Join</Text>
+        </Pressable>
       </View>
     </View>
   )
@@ -42,50 +86,9 @@ const Activity = (props) => {
 const Category = (props) => {
   return (
     <View style={styles.category}>
-      <Text style={styles.textCategory}>{props.text}</Text>
+      <Text>{props.text}</Text>
     </View>
   )
 };
-
-const styles = StyleSheet.create({
-  item: {
-    backgroundColor: '#FFF',
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
-  category: {
-    minWidth: 40,
-    textAlign: "center",
-    height: 24,
-    marginVertical: 5,
-    backgroundColor: '#55BCF6',
-    opacity: 0.4,
-    borderRadius: 20,
-    marginRight: 10,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  itemTitle: {
-    flexWrap: "wrap",
-    fontWeight: 'bold',
-    marginVertical: 5,
-    fontSize: 16
-  },
-  itemText: {
-    flexWrap: "wrap",
-    alignSelf: "stretch",
-    marginVertical: 5,
-  },
-  textCategory: {
-    paddingHorizontal: 15,
-  },
-  itemBot: {
-    justifyContent: "space-between",
-    flexDirection: "row"
-  },
-});
 
 export default Activity;

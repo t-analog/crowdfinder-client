@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -10,216 +10,174 @@ import {
 import {
   Menu, Appbar
 } from 'react-native-paper';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 import { logout } from '../utils/user';
+import styles from '../styles/stylesheet';
 
 const ProfileScreen = ({ navigation }) => {
-  const [edit, setEdit] = useState(false);
-  const toggleEdit = () => setEdit(!edit);
-  const [menuVisible, setMenuVisible] = useState(false);
-  const openMenu = () => setMenuVisible(true);
-  const closeMenu = () => setMenuVisible(false);
+  const [isEditable, setIsEditable] = React.useState(false);
+  const [isVisible, setIsVisible] = React.useState(false);
+  const toggleIsEditable = () => setIsEditable(!isEditable);
+  const toggleIsVisible = () => setIsVisible(!isVisible);
+
+  const [email, setEmail] = React.useState("xi@cpc.cn");
+  const [location, setLocation] = React.useState("Skudai, Johor");
+  const [bio, setBio] = React.useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus nisl lectus, sed convallis odio lacinia eget.");
 
   return (
-    <View>
-      <Menu
-        visible={menuVisible}
-        style={styles.rightmenu}
-        onDismiss={closeMenu}
-        anchor={ <Appbar.Header style={styles.color}>
-                  <Appbar.Content title=""/>
-                  <Appbar.Action icon="dots-vertical" onPress={openMenu}/>
-                  </Appbar.Header>
-                }>
-        <Menu.Item
-          title="Activity Settings"
-          onPress={() => {
-            navigation.navigate("Activity Settings")
-          }}
-        />
-        <Menu.Item
-          title="Support Us"
-          onPress={() => {
-            navigation.navigate("Support Us")
-          }}
-        />
-        <Menu.Item
-          title="Logout"
-          onPress={async () => {
-              if (await logout()) navigation.navigate("Login");
-            }
+    <View style={styles.container}>
+      <View style={styles.flexEnd}>
+        <Menu
+          visible={isVisible}
+          style={styles.profileMenu}
+          onDismiss={toggleIsVisible}
+          anchor={
+            <Ionicons
+              name={'menu'}
+              color={'black'}
+              size={20}
+              onPress={toggleIsVisible}
+            />
           }
-        />
-      </Menu>
-      <View style={styles.container}>
-            <Text style={styles.header}>Your Profile</Text>
-            <Image
-              style={styles.profile}
-              source={require('../assets/profile.jpeg')} />
-            <View style={styles.boxA}>
-              <Text style={styles.data}>Username</Text>
-              <TextInput style={styles.boxB}
-                underlineColorAndroid="transparent"
-                placeholder="@xijinping"
-                placeholderTextColor="black"
-                autoCapitalize="none"
-                editable={edit} />
-            </View>
-            <View style={styles.boxA}>
-              <Text style={styles.data}>Email</Text>
-              <TextInput style={styles.boxB}
-                underlineColorAndroid="transparent"
-                placeholder="xi@cpc.cn"
-                placeholderTextColor="black"
-                autoCapitalize="none"
-                editable={edit} />
-            </View>
-            <View style={styles.boxA}>
-              <Text style={styles.data}>Location</Text>
-              <TextInput style={styles.boxB}
-                underlineColorAndroid="transparent"
-                placeholder="Skudai"
-                placeholderTextColor="black"
-                autoCapitalize="none"
-                editable={edit} />
-            </View>
-            <View style={styles.boxA}>
-              <Text style={styles.data}>Bio</Text>
-              <TextInput style={styles.boxB2}
-                multiline={true}
-                underlineColorAndroid="transparent"
-                placeholder="President of the People's Republic of China & General Secretary of the Communist Party of China."
-                placeholderTextColor="black"
-                autoCapitalize="none"
-                editable={edit} />
-            </View>
-            {
-              edit?(
-                <View style={styles.row}>
-                  <Pressable
-                    style={styles.buttonSplit}
-                    onPress={toggleEdit}
-                    >
-                    <Text style={styles.ButtonText}>Confirm</Text>
-                  </Pressable>
-                  <Pressable
-                    style={styles.buttonSplit}
-                    onPress={toggleEdit}
-                    >
-                    <Text style={styles.ButtonText}>Cancel</Text>
-                  </Pressable>
-                </View>
-              )
-              :<Pressable
-                style={styles.button}
-                onPress={toggleEdit}
-                >
-                <Text style={styles.ButtonText}>Edit Profile</Text>
+        >
+          <Menu.Item
+            title="Activity Settings"
+            onPress={() => {
+              navigation.navigate("Activity Settings")
+            }}
+          />
+          <Menu.Item
+            title="Support Us"
+            onPress={() => {
+              navigation.navigate("Support Us")
+            }}
+          />
+          <Menu.Item
+            title="Logout"
+            onPress={async () => {
+              if (await logout()) navigation.navigate("Login");
+            }}
+          />
+        </Menu>
+      </View>
+      <View
+        style={{
+          paddingTop: 120,
+        }}
+      >
+        <View>
+          <Text style={styles.header}>Your Profile</Text>
+          <Image
+            style={styles.profileImage}
+            source={require('../assets/profile.jpeg')} />
+        </View>
+        <View style={styles.contentCenter}>
+          <Text style={{
+            position: 'absolute',
+            left: 10,
+          }}>Email</Text>
+          <TextInput
+            autoCapitalize="none"
+            onChangeText={setEmail}
+            placeholder="Email"
+            placeholderTextColor="black"
+            underlineColorAndroid="transparent"
+            value={email}
+            editable={isEditable}
+            style={[
+              styles.textInputBase,
+              styles.textInputSmall,
+              styles.right
+            ]}
+          />
+        </View>
+        <View style={[
+          styles.contentCenter,
+          styles.marginTop
+        ]}>
+          <Text style={{
+            position: 'absolute',
+            left: 10,
+          }}>Location</Text>
+          <TextInput
+            autoCapitalize="none"
+            onChangeText={setLocation}
+            placeholder="Location"
+            placeholderTextColor="black"
+            underlineColorAndroid="transparent"
+            value={location}
+            editable={isEditable}
+            style={[
+              styles.textInputBase,
+              styles.textInputSmall,
+              styles.right
+            ]}
+          />
+        </View>
+        <View style={[
+          styles.marginTop
+        ]}>
+          <Text style={{
+            position: 'absolute',
+            left: 10,
+            top: 10,
+          }}>Bio</Text>
+          <TextInput
+            autoCapitalize="none"
+            onChangeText={setBio}
+            placeholder="Bio"
+            placeholderTextColor="black"
+            underlineColorAndroid="transparent"
+            multiline={true}
+            value={bio}
+            editable={isEditable}
+            style={[
+              styles.textInputBase,
+              styles.textInputBig
+            ]}
+          />
+        </View>
+        {
+          isEditable ? (
+            <View style={[
+              styles.spaceBetween,
+              styles.marginTop
+            ]}>
+              <Pressable
+                onPress={toggleIsEditable}
+                style={[
+                  styles.buttonBase,
+                  styles.buttonHalf
+                ]}
+              >
+                <Text style={styles.text}>Cancel</Text>
               </Pressable>
-            }
-          </View>
+              <Pressable
+                onPress={toggleIsEditable}
+                style={[
+                  styles.buttonBase,
+                  styles.buttonHalf
+                ]}
+              >
+                <Text style={styles.text}>Confirm</Text>
+              </Pressable>
+            </View>
+          )
+            : <Pressable
+              onPress={toggleIsEditable}
+              style={[
+                styles.buttonBase,
+                styles.buttonFull,
+                styles.marginTop
+              ]}
+            >
+              <Text style={styles.text}>Edit Profile</Text>
+            </Pressable>
+        }
+      </View>
     </View>
   );
 };
 
 export default ProfileScreen;
-const styles = StyleSheet.create({
-  rightmenu: {
-    top: 19,
-    left: 258
-  },
-  color: {
-    backgroundColor: 'white',
-  },
-  container: {
-    paddingTop: 100,
-    backgroundColor: 'white'
-  },
-  header: {
-    marginTop: 20,
-    marginBottom: 5,
-    marginLeft: 15,
-    fontSize: 40
-  },
-  data: {
-    fontSize: 16
-  },
-  profile: {
-    width: 120,
-    height: 120,
-    borderRadius: 120 / 2,
-    position: 'absolute',
-    right: 10,
-    top: 5
-  },
-  box: {
-    paddingHorizontal: 8,
-    paddingVertical: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  boxA: {
-    paddingHorizontal: 8,
-    paddingVertical: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  boxB: {
-    marginTop: -5,
-    justifyContent: 'space-between',
-    color: "black",
-    fontSize: 16
-  },
-  boxB2: {
-    marginTop: -5,
-    marginRight: 9,
-    paddingTop: 28,
-    justifyContent: 'space-between',
-    color: "black",
-    fontSize: 16
-  },
-  button: {
-    padding: 10,
-    marginTop: 30,
-    marginLeft: 15,
-    marginRight: 15,
-    height: 40,
-    backgroundColor: 'black',
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  buttonSplit: {
-    padding: 10,
-    marginTop: 30,
-    marginLeft: 15,
-    marginRight: 15,
-    height: 40,
-    backgroundColor: 'black',
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width:176,
-    justifyContent: 'space-between'
-  },
-  ButtonText: {
-    color: 'white',
-    fontSize: 16
-  },
-  row: {
-    flexDirection: 'row',
-  }
-});

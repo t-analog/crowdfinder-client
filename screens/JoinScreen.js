@@ -9,10 +9,11 @@ import {
 
 import BottomDrawer from '../components/BottomDrawer';
 import * as activityExample from '../examples/activityExample.json'
+import styles from '../styles/stylesheet';
 
 const JoinScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.mapContainer}>
       <MapView
         style={styles.map}
         initialRegion={{
@@ -23,15 +24,15 @@ const JoinScreen = ({ navigation }) => {
         }}
       />
       <BottomDrawer>
-        <View style={styles.activityWrapper}>
-          <Text style={styles.sectionTitle}>Activity Nearby</Text>
+        <View style={styles.container}>
+          <Text style={styles.header}>Activity Nearby</Text>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={styles.items}
+            style={styles.scrollView}
           >
-            {activityExample.activities.map((element, index, array) => (
-              /* logic so that we only place marginBottom except the last */
-              (index + 1 !== array.length)
+            {activityExample.activities.map((element, index) => (
+              /* logic so that we only place marginTop except the first */
+              (index == 0)
                 ?
                 <View key={index}>
                   <Activity
@@ -40,62 +41,30 @@ const JoinScreen = ({ navigation }) => {
                     location={element.location}
                     categories={element.categories}
                   />
-                  <View
-                    style={{ marginBottom: 20 }}
-                  />
                 </View>
                 :
-                <Activity
+                <View
                   key={index}
-                  title={element.title}
-                  description={element.description}
-                  location={element.location}
-                  categories={element.categories}
-                />
+                  style={styles.marginTop}
+                >
+                  <Activity
+                    title={element.title}
+                    description={element.description}
+                    location={element.location}
+                    categories={element.categories}
+                  />
+                </View>
             ))}
+            <View
+              style={{
+                height: 80,
+              }}
+            />
           </ScrollView>
         </View>
       </BottomDrawer>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  activityWrapper: {
-    flex: 1,
-    backgroundColor: "aliceblue",
-    padding: 20,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  items: {
-    marginTop: 20,
-    borderRadius: 20,
-    overflow: 'hidden',
-  },
-  container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  text: {
-    fontSize: 20,
-    elevation: 1,
-  },
-});
 
 export default JoinScreen;

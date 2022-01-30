@@ -9,12 +9,14 @@ import {
 } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
+import styles from '../styles/stylesheet';
+
 const { width, height } = Dimensions.get('window');
 
 const drawer = {
   height: height * 3 / 4,
   state: {
-    open: (height * 3 / 4) / 2,
+    open: (height * 3 / 6),
     closed: 0
   },
 }
@@ -34,11 +36,11 @@ const BottomDrawer = ({ children }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.drawerContainer}>
       <Animated.View
         style={{
           position: 'absolute',
-          bottom: -(drawer.height / 2),
+          bottom: -(drawer.height * 3 / 4),
           transform: [{ translateY: pan }]
         }}
       >
@@ -75,34 +77,5 @@ const BottomDrawer = ({ children }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  drawer: {
-    backgroundColor: "aliceblue",
-    borderColor: "gray",
-    // borderWidth: 1,
-    height: drawer.height,
-    width,
-    elevation: 20,
-  },
-  drawerPressable: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "aliceblue",
-    borderColor: "gray",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    // borderWidth: 1,
-    height: 40,
-    width,
-    elevation: 20,
-  }
-});
 
 export default BottomDrawer;

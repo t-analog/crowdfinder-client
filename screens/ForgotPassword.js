@@ -1,48 +1,30 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { Text, View, Pressable, TextInput, StyleSheet } from 'react-native'
+import styles from '../styles/stylesheet';
 
 const ForgotPasswordScreen = () => {
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input}
+      <TextInput
+        style={[
+          styles.textInputBase,
+          styles.textInputSmall,
+        ]}
         underlineColorAndroid="transparent"
-        placeholder="Email/Username"
+        placeholder="Email"
         placeholderTextColor="black"
         autoCapitalize="none"
       />
-      <TouchableOpacity
-        style={styles.submitButton}>
-        <Text style={styles.ButtonText}>Submit</Text>
-      </TouchableOpacity>
+      <Pressable
+        style={[
+          styles.buttonBase,
+          styles.buttonFull,
+          styles.marginTop,
+        ]}>
+        <Text style={styles.text}>Submit</Text>
+      </Pressable>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 100
-  },
-  input: {
-    paddingHorizontal: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    height: 40,
-    borderColor: 'black',
-    borderWidth: 1
-  },
-  submitButton: {
-    backgroundColor: 'black',
-    padding: 10,
-    margin: 15,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  ButtonText: {
-    color: 'white'
-  }
-});
 
 export default ForgotPasswordScreen;

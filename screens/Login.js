@@ -1,15 +1,26 @@
 import React from 'react';
 import { login } from '../utils/user';
-import { View, Image, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  TextInput,
+  Pressable,
+} from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useTogglePasswordVisibility } from '../components/TogglePassword';
+import styles from '../styles/stylesheet';
 
 const LoginScreen = ({ navigation }) => {
-  const [username, onChangeUsername] = React.useState("");
-  const [password, onChangePassword] = React.useState("");
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
+    useTogglePasswordVisibility();
   return (
     <View style={styles.container}>
       {/* show variable only for debugging */}
       <Text>
-        Value of username: {username}{"\n"}
+        Value of email: {username}{"\n"}
         Value of password: {password}
       </Text>
       <Image
@@ -18,98 +29,62 @@ const LoginScreen = ({ navigation }) => {
       />
       <TextInput
         autoCapitalize="none"
-        onChangeText={onChangeUsername}
-        placeholder="Email/Username"
+        onChangeText={setUsername}
+        placeholder="Email"
         placeholderTextColor="black"
-        style={styles.input}
+        style={[styles.textInputBase, styles.textInputSmall]}
         underlineColorAndroid="transparent"
       />
-      <TextInput
-        autoCapitalize="none"
-        onChangeText={onChangePassword}
-        placeholder="Password"
-        placeholderTextColor="black"
-        secureTextEntry={true}
-        style={styles.input}
-        underlineColorAndroid="transparent"
-      />
-      <TouchableOpacity
-        onPress={
-          () => navigation.navigate("ForgotPassword")
-        }>
-        <Text style={styles.forgot}>Forgot your password?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={
-          async () => {
-            const user = await login({ username, password });
-            if (user) navigation.navigate("Home");
+      <View
+        style={styles.marginTop}
+      >
+        <TextInput
+          autoCapitalize="none"
+          onChangeText={setPassword}
+          placeholder="Password"
+          placeholderTextColor="black"
+          secureTextEntry={passwordVisibility}
+          style={[styles.textInputBase, styles.textInputSmall]}
+          underlineColorAndroid="transparent"
+        />
+        <Pressable style={styles.icon} onPress={handlePasswordVisibility}>
+          <Ionicons
+            name={rightIcon}
+            color={'black'}
+            size={20}
+          />
+        </Pressable>
+      </View>
+      <View style={[ styles.flexEnd, styles.marginTop ]}>
+        <Text
+          onPress={
+            () => navigation.navigate("ForgotPassword")
           }
-        }>
-        <Text style={styles.ButtonText}>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.createAccButton}
-        onPress={
-          () => navigation.navigate("Register")
-        }>
-        <Text style={styles.ButtonText}>Register Account</Text>
-      </TouchableOpacity>
+          style={styles.forgot}
+        >Forgot your password?
+        </Text>
+      </View>
+      <View style={[ styles.spaceBetween, styles.marginTop ]}>
+        <Pressable
+          style={[styles.buttonBase, styles.buttonHalf]}
+          onPress={
+            () => navigation.navigate("Register")
+          }>
+          <Text style={styles.text}>Register</Text>
+        </Pressable>
+        <Pressable
+          style={[styles.buttonBase, styles.buttonHalf]}
+          onPress={
+            async () => {
+              const user = await login({ username, password });
+              if (user) navigation.navigate("Home");
+            }
+          }>
+          <Text style={styles.text}>Login</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 100
-  },
-  logo: {
-    aspectRatio: 1.81,
-    width: undefined,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 15,
-    marginLeft: 15,
-    resizeMode: 'contain'
-  },
-  input: {
-    paddingHorizontal: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    height: 40,
-    borderColor: 'black',
-    borderWidth: 1
-  },
-  forgot: {
-    padding: 15,
-    color: 'blue',
-    textAlign: 'right',
-  },
-  loginButton: {
-    backgroundColor: 'black',
-    padding: 10,
-    margin: 15,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  createAccButton: {
-    backgroundColor: 'black',
-    padding: 10,
-    marginTop: -5,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 15,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  ButtonText: {
-    color: 'white'
-  }
-});
 
 export default LoginScreen;

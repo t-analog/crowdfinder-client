@@ -9,6 +9,7 @@ import {
 import MapView from 'react-native-maps';
 
 import { createActivity } from '../utils/activity';
+import styles from '../styles/stylesheet';
 import BottomDrawer from '../components/BottomDrawer';
 
 const CreateActivityScreen = () => {
@@ -42,7 +43,7 @@ const CreateActivityScreen = () => {
     };
   };
   return (
-    <View style={styles.container}>
+    <View style={styles.mapContainer}>
       <MapView
         style={styles.map}
         initialRegion={{
@@ -53,71 +54,69 @@ const CreateActivityScreen = () => {
         }}
       />
       <BottomDrawer>
-        <View style={styles.drawerContainer}>
-          <Text style={styles.sectionTitle}>Activity Nearby</Text>
-          <View>
-            <TextInput
-              autoCapitalize="none"
-              placeholder="Name"
-              placeholderTextColor
-              style={styles.input}
-              underlineColorAndroid="transparent"
-              onChangeText={onChangeName}
-              value={name}
-            />
-            <TextInput
-              autoCapitalize="none"
-              placeholder="Description"
-              placeholderTextColor
-              style={styles.inputdesc}
-              underlineColorAndroid="transparent"
-              onChangeText={onChangeDescription}
-              value={description}
-            />
-            <TextInput
-              autoCapitalize="none"
-              placeholder="Category"
-              placeholderTextColor
-              style={styles.input}
-              onChangeText={onChangeCategories}
-              underlineColorAndroid="transparent"
-              value={categories}
-            />
-            <TextInput
-              autoCapitalize="none"
-              placeholder="Capacity"
-              placeholderTextColor
-              style={styles.input}
-              onChangeText={onChangeCapacity}
-              underlineColorAndroid="transparent"
-              value={capacity}
-            />
-            <TextInput
-              autoCapitalize="none"
-              placeholder="Location"
-              placeholderTextColor
-              style={styles.input}
-              onChangeText={onChangeLocation}
-              underlineColorAndroid="transparent"
-              value={location}
-            />
-          </View>
-          <View style={styles.row}>
+        <View style={styles.container}>
+          <Text style={styles.header}>Create Activity</Text>
+          <TextInput
+            autoCapitalize="none"
+            placeholder="Name"
+            placeholderTextColor
+            style={[styles.textInputBase, styles.textInputSmall]}
+            underlineColorAndroid="transparent"
+            onChangeText={onChangeName}
+            value={name}
+          />
+          <TextInput
+            autoCapitalize="none"
+            placeholder="Description"
+            placeholderTextColor
+            style={[styles.textInputBase, styles.textInputBig, styles.marginTop]}
+            underlineColorAndroid="transparent"
+            onChangeText={onChangeDescription}
+            value={description}
+          />
+          <TextInput
+            autoCapitalize="none"
+            placeholder="Category"
+            placeholderTextColor
+            style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
+            onChangeText={onChangeCategories}
+            underlineColorAndroid="transparent"
+            value={categories}
+          />
+          <TextInput
+            autoCapitalize="none"
+            placeholder="Capacity"
+            placeholderTextColor
+            style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
+            onChangeText={onChangeCapacity}
+            underlineColorAndroid="transparent"
+            value={capacity}
+          />
+          <TextInput
+            autoCapitalize="none"
+            placeholder="Location"
+            placeholderTextColor
+            style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
+            onChangeText={onChangeLocation}
+            underlineColorAndroid="transparent"
+            value={location}
+          />
+          <View style={[styles.spaceBetween, styles.marginTop]}>
             <Pressable
-              style={styles.buttonCancel}
+              style={[styles.buttonBase, styles.buttonHalf]}
               onPress={() => {
                 clearText();
               }}
             >
-              <Text style={styles.ButtonText}>Cancel</Text>
+              <Text style={styles.text}>Cancel</Text>
             </Pressable>
             <Pressable
-              style={styles.buttonConfirm}
+              style={[styles.buttonBase, styles.buttonHalf]}
               onPress={() => {
                 submitActivity();
               }}
             >
-              <Text style={styles.ButtonText}>Confirm</Text>
+              <Text style={styles.text}>Confirm</Text>
             </Pressable>
           </View>
         </View>
@@ -125,128 +124,5 @@ const CreateActivityScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  text: {
-    fontSize: 20,
-    elevation: 1,
-  },
-  drawerContainer: {
-    padding: 20,
-    backgroundColor: "aliceblue",
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  row: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  logo: {
-    aspectRatio: 1.81,
-    width: undefined,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 15,
-    marginLeft: 15,
-    resizeMode: 'contain'
-  },
-  input: {
-    paddingHorizontal: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    height: 40,
-    borderColor: 'black',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 2,
-  },
-  inputdesc: {
-    paddingHorizontal: 10,
-    marginTop: 15,
-    marginRight: 15,
-    marginLeft: 15,
-    marginBottom: 0,
-    height: 150,
-    borderColor: 'black',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 2,
-  },
-  buttonActivity: {
-    backgroundColor: 'black',
-    padding: 10,
-    margin: 15,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonCancel: {
-    backgroundColor: 'black',
-    padding: 10,
-    paddingRight: 56,
-    paddingLeft: 56,
-    margin: 15,
-    height: 40,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    backgroundColor: '#3F5EFB',
-    borderRadius: 10,
-    textAlign: 'center',
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 4,
-  },
-  buttonConfirm: {
-    backgroundColor: 'black',
-    padding: 10,
-    paddingRight: 56,
-    paddingLeft: 56,
-    margin: 15,
-    height: 40,
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    backgroundColor: '#3F5EFB',
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 4,
-    borderRadius: 10,
-    textAlign: 'center'
-  },
-  ButtonText: {
-    color: 'white'
-  }
-});
 
 export default CreateActivityScreen;
