@@ -16,7 +16,7 @@ const { width, height } = Dimensions.get('window');
 const drawer = {
   height: height * 3 / 4,
   state: {
-    open: (height * 3 / 4) / 2,
+    open: (height * 3 / 6),
     closed: 0
   },
 }
@@ -40,7 +40,7 @@ const BottomDrawer = ({ children }) => {
       <Animated.View
         style={{
           position: 'absolute',
-          bottom: -(drawer.height / 2),
+          bottom: -(drawer.height * 3 / 4),
           transform: [{ translateY: pan }]
         }}
       >

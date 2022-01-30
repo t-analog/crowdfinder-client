@@ -86,7 +86,7 @@ export default StyleSheet.create({
     borderColor: 'black',
     borderRadius: 20,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   container: {
     flex: 1,
