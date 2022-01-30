@@ -13,6 +13,7 @@ const HomeTab = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: 'tomato',
+        tabBarIcon: () => (<Ionicons name={'home'} color={'white'} size={20} />),
         tabBarInactiveTintColor: 'gray',
         tabBarShowLabel: true,
         tabBarHideOnKeyboard: true,
