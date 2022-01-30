@@ -9,10 +9,11 @@ import {
 
 import BottomDrawer from '../components/BottomDrawer';
 import * as activityExample from '../examples/activityExample.json'
+import styles from '../styles/stylesheet';
 
 const JoinScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.mapContainer}>
       <MapView
         style={styles.map}
         initialRegion={{
@@ -24,7 +25,7 @@ const JoinScreen = ({ navigation }) => {
       />
       <BottomDrawer>
         <View style={styles.activityWrapper}>
-          <Text style={styles.sectionTitle}>Activity Nearby</Text>
+          <Text style={styles.header}>Activity Nearby</Text>
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={styles.items}
@@ -59,43 +60,5 @@ const JoinScreen = ({ navigation }) => {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  activityWrapper: {
-    flex: 1,
-    backgroundColor: "aliceblue",
-    padding: 20,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  items: {
-    marginTop: 20,
-    borderRadius: 20,
-    overflow: 'hidden',
-  },
-  container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  text: {
-    fontSize: 20,
-    elevation: 1,
-  },
-});
 
 export default JoinScreen;

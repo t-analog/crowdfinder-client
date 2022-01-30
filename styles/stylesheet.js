@@ -22,9 +22,35 @@ const boxComponent = {
 };
 
 export default StyleSheet.create({
+  items: {
+    marginTop: 20,
+    borderRadius: 20,
+    overflow: 'hidden',
+  },
+  mapContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  map: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  activityWrapper: {
+    flex: 1,
+    backgroundColor: "aliceblue",
+    padding: 20,
+  },
   item: {
     backgroundColor: '#FFF',
-    padding: 20,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'space-evenly',
@@ -34,11 +60,9 @@ export default StyleSheet.create({
     minWidth: 40,
     textAlign: "center",
     height: 24,
-    marginVertical: 5,
     backgroundColor: '#55BCF6',
     opacity: 0.4,
     borderRadius: 20,
-    marginRight: 10,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -129,6 +153,10 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
+  flexStart: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
   logo: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -166,22 +194,5 @@ export default StyleSheet.create({
   },
   headerBackground: {
     backgroundColor: 'white',
-  },
-  mapContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
   },
 });
