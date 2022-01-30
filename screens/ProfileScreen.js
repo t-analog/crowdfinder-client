@@ -10,6 +10,8 @@ import {
 import {
   Menu, Appbar
 } from 'react-native-paper';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 import { logout } from '../utils/user';
 import styles from '../styles/stylesheet';
 
@@ -24,41 +26,52 @@ const ProfileScreen = ({ navigation }) => {
   const [bio, setBio] = React.useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus nisl lectus, sed convallis odio lacinia eget.");
 
   return (
-    <View>
-      <Menu
-        visible={isVisible}
-        style={styles.profileMenu}
-        onDismiss={toggleIsVisible}
-        anchor={
-          <Appbar.Header style={styles.headerBackground}>
-            <Appbar.Content title="" />
-            <Appbar.Action icon="dots-vertical" onPress={toggleIsVisible} />
-          </Appbar.Header>
-        }>
-        <Menu.Item
-          title="Activity Settings"
-          onPress={() => {
-            navigation.navigate("Activity Settings")
-          }}
-        />
-        <Menu.Item
-          title="Support Us"
-          onPress={() => {
-            navigation.navigate("Support Us")
-          }}
-        />
-        <Menu.Item
-          title="Logout"
-          onPress={async () => {
-            if (await logout()) navigation.navigate("Login");
-          }}
-        />
-      </Menu>
-      <View style={styles.container}>
-        <Text style={styles.header}>Your Profile</Text>
-        <Image
-          style={styles.profileImage}
-          source={require('../assets/profile.jpeg')} />
+    <View style={styles.container}>
+      <View style={styles.flexEnd}>
+        <Menu
+          visible={isVisible}
+          style={styles.profileMenu}
+          onDismiss={toggleIsVisible}
+          anchor={
+            <Ionicons
+              name={'menu'}
+              color={'black'}
+              size={20}
+              onPress={toggleIsVisible}
+            />
+          }
+        >
+          <Menu.Item
+            title="Activity Settings"
+            onPress={() => {
+              navigation.navigate("Activity Settings")
+            }}
+          />
+          <Menu.Item
+            title="Support Us"
+            onPress={() => {
+              navigation.navigate("Support Us")
+            }}
+          />
+          <Menu.Item
+            title="Logout"
+            onPress={async () => {
+              if (await logout()) navigation.navigate("Login");
+            }}
+          />
+        </Menu>
+      </View>
+      <View
+        style={{
+          paddingTop: 120,
+        }}
+      >
+        <View>
+          <Text style={styles.header}>Your Profile</Text>
+          <Image
+            style={styles.profileImage}
+            source={require('../assets/profile.jpeg')} />
+        </View>
         <TextInput
           autoCapitalize="none"
           onChangeText={setEmail}

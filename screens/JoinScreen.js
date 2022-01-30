@@ -24,15 +24,15 @@ const JoinScreen = ({ navigation }) => {
         }}
       />
       <BottomDrawer>
-        <View style={styles.activityWrapper}>
+        <View style={styles.container}>
           <Text style={styles.header}>Activity Nearby</Text>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={styles.items}
+            style={styles.scrollView}
           >
-            {activityExample.activities.map((element, index, array) => (
-              /* logic so that we only place marginBottom except the last */
-              (index + 1 !== array.length)
+            {activityExample.activities.map((element, index) => (
+              /* logic so that we only place marginTop except the first */
+              (index == 0)
                 ?
                 <View key={index}>
                   <Activity
@@ -41,19 +41,25 @@ const JoinScreen = ({ navigation }) => {
                     location={element.location}
                     categories={element.categories}
                   />
-                  <View
-                    style={{ marginBottom: 20 }}
-                  />
                 </View>
                 :
-                <Activity
+                <View
                   key={index}
-                  title={element.title}
-                  description={element.description}
-                  location={element.location}
-                  categories={element.categories}
-                />
+                  style={styles.marginTop}
+                >
+                  <Activity
+                    title={element.title}
+                    description={element.description}
+                    location={element.location}
+                    categories={element.categories}
+                  />
+                </View>
             ))}
+            <View
+              style={{
+                height: 80,
+              }}
+            />
           </ScrollView>
         </View>
       </BottomDrawer>

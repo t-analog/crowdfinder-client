@@ -16,7 +16,11 @@ const ActivitySettingsScreen = ({ navigation }) => {
       <Text style={styles.header}>Activity Settings</Text>
       <View>
         <View
-          style={[styles.emptyBoxBase, styles.emptyBoxSmall]}
+          style={[
+            styles.flexStart,
+            styles.emptyBoxBase,
+            styles.emptyBoxSmall
+          ]}
         >
           <Text>
             Preferred activity notification

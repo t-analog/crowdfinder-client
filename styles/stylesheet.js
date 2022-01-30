@@ -22,9 +22,7 @@ const boxComponent = {
 };
 
 export default StyleSheet.create({
-  items: {
-    marginTop: 20,
-    borderRadius: 20,
+  scrollView: {
     overflow: 'hidden',
   },
   mapContainer: {
@@ -44,48 +42,17 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-  activityWrapper: {
-    flex: 1,
-    backgroundColor: "aliceblue",
-    padding: 20,
-  },
-  item: {
-    backgroundColor: '#FFF',
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    marginBottom: 20,
-  },
   category: {
     minWidth: 40,
-    textAlign: "center",
-    height: 24,
-    backgroundColor: '#55BCF6',
-    opacity: 0.4,
+    height: 20,
+    borderWidth: 1,
+    borderColor: 'black',
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center'
   },
-  itemTitle: {
-    flexWrap: "wrap",
-    fontWeight: 'bold',
-    marginVertical: 5,
-    fontSize: 16
-  },
-  itemText: {
-    flexWrap: "wrap",
-    alignSelf: "stretch",
-    marginVertical: 5,
-  },
-  textCategory: {
-    paddingHorizontal: 15,
-  },
-  itemBot: {
-    justifyContent: "space-between",
-    flexDirection: "row"
-  },
-
   container: {
+    flex: 1,
     padding: 20,
     backgroundColor: 'white',
   },
@@ -109,7 +76,7 @@ export default StyleSheet.create({
     borderColor: boxComponent.border.color,
     borderWidth: boxComponent.border.width,
     borderRadius: boxComponent.border.radius,
-    justifyContent: 'center',
+    alignItems: 'center',
   },
   emptyBoxSmall: {
     height: boxComponent.height.small,
@@ -157,6 +124,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
+  flexRow: {
+    flexDirection: 'row',
+  },
   logo: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -175,9 +145,9 @@ export default StyleSheet.create({
     color: 'blue',
   },
   profileMenu: {
-    position: 'absolute',
-    top: 20,
-    right: 20,
+    // position: 'absolute',
+    // top: 20,
+    // right: 20,
   },
   profileImage: {
     width: 120,
@@ -185,10 +155,10 @@ export default StyleSheet.create({
     borderRadius: 120 / 2,
     position: 'absolute',
     right: 0,
-    marginRight: 20,
+    top: -60,
   },
   header: {
-    marginTop: 100,
+    marginTop: 20,
     marginBottom: 20,
     fontSize: 40
   },
