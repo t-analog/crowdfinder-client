@@ -128,7 +128,7 @@ const ProfileScreen = ({ navigation }) => {
           isEditable ? (
             <View style={[styles.spaceBetween, styles.marginTop]}>
               <Pressable
-                style={[styles.buttbehindonBase, styles.buttonHalf]}
+                style={[styles.buttonBase, styles.buttonHalf]}
                 onPress={toggleIsEditable}
               >
                 <Text style={styles.text}>Confirm</Text>
