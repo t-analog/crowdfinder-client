@@ -165,4 +165,7 @@ export default StyleSheet.create({
   headerBackground: {
     backgroundColor: 'white',
   },
+  right: {
+    textAlign: 'right',
+  },
 });

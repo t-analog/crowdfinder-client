@@ -72,6 +72,12 @@ const ProfileScreen = ({ navigation }) => {
             style={styles.profileImage}
             source={require('../assets/profile.jpeg')} />
         </View>
+        <View>
+        <Text style={{
+          position: 'absolute',
+          left: 10,
+          top: 12,
+        }}>Email</Text>
         <TextInput
           autoCapitalize="none"
           onChangeText={setEmail}
@@ -80,8 +86,15 @@ const ProfileScreen = ({ navigation }) => {
           underlineColorAndroid="transparent"
           value={email}
           editable={isEditable}
-          style={[styles.textInputBase, styles.textInputSmall]}
+          style={[styles.textInputBase, styles.textInputSmall, styles.right]}
         />
+        </View>
+        <View>
+        <Text style={{
+          position: 'absolute',
+          left: 10,
+          top: 32,
+        }}>Location</Text>
         <TextInput
           autoCapitalize="none"
           onChangeText={setLocation}
@@ -90,8 +103,15 @@ const ProfileScreen = ({ navigation }) => {
           underlineColorAndroid="transparent"
           value={location}
           editable={isEditable}
-          style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
+          style={[styles.textInputBase, styles.textInputSmall, styles.marginTop, styles.right]}
         />
+        </View>
+        <View>
+        <Text style={{
+          position: 'absolute',
+          left: 10,
+          top: 32,
+        }}>Bio</Text>
         <TextInput
           autoCapitalize="none"
           onChangeText={setBio}
@@ -103,11 +123,12 @@ const ProfileScreen = ({ navigation }) => {
           editable={isEditable}
           style={[styles.textInputBase, styles.textInputBig, styles.marginTop]}
         />
+        </View>
         {
           isEditable ? (
             <View style={[styles.spaceBetween, styles.marginTop]}>
               <Pressable
-                style={[styles.buttonBase, styles.buttonHalf]}
+                style={[styles.buttbehindonBase, styles.buttonHalf]}
                 onPress={toggleIsEditable}
               >
                 <Text style={styles.text}>Confirm</Text>
