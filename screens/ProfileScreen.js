@@ -10,13 +10,14 @@ import {
   Menu, Appbar
 } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
-
+import changeProfileImage from '../components/ProfilePicture';
 import { logout } from '../utils/user';
 import styles from '../styles/stylesheet';
 
 const ProfileScreen = ({ navigation }) => {
   const [isEditable, setIsEditable] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
+
   const toggleIsEditable = () => setIsEditable(!isEditable);
   const toggleIsVisible = () => setIsVisible(!isVisible);
 
@@ -67,6 +68,26 @@ const ProfileScreen = ({ navigation }) => {
       >
         <View>
           <Text style={styles.header}>Your Profile</Text>
+          {
+            isEditable ? (
+              <View>
+                <Pressable
+                  onPress={() => {
+                    navigation.navigate("ProfilePicture")
+                  }}
+                  style={[
+                    styles.buttonBase,
+                    styles.buttonFull,
+                    styles.marginTop,
+                    styles.marginBot
+                  ]}
+                >
+                  <Text style={styles.text}>Change Profile Photo</Text>
+              </Pressable>
+             </View>
+           )
+          : null
+          }
           <Image
             style={styles.profileImage}
             source={require('../assets/profile.jpeg')} />

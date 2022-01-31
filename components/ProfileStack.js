@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ProfileScreen from '../screens/ProfileScreen';
 import SupportUsScreen from '../screens/SupportUsScreen';
 import ActivitySettingsScreen from '../screens/ActivitySettingsScreen';
+import ProfilePicture from './ProfilePicture';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,13 @@ const ProfileStack = () => {
         options={{
           header: () => null
         }}
+      />
+        <Stack.Screen
+          name="ProfilePicture"
+          component={ProfilePicture}
+          options={{
+            header: () => null
+          }}
       />
     </Stack.Navigator>
   );
