@@ -8,7 +8,11 @@
         "foo",
         "bar",
         "baz"
-      ]
+      ],
+      "position": {
+        "latitude": 1.5578269758825156,
+        "longitude": 103.65635653742419
+      }
     },
     {
       "title": "House Moving",
@@ -18,7 +22,11 @@
         "foo",
         "bar",
         "baz"
-      ]
+      ],
+      "position": {
+        "latitude": 1.56139,
+        "longitude": 103.62909331123109
+      }
     },
     {
       "title": "House Moving",
@@ -28,7 +36,11 @@
         "foo",
         "bar",
         "baz"
-      ]
+      ],
+      "position": {
+        "latitude": 1.5133652971242817, 
+        "longitude": 103.49316486187372
+      }
     }
   ]
 }
