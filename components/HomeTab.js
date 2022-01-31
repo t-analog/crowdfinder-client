@@ -6,9 +6,18 @@ import JoinScreen from '../screens/JoinScreen';
 import ProfileStack from '../components/ProfileStack';
 import CreateActivityScreen from '../screens/CreateActivityScreen';
 
+import { MapContext } from '../utils/globalState'
+
 const Tab = createBottomTabNavigator();
 
 const HomeTab = () => {
+  const [mapState, setMapState] = React.useState({
+      latitude: 1.56139,
+      longitude: 103.62924,
+      latitudeDelta: 0.01,
+      longitudeDelta: 0.01,
+  });
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -34,28 +43,39 @@ const HomeTab = () => {
     >
       <Tab.Screen
         name="Nearby Activity"
-        component={JoinScreen}
         options={{
-          tabBarIcon: () => ( <Ionicons name={'list-outline'} color={'white'} size={24}/> ),
+          tabBarIcon: () => (<Ionicons name={'list-outline'} color={'white'} size={24} />),
           header: () => null
         }}
-      />
+      >
+        {() => (
+          <MapContext.Provider value={[mapState, setMapState]}>
+            <JoinScreen />
+          </MapContext.Provider>
+        )}
+      </Tab.Screen>
       <Tab.Screen
         name="Create Activity"
-        component={CreateActivityScreen}
         options={{
-          tabBarIcon: () => ( <Ionicons name={'add-circle-outline'} color={'white'} size={24}/> ),
+          tabBarIcon: () => (<Ionicons name={'add-circle-outline'} color={'white'} size={24} />),
           header: () => null
         }}
-      />
+      >
+        {() => (
+          <MapContext.Provider value={[mapState, setMapState]}>
+            <CreateActivityScreen />
+          </MapContext.Provider>
+        )}
+      </Tab.Screen>
       <Tab.Screen
         name="Profile"
         component={ProfileStack}
         options={{
-          tabBarIcon: () => ( <Ionicons name={'person-outline'} color={'white'} size={24}/> ),
+          tabBarIcon: () => (<Ionicons name={'person-outline'} color={'white'} size={24} />),
           header: () => null
         }}
-      />
+      >
+      </Tab.Screen>
     </Tab.Navigator>
   );
 }
