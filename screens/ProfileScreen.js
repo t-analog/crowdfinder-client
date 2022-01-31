@@ -10,7 +10,7 @@ import {
   Menu, Appbar
 } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
-
+import changeProfileImage from '../components/ProfileStack';
 import { logout } from '../utils/user';
 import styles from '../styles/stylesheet';
 
@@ -67,9 +67,16 @@ const ProfileScreen = ({ navigation }) => {
       >
         <View>
           <Text style={styles.header}>Your Profile</Text>
+          <Pressable
+            style={styles.profileImage}
+            onPress={() => {
+              navigation.navigate("ProfilePicture")
+          }}
+          >
           <Image
             style={styles.profileImage}
             source={require('../assets/profile.jpeg')} />
+          </Pressable>
         </View>
         <View style={styles.contentCenter}>
           <Text style={{
