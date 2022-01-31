@@ -8,6 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 
 import styles from '../styles/stylesheet';
 
@@ -24,6 +25,22 @@ const drawer = {
 const BottomDrawer = ({ children }) => {
   const pan = useRef(new Animated.Value(drawer.state.closed)).current;
   const [drawerState, setDrawerState] = useState(drawer.state.closed);
+  // const navigation = useNavigation();
+  // React.useEffect(() => {
+  //   const unsubscribe = navigation.addListener('blur', () => console.log(`BottomDrawer unfocused`));
+  //   return unsubscribe;
+  // }, [navigation]);
+  useFocusEffect(
+    React.useCallback(() => {
+      const unsubscribe = () => {
+        if (drawerState == drawer.state.open) {
+          drawerAnimateMove(pan, drawer.state.closed);
+          setDrawerState(drawer.state.closed);
+        }
+      }
+      return unsubscribe;
+    }, [drawerState])
+  )
 
 
   const drawerAnimateMove = (value, toValue) => {
@@ -32,6 +49,17 @@ const BottomDrawer = ({ children }) => {
       useNativeDriver: false,
       easing: Easing.out(Easing.exp)
     }).start();
+  };
+
+  const drawerNextState = () => {
+    if (drawerState == drawer.state.closed) {
+      drawerAnimateMove(pan, drawer.state.open);
+      setDrawerState(drawer.state.open);
+    }
+    else if (drawerState == drawer.state.open) {
+      drawerAnimateMove(pan, drawer.state.closed);
+      setDrawerState(drawer.state.closed);
+    }
   };
 
   return (
@@ -46,14 +74,8 @@ const BottomDrawer = ({ children }) => {
         <Pressable
           style={styles.drawerPressable}
           onPress={() => {
-            if (drawerState == drawer.state.closed) {
-              drawerAnimateMove(pan, drawer.state.open);
-              setDrawerState(drawer.state.open);
-            }
-            else if (drawerState == drawer.state.open) {
-              drawerAnimateMove(pan, drawer.state.closed);
-              setDrawerState(drawer.state.closed);
-            }
+            /* console.log(`${drawerState}`); */
+            drawerNextState();
           }}
         >
           {drawerState == drawer.state.closed
