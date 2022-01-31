@@ -23,13 +23,13 @@ const JoinScreen = ({ navigation }) => {
   });
 
   Geolocation.getCurrentPosition(position => {
-    console.log(position);
+    // console.log(position);
     setRegion({
       region: {
-        longitude: position.coords.longitude,
         latitude: position.coords.latitude,
-        longitudeDelta: 0.01,
-        latitudeDelta: 0.01
+        longitude: position.coords.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01
       }
     })
   },  error => console.log(error),
@@ -50,7 +50,7 @@ const JoinScreen = ({ navigation }) => {
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        initialregion = {region.region}
+        initialRegion = {region.region}
         onRegionChange={region => {
           // console.log('Region changed');
           // setRegion({region});
@@ -66,10 +66,6 @@ const JoinScreen = ({ navigation }) => {
           coordinate={region.region}
           title={"initial"}
           description={'description'} />
-
-        <Marker
-            coordinate={{latitude: 1.5677556442934295, 
-                          longitude: 103.63602593964225}} />
 
         {Markers()}
       </MapView>
