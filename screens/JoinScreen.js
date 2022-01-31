@@ -28,12 +28,12 @@ const JoinScreen = ({ navigation }) => {
       region: {
         longitude: position.coords.longitude,
         latitude: position.coords.latitude,
-        longitudeDelta: 0.004,
-        latitudeDelta: 0.009
+        longitudeDelta: 0.01,
+        latitudeDelta: 0.01
       }
     })
   },  error => console.log(error),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 2000 }
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 3000 }
   );
   
   const Markers = () => {
@@ -50,7 +50,7 @@ const JoinScreen = ({ navigation }) => {
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        region = {region.region}
+        initialregion = {region.region}
         onRegionChange={region => {
           // console.log('Region changed');
           // setRegion({region});
