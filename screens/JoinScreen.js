@@ -1,5 +1,5 @@
 import Activity from '../components/Activity';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import React from 'react';
 import {
   Text,
@@ -11,7 +11,8 @@ import { useNavigation } from '@react-navigation/native'
 import BottomDrawer from '../components/BottomDrawer';
 import * as activityExample from '../examples/activityExample.json'
 import styles from '../styles/stylesheet';
-import { MapContext } from '../utils/globalState'
+import { MapContext } from '../utils/globalState';
+import Geolocation from '@react-native-community/geolocation';
 
 const JoinScreen = () => {
   const navigation = useNavigation();
@@ -20,13 +21,33 @@ const JoinScreen = () => {
   //   return unsubscribe;
   // }, [navigation]);
   const [mapState, setMapState] = React.useContext(MapContext);
+
+  Geolocation.getCurrentPosition(position => {
+    setMapState
+  },  error => {},
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 3000 }
+  );
+
+  const Markers = () => {
+    return activityExample.activities.map((element, index) => (
+      <Marker
+        key={index}
+        coordinate={{latitude: element.position.latitude,
+                      longitude: element.position.longitude}}
+        title={element.title} />
+    ))
+  };
+
   return (
     <View style={styles.mapContainer}>
       <MapView
         style={styles.map}
         region={mapState}
         onRegionChangeComplete={setMapState}
-      />
+        showsUserLocation
+      >
+        {Markers()}
+      </MapView>
       <BottomDrawer>
         <View style={styles.container}>
           <Text style={styles.header}>Activity Nearby</Text>
