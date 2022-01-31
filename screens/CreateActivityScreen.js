@@ -34,14 +34,24 @@ const CreateActivityScreen = () => {
       console.error("Name cannot be empty!");
       return false;
     } else {
-      createActivity(
-        name,
-        description,
-        Number(capacity),
-        categories.split(' '),
-        { latitude: 1.2, longitude: 3.4 }
-      );
-      alert("Activity Created")
+      const locationSplitted = location.split(' ');
+      try {
+        createActivity().mutate();
+      } catch (err) {
+        console.error(err);
+        // Do something
+      }
+      // createActivity(
+      //   name,
+      //   description,
+      //   parseInt(capacity),
+      //   categories.split(' '),
+      //   {
+      //     latitude: parseFloat(locationSplitted[0]),
+      //     longitude: parseFloat(locationSplitted[1])
+      //   },
+      // );
+      alert("Activity Created");
       return true;
     };
   };

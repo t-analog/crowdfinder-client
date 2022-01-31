@@ -17,7 +17,7 @@ const Activity = (props) => {
         styles.emptyBoxBase,
         styles.emptyBoxSmall,
       ]}>
-        <Text>{props.title}</Text>
+        <Text>{props.name}</Text>
       </View>
       <View style={[
         styles.flexStart,
@@ -54,8 +54,9 @@ const Activity = (props) => {
         styles.flexStart,
         styles.emptyBoxBase,
         styles.emptyBoxSmall,
-        styles.marginTop]}>
-        <Text>{props.location}</Text>
+        styles.marginTop
+      ]}>
+        <Text>Lat: {props.location.latitude} Long: {props.location.longitude}</Text>
       </View>
       <View style={[
         styles.spaceBetween,
@@ -66,9 +67,7 @@ const Activity = (props) => {
           styles.emptyBoxBase,
           styles.emptyBoxSmall
         ]}>
-          <Text>
-            0 / 3
-          </Text>
+          <Text> {props.capacity} </Text>
         </View>
         <Pressable
           style={[styles.buttonBase, styles.buttonHalf]}
