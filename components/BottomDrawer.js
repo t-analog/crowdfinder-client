@@ -21,7 +21,6 @@ const drawer = {
   },
 }
 
-
 const BottomDrawer = ({ children }) => {
   const pan = useRef(new Animated.Value(drawer.state.closed)).current;
   const [drawerState, setDrawerState] = useState(drawer.state.closed);

@@ -11,8 +11,11 @@ import MapView from 'react-native-maps';
 import { createActivity } from '../utils/activity';
 import styles from '../styles/stylesheet';
 import BottomDrawer from '../components/BottomDrawer';
+import { MapContext } from '../utils/globalState'
 
 const CreateActivityScreen = () => {
+  const [mapState, setMapState] = React.useContext(MapContext);
+
   const [capacity, onChangeCapacity] = React.useState("");
   const [categories, onChangeCategories] = React.useState("");
   const [description, onChangeDescription] = React.useState("");
@@ -46,12 +49,12 @@ const CreateActivityScreen = () => {
     <View style={styles.mapContainer}>
       <MapView
         style={styles.map}
-        initialRegion={{
-          latitude: 1.56139,
-          longitude: 103.62924,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-        }}
+        region={mapState}
+        /* onRegionChange={(region) => { */
+        /*   /\* console.log(`${JSON.stringify(mapState)}`); *\/ */
+        /*   return setMapState(region); */
+        /* }} */
+        onRegionChangeComplete={setMapState}
       />
       <BottomDrawer>
         <View style={styles.container}>
