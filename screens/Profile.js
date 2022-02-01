@@ -1,18 +1,22 @@
 import React from 'react';
 import {
-  View,
   Text,
-  TextInput,
+  View,
   Image,
   Pressable,
+  TextInput,
 } from 'react-native';
 import {
-  Menu, Appbar
+  Menu,
 } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { logout } from '../utils/user';
 import styles from '../styles/stylesheet';
+import {
+  getCustomUserData,
+  updateCustomUserData,
+} from '../utils/user';
 
 const Profile = ({ navigation }) => {
   const [isEditable, setIsEditable] = React.useState(false);
@@ -20,9 +24,27 @@ const Profile = ({ navigation }) => {
   const toggleIsEditable = () => setIsEditable(!isEditable);
   const toggleIsVisible = () => setIsVisible(!isVisible);
 
-  const [email, setEmail] = React.useState("xi@cpc.cn");
-  const [location, setLocation] = React.useState("Skudai, Johor");
-  const [bio, setBio] = React.useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus nisl lectus, sed convallis odio lacinia eget.");
+  const [email, setEmail] = React.useState("");
+  const [location, setLocation] = React.useState("");
+  const [biodata, setBiodata] = React.useState("");
+
+  const { status, data, error: getCustomUserDataError, isFetching } = getCustomUserData();
+  const { mutate, error: updateCustomUserDataError } = updateCustomUserData();
+
+  const updateCustomUserDataTrigger = () => {
+    mutate({
+      biodata,
+      location,
+    })
+  };
+
+  React.useEffect(() => {
+    if (status === "success") {
+      setEmail(data.user.name);
+      setLocation(data.user.location);
+      setBiodata(data.user.biodata);
+    }
+  }, [data]);
 
   return (
     <View style={styles.container}>
@@ -83,7 +105,7 @@ const Profile = ({ navigation }) => {
             placeholderTextColor="black"
             underlineColorAndroid="transparent"
             value={email}
-            editable={isEditable}
+            editable={false}
             style={[
               styles.textInputBase,
               styles.textInputSmall,
@@ -124,12 +146,12 @@ const Profile = ({ navigation }) => {
           }}>Bio</Text>
           <TextInput
             autoCapitalize="none"
-            onChangeText={setBio}
+            onChangeText={setBiodata}
             placeholder="Bio"
             placeholderTextColor="black"
             underlineColorAndroid="transparent"
             multiline={true}
-            value={bio}
+            value={biodata}
             editable={isEditable}
             style={[
               styles.textInputBase,
@@ -153,7 +175,10 @@ const Profile = ({ navigation }) => {
                 <Text style={styles.text}>Cancel</Text>
               </Pressable>
               <Pressable
-                onPress={toggleIsEditable}
+                onPress={() => {
+                  updateCustomUserDataTrigger();
+                  toggleIsEditable();
+                }}
                 style={[
                   styles.buttonBase,
                   styles.buttonHalf

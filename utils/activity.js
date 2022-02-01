@@ -95,9 +95,7 @@ const createActivity = () => {
   });
 };
 
-const getActivity = (
-  id
-) => {
+const getActivity = () => {
   const getActivityQuery = gql`
     query GetActivity($id: ObjectId) {
       activity(
@@ -120,10 +118,10 @@ const getActivity = (
       }
     }
   `;
-  const vars = {
-    "id": id
-  };
-  return useQuery("activity", async () => {
+  return useQuery("activity", async ({ id }) => {
+    const vars = {
+      "id": id
+    };
     try {
       const data = await client.request(getActivityQuery, vars);
       return data;
@@ -163,7 +161,7 @@ const getActivities = () => {
   });
 };
 
-const updateActivity = async () => {
+const updateActivity = () => {
   const updateActivityQuery = gql`
     mutation UpdateActivity(
       $id: ObjectId
@@ -171,7 +169,7 @@ const updateActivity = async () => {
       $description: String,
       $capacity: Int,
       $categories: [String],
-      $location: ActivityLocationInsertInput
+      $location: ActivityLocationUpdateInput
     ) {
       updateOneActivity(
         query: {
@@ -229,7 +227,7 @@ const updateActivity = async () => {
   });
 };
 
-const deleteActivity = async () => {
+const deleteActivity = () => {
   const deleteActivityQuery = gql`
     mutation DeleteActivity($id: ObjectId) {
       deleteOneActivity(
@@ -252,9 +250,7 @@ const deleteActivity = async () => {
       }
     }
   `;
-  return useMutation(async ({
-    id,
-  }) => {
+  return useMutation(async ({ id }) => {
     const vars = {
       "id": id,
     };

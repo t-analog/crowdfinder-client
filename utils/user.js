@@ -1,4 +1,15 @@
 import Realm from 'realm';
+import {
+  gql,
+} from 'graphql-request';
+import {
+  useQuery,
+  useMutation,
+} from "react-query";
+
+import {
+  client,
+} from '../utils/graphql';
 import { app } from './realm';
 
 /**
@@ -72,4 +83,89 @@ const logout = async () => {
   }
 }
 
-export { register, login, logout };
+const getCustomUserData = () => {
+  const getCustomUserDataQuery = gql`
+    query GetCustomUserData($id: String) {
+      user(
+        query: {
+          _id: $id
+        }
+      ) {
+        _id
+        name
+        _partition
+        activityPreference
+        location
+        biodata
+        preferredActivity
+        }
+      }
+  `;
+  return useQuery("user", async () => {
+    const vars = {
+      "id": app.currentUser.id
+    };
+    try {
+      const data = await client.request(getCustomUserDataQuery, vars);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  });
+};
+
+const updateCustomUserData = () => {
+  const updateCustomUserDataQuery = gql`
+    mutation UpdateCustomUserData(
+      $id: String,
+      $biodata: String,
+      $location: String,
+    ) {
+      updateOneUser(
+        query: {
+          _id: $id
+        }
+        set: {
+          biodata: $biodata
+          location: $location
+        }
+      ) {
+        _id
+        name
+        _partition
+        biodata
+        location
+        activityPreference
+        preferredActivity
+      }
+    }
+  `;
+  return useMutation(async ({
+    biodata,
+    location,
+    // activityPreference,
+    // preferredActivity,
+  }) => {
+    const vars = {
+      "id": app.currentUser.id,
+      "biodata": biodata,
+      "location": location,
+      // "activityPreference": activityPreference,
+      // "preferredActivity": preferredActivity,
+    };
+    try {
+      const data = await client.request(updateCustomUserDataQuery, vars);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  });
+}
+
+export {
+  register,
+  login,
+  logout,
+  getCustomUserData,
+  updateCustomUserData,
+};
