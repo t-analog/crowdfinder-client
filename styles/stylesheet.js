@@ -80,7 +80,8 @@ export default StyleSheet.create({
     bottom: 0,
   },
   category: {
-    minWidth: 40,
+    minWidth: 20,
+    paddingHorizontal: 5,
     height: 20,
     borderWidth: 1,
     borderColor: 'black',

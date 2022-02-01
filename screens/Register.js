@@ -3,10 +3,10 @@ import { register } from '../utils/user';
 import { View, Text, Pressable, TextInput, StyleSheet } from 'react-native';
 import styles from '../styles/stylesheet';
 
-const RegisterAccountScreen = ({ navigation }) => {
-  const [username, onChangeUsername] = React.useState("");
-  const [password, onChangePassword] = React.useState("");
-  const [confirmPassword, onChangeConfirmPassword] = React.useState("");
+const RegisterAccount= ({ navigation }) => {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
   return (
     <View style={styles.container}>
       <Text>
@@ -17,14 +17,14 @@ const RegisterAccountScreen = ({ navigation }) => {
       <TextInput
         style={[styles.textInputBase, styles.textInputSmall]}
         autoCapitalize="none"
-        onChangeText={onChangeUsername}
+        onChangeText={setUsername}
         placeholder="Email/Username"
         placeholderTextColor="black"
         underlineColorAndroid="transparent"
       />
       <TextInput
         autoCapitalize="none"
-        onChangeText={onChangePassword}
+        onChangeText={setPassword}
         placeholder="Password"
         placeholderTextColor="black"
         secureTextEntry={true}
@@ -33,7 +33,7 @@ const RegisterAccountScreen = ({ navigation }) => {
       />
       <TextInput
         autoCapitalize="none"
-        onChangeText={onChangeConfirmPassword}
+        onChangeText={setConfirmPassword}
         placeholder="Confirm Password"
         placeholderTextColor="black"
         secureTextEntry={true}
@@ -58,4 +58,4 @@ const RegisterAccountScreen = ({ navigation }) => {
   );
 }
 
-export default RegisterAccountScreen;
+export default RegisterAccount;

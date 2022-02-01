@@ -14,7 +14,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { logout } from '../utils/user';
 import styles from '../styles/stylesheet';
 
-const ProfileScreen = ({ navigation }) => {
+const Profile = ({ navigation }) => {
   const [isEditable, setIsEditable] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
   const toggleIsEditable = () => setIsEditable(!isEditable);
@@ -179,4 +179,4 @@ const ProfileScreen = ({ navigation }) => {
   );
 };
 
-export default ProfileScreen;
+export default Profile;

@@ -26,4 +26,7 @@ const client = new GraphQLClient(
   }
 );
 
-export default client;
+export {
+  client,
+  graphqlUri,
+};

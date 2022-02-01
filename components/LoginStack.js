@@ -1,9 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeTab from './HomeTab';
-import LoginScreen from '../screens/Login';
-import RegisterScreen from '../screens/Register';
-import ForgotPasswordScreen from '../screens/ForgotPassword';
+import Login from '../screens/Login';
+import Register from '../screens/Register';
+import ForgotPassword from '../screens/ForgotPassword';
 
 const Stack = createStackNavigator();
 
@@ -12,18 +12,18 @@ const LoginStack = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="Login"
-        component={LoginScreen}
+        component={Login}
         options={{
           header: () => null
         }}
       />
       <Stack.Screen
         name="ForgotPassword"
-        component={ForgotPasswordScreen}
+        component={ForgotPassword}
       />
       <Stack.Screen
         name="Register"
-        component={RegisterScreen}
+        component={Register}
       />
       <Stack.Screen
         name="Home"
