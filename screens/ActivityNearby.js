@@ -38,6 +38,11 @@ const ActivityNearby = () => {
             style={styles.scrollView}
           >
             <ActivityList />
+            <View
+              style={{
+                height: 140,
+              }}
+            />
           </ScrollView>
         </View>
       </BottomDrawer>
@@ -73,7 +78,12 @@ const ActivityList = () => {
               :
               <View
                 key={index}
-                style={styles.marginTop}
+                style={[
+                  /* styles.marginTop, */
+                  {
+                    marginTop: 40,
+                  }
+                ]}
               >
                 <Activity
                   name={element.name}
@@ -84,11 +94,6 @@ const ActivityList = () => {
                 />
               </View>
           ))}
-          <View
-            style={{
-              height: 140,
-            }}
-          />
         </View>
       )}
     </View>

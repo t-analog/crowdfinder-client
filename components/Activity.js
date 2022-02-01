@@ -56,7 +56,7 @@ const Activity = (props) => {
         styles.emptyBoxSmall,
         styles.marginTop
       ]}>
-        <Text>Lat: {props.location.latitude} Long: {props.location.longitude}</Text>
+        <Text>Lat: {props.location.latitude}, Long: {props.location.longitude}</Text>
       </View>
       <View style={[
         styles.spaceBetween,
