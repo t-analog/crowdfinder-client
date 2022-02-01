@@ -22,8 +22,6 @@ import {
   getActivities,
 } from '../utils/activity';
 
-const queryClient = new QueryClient();
-
 const JoinScreen = () => {
   const navigation = useNavigation();
   const [mapState, setMapState] = React.useContext(MapContext);
@@ -42,9 +40,7 @@ const JoinScreen = () => {
             showsVerticalScrollIndicator={false}
             style={styles.scrollView}
           >
-            <QueryClientProvider client={queryClient}>
-              <ActivityList />
-            </QueryClientProvider>
+            <ActivityList />
           </ScrollView>
         </View>
       </BottomDrawer>

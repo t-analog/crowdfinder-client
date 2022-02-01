@@ -7,6 +7,11 @@ import {
   StyleSheet,
 } from 'react-native';
 import MapView from 'react-native-maps';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQueryClient,
+} from "react-query";
 
 import { createActivity } from '../utils/activity';
 import styles from '../styles/stylesheet';
@@ -21,6 +26,8 @@ const CreateActivityScreen = () => {
   const [description, onChangeDescription] = React.useState("");
   const [location, onChangeLocation] = React.useState("");
   const [name, onChangeName] = React.useState("");
+  const { mutate, error } = createActivity();
+
 
   const clearText = () => {
     onChangeCapacity("");
@@ -29,41 +36,26 @@ const CreateActivityScreen = () => {
     onChangeLocation("");
     onChangeName("");
   };
-  const submitActivity = async () => {
+  const submitActivity = () => {
     if (name == "") {
       console.error("Name cannot be empty!");
       return false;
-    } else {
-      const locationSplitted = location.split(' ');
-      try {
-        createActivity().mutate();
-      } catch (err) {
-        console.error(err);
-        // Do something
-      }
-      // createActivity(
-      //   name,
-      //   description,
-      //   parseInt(capacity),
-      //   categories.split(' '),
-      //   {
-      //     latitude: parseFloat(locationSplitted[0]),
-      //     longitude: parseFloat(locationSplitted[1])
-      //   },
-      // );
-      alert("Activity Created");
-      return true;
-    };
+    }
+    mutate({
+      name,
+      description,
+      capacity,
+      categories,
+      location,
+    });
+    alert("Activity Created");
+    return true;
   };
   return (
     <View style={styles.mapContainer}>
       <MapView
         style={styles.map}
         region={mapState}
-        /* onRegionChange={(region) => { */
-        /*   /\* console.log(`${JSON.stringify(mapState)}`); *\/ */
-        /*   return setMapState(region); */
-        /* }} */
         onRegionChangeComplete={setMapState}
       />
       <BottomDrawer>

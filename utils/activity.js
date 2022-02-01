@@ -1,6 +1,5 @@
 import {
   gql,
-  request,
 } from 'graphql-request';
 import {
   useQuery,
@@ -9,7 +8,6 @@ import {
 
 import {
   client,
-  graphqlUri,
 } from '../utils/graphql';
 import { app } from '../utils/realm';
 
@@ -26,13 +24,7 @@ import { app } from '../utils/realm';
  * @property {{latitude: String, longitude: String}} location Activity location, in latitude and longitude
  * */
 
-const createActivity = (
-  // name,
-  // description,
-  // capacity,
-  // categories,
-  // location
-) => {
+const createActivity = () => {
   const createActivityQuery = gql`
     mutation InsertOneActivity(
       $name: String,
@@ -71,27 +63,29 @@ const createActivity = (
       }
     }
   `;
-  const vars = {
-    // "name": name,
-    // "partition": `activity=${app.currentUser.id}`,
-    // "description": description,
-    // "creator": app.currentUser.customData.name,
-    // "capacity": capacity,
-    // "categories": categories,
-    // "participants": [],
-    // "location": location
-    "name": "test name",
-    "partition": `activity=${app.currentUser.id}`,
-    "description": "test desc",
-    "creator": app.currentUser.customData.name,
-    "capacity": 727,
-    "categories": ["foo", "bar", "baz"],
-    "participants": [],
-    "location": { latitude: 1.2, longitude: 3.4 }
-  };
-  // return await client.request(createActivityQuery, vars);
-  return useMutation(async () => {
-    const data = await client.request(createActivityQuery, vars);
+  return useMutation(async ({
+    name,
+    description,
+    capacity,
+    categories,
+    location,
+  }) => {
+    const locationSplit = location.split(' ');
+    const vars = {
+      "name": name,
+      "partition": `activity=${app.currentUser.id}`,
+      "description": description,
+      "creator": app.currentUser.customData.name,
+      "capacity": parseInt(capacity),
+      "categories": categories.split(' '),
+      "participants": [],
+      "location": {
+        "latitude": parseFloat(locationSplit[0]),
+        "longitude": parseFloat(locationSplit[1]),
+      },
+    };
+    const { data, error } = await client.request(createActivityQuery, vars);
+    if (error) throw new Error(error.message);
     return data;
   });
 };
@@ -131,7 +125,8 @@ const getActivity = (
   };
   // return await client.request(getActivityQuery, vars);
   return useQuery("activity", async () => {
-    const data = await client.request(getActivityQuery, vars);
+    const { data, error } = await client.request(getActivityQuery, vars);
+    if (error) throw new Error(error.message);
     // console.log(`${JSON.stringify(data)}`);
     return data;
   });
@@ -158,7 +153,8 @@ const getActivities = () => {
   `;
   // return await client.request(getActivitiesQuery);
   return useQuery("activites", async () => {
-    const data = await client.request(getActivitiesQuery);
+    const { data, error } = await client.request(getActivitiesQuery);
+    if (error) throw new Error(error.message);
     // console.log(`${JSON.stringify(data)}`);
     return data;
   });
