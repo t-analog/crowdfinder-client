@@ -8,11 +8,6 @@ import {
 import MapView, {
   Marker,
 } from 'react-native-maps';
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQueryClient,
-} from "react-query";
 
 import { createActivity } from '../utils/activity';
 import styles from '../styles/stylesheet';
@@ -29,18 +24,16 @@ const CreateActivity = () => {
   const [capacity, setCapacity] = React.useState("");
   const [categories, setCategories] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [location, setLocation] = React.useState("");
   const [name, setName] = React.useState("");
   const { mutate, error } = createActivity();
 
   const clearText = () => {
-    setCapacity("");
-    setCategories("");
-    setDescription("");
-    setLocation("");
     setName("");
+    setDescription("");
+    setCategories("");
+    setCapacity("");
   };
-  const submitActivity = () => {
+  const createActivityTrigger = () => {
     if (name == "") {
       console.error("Name cannot be empty!");
       return false;
@@ -142,7 +135,6 @@ const CreateActivity = () => {
               {
                 color: 'black',
               }]}
-            onChangeText={setLocation}
             underlineColorAndroid="transparent"
             value={`Lat: ${JSON.stringify(activityMarker.latitude)}, Long: ${JSON.stringify(activityMarker.longitude)}`}
           />
@@ -167,7 +159,7 @@ const CreateActivity = () => {
                 styles.buttonHalf
               ]}
               onPress={() => {
-                submitActivity();
+                createActivityTrigger();
               }}
             >
               <Text style={styles.text}>Confirm</Text>
