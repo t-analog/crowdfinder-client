@@ -5,7 +5,6 @@ import {
   TextInput,
   Image,
   Pressable,
-  StyleSheet
 } from 'react-native';
 import {
   Menu, Appbar

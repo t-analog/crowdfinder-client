@@ -1,27 +1,31 @@
 import Activity from '../components/Activity';
 import MapView from 'react-native-maps';
+import React from 'react';
 import {
   Text,
   View,
-  StyleSheet,
   ScrollView
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native'
 
 import BottomDrawer from '../components/BottomDrawer';
 import * as activityExample from '../examples/activityExample.json'
 import styles from '../styles/stylesheet';
+import { MapContext } from '../utils/globalState'
 
-const JoinScreen = ({ navigation }) => {
+const JoinScreen = () => {
+  const navigation = useNavigation();
+  // React.useEffect(() => {
+  //   const unsubscribe = navigation.addListener('blur', () => console.log(`Activity Nearby unfocused`));
+  //   return unsubscribe;
+  // }, [navigation]);
+  const [mapState, setMapState] = React.useContext(MapContext);
   return (
     <View style={styles.mapContainer}>
       <MapView
         style={styles.map}
-        initialRegion={{
-          latitude: 1.56139,
-          longitude: 103.62924,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-        }}
+        region={mapState}
+        onRegionChangeComplete={setMapState}
       />
       <BottomDrawer>
         <View style={styles.container}>
