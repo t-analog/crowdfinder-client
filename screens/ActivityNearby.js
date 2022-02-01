@@ -15,12 +15,14 @@ import {
 import BottomDrawer from '../components/BottomDrawer';
 // import * as activityExample from '../examples/activityExample.json'
 import styles from '../styles/stylesheet';
-import { MapContext } from '../utils/globalState'
+import { JoinContext, MapContext } from '../utils/globalState'
 import {
   getActivities,
 } from '../utils/activity';
+import activityExample from '../examples/activityExample.json'
 
 const ActivityNearby = () => {
+  const [joined, setJoined] = React.useState("");
   const [mapState, setMapState] = React.useContext(MapContext);
 
   return (
@@ -37,7 +39,18 @@ const ActivityNearby = () => {
             showsVerticalScrollIndicator={false}
             style={styles.scrollView}
           >
-            <ActivityList />
+            {
+              (joined == "")
+                ?
+              <JoinContext.Provider value={[joined, setJoined]}>
+                <ActivityList />
+              </JoinContext.Provider>
+              :
+              <JoinContext.Provider value={[joined, setJoined]}>
+                <Joining />
+              </JoinContext.Provider>
+              
+            }
             <View
               style={{
                 height: 140,
@@ -52,6 +65,7 @@ const ActivityNearby = () => {
 
 const ActivityList = () => {
   const { status, data, error, isFetching } = getActivities();
+  const [joined, setJoined] = React.useState(JoinContext);
 
   return (
     <View>
@@ -61,19 +75,22 @@ const ActivityList = () => {
         <Text>Error</Text>
       ) : (
         <View>
-          {data.activities.map((element, index) => (
+          {activityExample.activities.map((element, index) => (
             /* logic so that we put marginTop except the first */
             (index == 0)
               ?
               <View key={index}>
-                <Activity
-                  name={element.name}
-                  description={element.description}
-                  capacity={element.capacity}
-                  categories={element.categories}
-                  participants={element.participants}
-                  location={element.location}
-                />
+                <JoinContext.Provider value={[joined, setJoined]}>
+                  <Activity
+                    id={element.id}
+                    name={element.name}
+                    description={element.description}
+                    capacity={element.capacity}
+                    categories={element.categories}
+                    participants={element.participants}
+                    location={element.location}
+                  />
+                </JoinContext.Provider>
               </View>
               :
               <View
@@ -85,13 +102,17 @@ const ActivityList = () => {
                   }
                 ]}
               >
-                <Activity
-                  name={element.name}
-                  description={element.description}
-                  capacity={element.capacity}
-                  location={element.location}
-                  categories={element.categories}
-                />
+                <JoinContext.Provider value={[joined, setJoined]}>
+                  <Activity
+                    id={element.id}
+                    name={element.name}
+                    description={element.description}
+                    capacity={element.capacity}
+                    location={element.location}
+                    categories={element.categories}
+                  />
+                </JoinContext.Provider>
+                <Text>Hello</Text>
               </View>
           ))}
         </View>
@@ -100,4 +121,42 @@ const ActivityList = () => {
   )
 }
 
+const Joining = () => {
+  const { status, data, error, isFetching } = getActivities();
+  const [joined, setJoined] = React.useState(JoinContext);
+
+  return (
+    <View>
+      {status === "loading" ? (
+        <Text>Loading</Text>
+      ) : status === "error" ? (
+        <Text>Error</Text>
+      ) : (
+        <View>
+          {activityExample.activities.map((element) => (
+            /* logic so that we put marginTop except the first */
+            (element.id == joined)
+              ?
+              <View>
+                <JoinContext.Provider value={[joined, setJoined]}>
+                  <Activity
+                    name={element.name}
+                    description={element.description}
+                    capacity={element.capacity}
+                    categories={element.categories}
+                    participants={element.participants}
+                    location={element.location}
+                  />
+                </JoinContext.Provider>
+              </View>
+              :
+              null
+          ))}
+        </View>
+      )}
+    </View>
+  )
+}
+
 export default ActivityNearby;
+
