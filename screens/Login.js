@@ -11,9 +11,9 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useTogglePasswordVisibility } from '../components/TogglePassword';
 import styles from '../styles/stylesheet';
 
-const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+const Login = ({ navigation }) => {
+  const [username, setUsername] = React.useState("second@second");
+  const [password, setPassword] = React.useState("password");
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
     useTogglePasswordVisibility();
   return (
@@ -29,6 +29,7 @@ const LoginScreen = ({ navigation }) => {
       />
       <TextInput
         autoCapitalize="none"
+        value={username}
         onChangeText={setUsername}
         placeholder="Email"
         placeholderTextColor="black"
@@ -40,6 +41,7 @@ const LoginScreen = ({ navigation }) => {
       >
         <TextInput
           autoCapitalize="none"
+          value={password}
           onChangeText={setPassword}
           placeholder="Password"
           placeholderTextColor="black"
@@ -55,7 +57,7 @@ const LoginScreen = ({ navigation }) => {
           />
         </Pressable>
       </View>
-      <View style={[ styles.flexEnd, styles.marginTop ]}>
+      <View style={[styles.flexEnd, styles.marginTop]}>
         <Text
           onPress={
             () => navigation.navigate("ForgotPassword")
@@ -64,7 +66,7 @@ const LoginScreen = ({ navigation }) => {
         >Forgot your password?
         </Text>
       </View>
-      <View style={[ styles.spaceBetween, styles.marginTop ]}>
+      <View style={[styles.spaceBetween, styles.marginTop]}>
         <Pressable
           style={[styles.buttonBase, styles.buttonHalf]}
           onPress={
@@ -87,4 +89,4 @@ const LoginScreen = ({ navigation }) => {
   );
 }
 
-export default LoginScreen;
+export default Login;

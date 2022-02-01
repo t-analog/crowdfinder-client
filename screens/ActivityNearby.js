@@ -4,10 +4,8 @@ import React from 'react';
 import {
   Text,
   View,
-  Pressable,
   ScrollView,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native'
 import {
   QueryClient,
   QueryClientProvider,
@@ -15,15 +13,14 @@ import {
 } from "react-query";
 
 import BottomDrawer from '../components/BottomDrawer';
-import * as activityExample from '../examples/activityExample.json'
+// import * as activityExample from '../examples/activityExample.json'
 import styles from '../styles/stylesheet';
 import { MapContext } from '../utils/globalState'
 import {
   getActivities,
 } from '../utils/activity';
 
-const JoinScreen = () => {
-  const navigation = useNavigation();
+const ActivityNearby = () => {
   const [mapState, setMapState] = React.useContext(MapContext);
 
   return (
@@ -60,7 +57,7 @@ const ActivityList = () => {
       ) : (
         <View>
           {data.activities.map((element, index) => (
-            /* logic so that we only place marginTop except the first */
+            /* logic so that we put marginTop except the first */
             (index == 0)
               ?
               <View key={index}>
@@ -97,4 +94,4 @@ const ActivityList = () => {
   )
 }
 
-export default JoinScreen;
+export default ActivityNearby;

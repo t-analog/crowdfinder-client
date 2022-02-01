@@ -6,7 +6,7 @@ import {
 
 import styles from '../styles/stylesheet';
 
-const SupportUsScreen = () => {
+const SupportUs = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Support Us</Text>
@@ -14,4 +14,4 @@ const SupportUsScreen = () => {
   );
 };
 
-export default SupportUsScreen;
+export default SupportUs;

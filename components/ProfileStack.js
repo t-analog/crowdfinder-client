@@ -1,8 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
-import ProfileScreen from '../screens/ProfileScreen';
-import SupportUsScreen from '../screens/SupportUsScreen';
-import ActivitySettingsScreen from '../screens/ActivitySettingsScreen';
+import Profile from '../screens/Profile';
+import SupportUs from '../screens/SupportUs';
+import ActivitySettings from '../screens/ActivitySettings';
 
 const Stack = createStackNavigator();
 
@@ -11,21 +11,21 @@ const ProfileStack = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="Profile Screen"
-        component={ProfileScreen}
+        component={Profile}
         options={{
           header: () => null
         }}
       />
       <Stack.Screen
         name="Activity Settings"
-        component={ActivitySettingsScreen}
+        component={ActivitySettings}
         options={{
           header: () => null
         }}
       />
       <Stack.Screen
         name="Support Us"
-        component={SupportUsScreen}
+        component={SupportUs}
         options={{
           header: () => null
         }}

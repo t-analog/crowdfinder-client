@@ -8,7 +8,7 @@ import {
 
 import styles from '../styles/stylesheet';
 
-const ActivitySettingsScreen = ({ navigation }) => {
+const ActivitySettings = ({ navigation }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   return (
@@ -50,4 +50,4 @@ const ActivitySettingsScreen = ({ navigation }) => {
   );
 };
 
-export default ActivitySettingsScreen;
+export default ActivitySettings;

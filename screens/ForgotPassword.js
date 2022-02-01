@@ -1,8 +1,13 @@
 import React from 'react';
-import { Text, View, Pressable, TextInput, StyleSheet } from 'react-native'
+import {
+  Text,
+  View,
+  Pressable,
+  TextInput
+} from 'react-native'
 import styles from '../styles/stylesheet';
 
-const ForgotPasswordScreen = () => {
+const ForgotPassword = () => {
   return (
     <View style={styles.container}>
       <TextInput
@@ -27,4 +32,4 @@ const ForgotPasswordScreen = () => {
   );
 }
 
-export default ForgotPasswordScreen;
+export default ForgotPassword;

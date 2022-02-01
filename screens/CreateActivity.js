@@ -18,23 +18,22 @@ import styles from '../styles/stylesheet';
 import BottomDrawer from '../components/BottomDrawer';
 import { MapContext } from '../utils/globalState'
 
-const CreateActivityScreen = () => {
+const CreateActivity = () => {
   const [mapState, setMapState] = React.useContext(MapContext);
 
-  const [capacity, onChangeCapacity] = React.useState("");
-  const [categories, onChangeCategories] = React.useState("");
-  const [description, onChangeDescription] = React.useState("");
-  const [location, onChangeLocation] = React.useState("");
-  const [name, onChangeName] = React.useState("");
+  const [capacity, setCapacity] = React.useState("");
+  const [categories, setCategories] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [location, setLocation] = React.useState("");
+  const [name, setName] = React.useState("");
   const { mutate, error } = createActivity();
 
-
   const clearText = () => {
-    onChangeCapacity("");
-    onChangeCategories("");
-    onChangeDescription("");
-    onChangeLocation("");
-    onChangeName("");
+    setCapacity("");
+    setCategories("");
+    setDescription("");
+    setLocation("");
+    setName("");
   };
   const submitActivity = () => {
     if (name == "") {
@@ -49,6 +48,7 @@ const CreateActivityScreen = () => {
       location,
     });
     alert("Activity Created");
+    clearText();
     return true;
   };
   return (
@@ -67,7 +67,7 @@ const CreateActivityScreen = () => {
             placeholderTextColor
             style={[styles.textInputBase, styles.textInputSmall]}
             underlineColorAndroid="transparent"
-            onChangeText={onChangeName}
+            onChangeText={setName}
             value={name}
           />
           <TextInput
@@ -76,7 +76,7 @@ const CreateActivityScreen = () => {
             placeholderTextColor
             style={[styles.textInputBase, styles.textInputBig, styles.marginTop]}
             underlineColorAndroid="transparent"
-            onChangeText={onChangeDescription}
+            onChangeText={setDescription}
             value={description}
           />
           <TextInput
@@ -84,7 +84,7 @@ const CreateActivityScreen = () => {
             placeholder="Category"
             placeholderTextColor
             style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
-            onChangeText={onChangeCategories}
+            onChangeText={setCategories}
             underlineColorAndroid="transparent"
             value={categories}
           />
@@ -93,7 +93,7 @@ const CreateActivityScreen = () => {
             placeholder="Capacity"
             placeholderTextColor
             style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
-            onChangeText={onChangeCapacity}
+            onChangeText={setCapacity}
             underlineColorAndroid="transparent"
             value={capacity}
           />
@@ -102,7 +102,7 @@ const CreateActivityScreen = () => {
             placeholder="Location"
             placeholderTextColor
             style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
-            onChangeText={onChangeLocation}
+            onChangeText={setLocation}
             underlineColorAndroid="transparent"
             value={location}
           />
@@ -130,4 +130,4 @@ const CreateActivityScreen = () => {
   );
 };
 
-export default CreateActivityScreen;
+export default CreateActivity;
