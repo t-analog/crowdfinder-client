@@ -31,9 +31,6 @@ const Activity = (props) => {
         styles.emptyBoxBase,
         styles.emptyBoxSmall,
         styles.marginTop,
-        /* { */
-        /*   alignItems: 'center' */
-        /* } */
       ]}>
         {props.categories.map((element, index) => (
           (index == 0)
@@ -49,6 +46,9 @@ const Activity = (props) => {
               <Category text={element} />
             </View>
         ))}
+        {/* <Text> */}
+        {/*   {typeof (props.categories)} {props.categories.length} */}
+        {/* </Text> */}
       </View>
       <View style={[
         styles.flexStart,
@@ -63,14 +63,17 @@ const Activity = (props) => {
         styles.marginTop
       ]}>
         <View style={[
-          styles.flexStart,
+          styles.spaceBetween,
           styles.emptyBoxBase,
           styles.emptyBoxSmall
         ]}>
-          <Text> {props.capacity} </Text>
+          <Text>{typeof (props.participants) === "undefined" ? 0 : props.participants.length} of {props.capacity} joined</Text>
         </View>
         <Pressable
-          style={[styles.buttonBase, styles.buttonHalf]}
+          style={[
+            styles.buttonBase,
+            /* styles.buttonHalf, */
+          ]}
           onPress={
             () => alert('Joined!')
           }

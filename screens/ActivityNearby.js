@@ -66,6 +66,7 @@ const ActivityList = () => {
                   description={element.description}
                   capacity={element.capacity}
                   categories={element.categories}
+                  participants={element.participants}
                   location={element.location}
                 />
               </View>

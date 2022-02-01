@@ -153,6 +153,7 @@ const getActivities = () => {
   return useQuery("activites", async () => {
     try {
       const data = await client.request(getActivitiesQuery);
+      console.log(`${JSON.stringify(data)}`);
       return data;
     } catch (err) {
       console.error(err);
