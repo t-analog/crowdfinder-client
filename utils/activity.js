@@ -68,9 +68,11 @@ const createActivity = () => {
     description,
     capacity,
     categories,
-    location,
+    location: {
+      latitude,
+      longitude,
+    },
   }) => {
-    const locationSplit = location.split(' ');
     const vars = {
       "name": name,
       "partition": `activity=${app.currentUser.id}`,
@@ -80,8 +82,8 @@ const createActivity = () => {
       "categories": categories.split(' '),
       "participants": [],
       "location": {
-        "latitude": parseFloat(locationSplit[0]),
-        "longitude": parseFloat(locationSplit[1]),
+        "latitude": latitude,
+        "longitude": longitude,
       },
     };
     try {
@@ -153,7 +155,7 @@ const getActivities = () => {
   return useQuery("activites", async () => {
     try {
       const data = await client.request(getActivitiesQuery);
-      console.log(`${JSON.stringify(data)}`);
+      // console.log(`${JSON.stringify(data)}`);
       return data;
     } catch (err) {
       console.error(err);

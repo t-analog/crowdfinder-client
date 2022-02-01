@@ -4,9 +4,10 @@ import {
   Text,
   Pressable,
   TextInput,
-  StyleSheet,
 } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, {
+  Marker,
+} from 'react-native-maps';
 import {
   QueryClient,
   QueryClientProvider,
@@ -20,6 +21,10 @@ import { MapContext } from '../utils/globalState'
 
 const CreateActivity = () => {
   const [mapState, setMapState] = React.useContext(MapContext);
+  const [activityMarker, setActivityMarker] = React.useState({
+    latitude: 0,
+    longitude: 0,
+  });
 
   const [capacity, setCapacity] = React.useState("");
   const [categories, setCategories] = React.useState("");
@@ -45,7 +50,10 @@ const CreateActivity = () => {
       description,
       capacity,
       categories,
-      location,
+      location: {
+        latitude: activityMarker.latitude,
+        longitude: activityMarker.longitude
+      },
     });
     alert("Activity Created");
     clearText();
@@ -57,7 +65,17 @@ const CreateActivity = () => {
         style={styles.map}
         region={mapState}
         onRegionChangeComplete={setMapState}
-      />
+        onPress={(e) => {
+          /* console.log(`Map pressed! ${JSON.stringify(e.nativeEvent)}`); */
+          /* console.log(`Value of activityMarker: ${JSON.stringify(activityMarker)}`); */
+          /* console.log(`typeof activityMarker: ${typeof(activityMarker.latitude)}`); */
+          setActivityMarker(e.nativeEvent.coordinate);
+        }}
+      >
+        <Marker
+          coordinate={activityMarker}
+        />
+      </MapView>
       <BottomDrawer>
         <View style={styles.container}>
           <Text style={styles.header}>Create Activity</Text>
@@ -65,7 +83,10 @@ const CreateActivity = () => {
             autoCapitalize="none"
             placeholder="Name"
             placeholderTextColor
-            style={[styles.textInputBase, styles.textInputSmall]}
+            style={[
+              styles.textInputBase,
+              styles.textInputSmall
+            ]}
             underlineColorAndroid="transparent"
             onChangeText={setName}
             value={name}
@@ -74,7 +95,11 @@ const CreateActivity = () => {
             autoCapitalize="none"
             placeholder="Description"
             placeholderTextColor
-            style={[styles.textInputBase, styles.textInputBig, styles.marginTop]}
+            style={[
+              styles.textInputBase,
+              styles.textInputBig,
+              styles.marginTop
+            ]}
             underlineColorAndroid="transparent"
             onChangeText={setDescription}
             value={description}
@@ -83,7 +108,11 @@ const CreateActivity = () => {
             autoCapitalize="none"
             placeholder="Category"
             placeholderTextColor
-            style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
+            style={[
+              styles.textInputBase,
+              styles.textInputSmall,
+              styles.marginTop
+            ]}
             onChangeText={setCategories}
             underlineColorAndroid="transparent"
             value={categories}
@@ -92,23 +121,40 @@ const CreateActivity = () => {
             autoCapitalize="none"
             placeholder="Capacity"
             placeholderTextColor
-            style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
+            style={[
+              styles.textInputBase,
+              styles.textInputSmall,
+              styles.marginTop
+            ]}
             onChangeText={setCapacity}
             underlineColorAndroid="transparent"
             value={capacity}
           />
           <TextInput
             autoCapitalize="none"
+            editable={false}
             placeholder="Location"
             placeholderTextColor
-            style={[styles.textInputBase, styles.textInputSmall, styles.marginTop]}
+            style={[
+              styles.textInputBase,
+              styles.textInputSmall,
+              styles.marginTop,
+              {
+                color: 'black',
+              }]}
             onChangeText={setLocation}
             underlineColorAndroid="transparent"
-            value={location}
+            value={`Lat: ${JSON.stringify(activityMarker.latitude)}, Long: ${JSON.stringify(activityMarker.longitude)}`}
           />
-          <View style={[styles.spaceBetween, styles.marginTop]}>
+          <View style={[
+            styles.spaceBetween,
+            styles.marginTop
+          ]}>
             <Pressable
-              style={[styles.buttonBase, styles.buttonHalf]}
+              style={[
+                styles.buttonBase,
+                styles.buttonHalf
+              ]}
               onPress={() => {
                 clearText();
               }}
@@ -116,7 +162,10 @@ const CreateActivity = () => {
               <Text style={styles.text}>Cancel</Text>
             </Pressable>
             <Pressable
-              style={[styles.buttonBase, styles.buttonHalf]}
+              style={[
+                styles.buttonBase,
+                styles.buttonHalf
+              ]}
               onPress={() => {
                 submitActivity();
               }}
