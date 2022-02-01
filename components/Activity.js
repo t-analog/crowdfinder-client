@@ -3,11 +3,42 @@ import {
   View,
   Text,
   Pressable,
+  Alert,
 } from 'react-native';
 
 import styles from '../styles/stylesheet';
+import { JoinContext } from '../utils/globalState'
 
 const Activity = (props) => {
+  const [joined, setJoined] = React.useContext(JoinContext);
+  // const submitActivity = () => {
+  //   updateActivity(
+  //     participants[{}]
+  //   );
+  //   return true;
+  // };
+  const JoinAlert = (props) => {
+    Alert.alert(
+      "Successfully Joined",
+      "You have successfully participated.",
+      [
+        /* if comparing username, mutation paticipants
+        { text: "OK", onPress: () => submitActivity() }
+        */
+        { text: "OK", onPress: () => setJoined(props) }
+      ]
+    );
+  }
+  const CancelAlert = () => {
+    Alert.alert(
+      "Confirmation",
+      "Are You Sure?",
+      [
+        { text: "YES", onPress: () => setJoined("") },
+        { text: "NO", onPress: () => {} }
+      ]
+    );
+  }
   return (
     <View style={{
 
@@ -69,17 +100,27 @@ const Activity = (props) => {
         ]}>
           <Text>{typeof (props.participants) === "undefined" ? 0 : props.participants.length} of {props.capacity} joined</Text>
         </View>
-        <Pressable
-          style={[
-            styles.buttonBase,
-            /* styles.buttonHalf, */
-          ]}
-          onPress={
-            () => alert('Joined!')
-          }
-        >
-          <Text style={styles.text}>Join</Text>
-        </Pressable>
+        {
+          joined == ""
+            ?
+          <Pressable
+            style={[styles.buttonBase, styles.buttonHalf]}
+            onPress={
+              () => CancelAlert()
+            }
+          >
+            <Text style={styles.text}>Cancel</Text>
+          </Pressable>
+          :
+          <Pressable
+            style={[styles.buttonBase, styles.buttonHalf]}
+            onPress={
+              () => JoinAlert(props.id)
+            }
+          >
+            <Text style={styles.text}>Join</Text>
+          </Pressable>
+        }
       </View>
     </View>
   )
