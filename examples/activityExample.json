@@ -1,33 +1,63 @@
 {
   "activities": [
     {
-      "title": "House Moving",
+      "id": "A001",
+      "name": "Virtual Run",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat ultrices blandit.",
-      "location": "Jalan Resak, Skudai",
       "categories": [
         "foo",
         "bar",
         "baz"
+      ],
+      "participants": [],
+      "capacity": 3,
+      "location": {
+        "latitude": 1.5578269758825156,
+        "longitude": 103.65635653742419
+      },
+      "category": [
+        "sport",
+        "social"
       ]
     },
     {
-      "title": "House Moving",
+      "id": "A002",
+      "name": "Election",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat ultrices blandit.",
-      "location": "Jalan Resak, Skudai",
       "categories": [
         "foo",
         "bar",
         "baz"
+      ],
+    "participants": [],
+    "capacity": 2,
+      "location": {
+        "latitude": 1.56139,
+        "longitude": 103.62909331123109
+      },
+      "category": [
+        "sport",
+        "social"
       ]
     },
     {
-      "title": "House Moving",
+      "id": "A003",
+      "name": "Swab Test",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat ultrices blandit.",
-      "location": "Jalan Resak, Skudai",
       "categories": [
         "foo",
         "bar",
         "baz"
+      ],
+      "participants": [],
+      "capacity": 2,
+      "location": {
+        "latitude": 1.5133652971242817, 
+        "longitude": 103.49316486187372
+      },
+      "category": [
+        "sport",
+        "social"
       ]
     }
   ]
