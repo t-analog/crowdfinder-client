@@ -4,6 +4,7 @@ import {
   Text,
   Pressable,
   TextInput,
+  ScrollView
 } from 'react-native';
 import MapView, {
   Marker,
@@ -35,7 +36,23 @@ const CreateActivity = () => {
   };
   const createActivityTrigger = () => {
     if (name == "") {
-      console.error("Name cannot be empty!");
+      alert("Name cannot be empty!");
+      return false;
+    }
+    else if (description == "") {
+      alert("Description cannot be empty!");
+      return false;
+    }
+    else if (categories == "") {
+      alert("Please enter the category for this activity!");
+      return false;
+    }
+    else if (capacity == "") {
+      alert("Please justify the capacity for this activity!");
+      return false;
+    }
+    else if (activityMarker.latitude == "" && activityMarker.longitude == "") {
+      alert("Invalid Location!");
       return false;
     }
     mutate({
