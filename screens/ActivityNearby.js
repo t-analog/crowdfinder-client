@@ -35,6 +35,7 @@ const ActivityNearby = () => {
         style={styles.map}
         region={mapState}
         onRegionChangeComplete={setMapState}
+        showsUserLocation
       >
         {status === "success"
           ?

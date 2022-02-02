@@ -73,6 +73,7 @@ const CreateActivity = () => {
         style={styles.map}
         region={mapState}
         onRegionChangeComplete={setMapState}
+        showsUserLocation
         onPress={(e) => {
           /* console.log(`Map pressed! ${JSON.stringify(e.nativeEvent)}`); */
           /* console.log(`Value of activityMarker: ${JSON.stringify(activityMarker)}`); */

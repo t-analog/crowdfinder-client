@@ -1,6 +1,7 @@
 import React from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Geolocation from 'react-native-geolocation-service';
 
 import ActivityNearby from '../screens/ActivityNearby';
 import ProfileStack from '../components/ProfileStack';
@@ -11,6 +12,22 @@ import { MapContext } from '../utils/globalState'
 const Tab = createBottomTabNavigator();
 
 const HomeTab = () => {
+  React.useEffect(() => {
+    Geolocation.getCurrentPosition(
+      (position) => {
+        // console.log(position);
+      },
+      (error) => {
+        // console.error(error);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 300000,
+        maximumAge: 300000,
+      }
+    );
+  });
+
   return (
     <Tab.Navigator
       screenOptions={{
