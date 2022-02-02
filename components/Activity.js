@@ -8,9 +8,11 @@ import {
 import styles from '../styles/stylesheet';
 import { app } from '../utils/realm';
 import { MapContext } from '../utils/globalState'
+import { deleteActivity } from '../utils/activity';
 
 const Activity = (props) => {
   const [mapState, setMapState] = React.useContext(MapContext);
+  const { mutate, error } = deleteActivity();
   const creatorOrJoinedCheck = () => (
     props.creator === app.currentUser.id || props.participants.includes(app.currentUser.id)
       ? true
@@ -103,36 +105,63 @@ const Activity = (props) => {
         ]}>
           <Text>{props.participants.length} of {props.capacity} joined</Text>
         </View>
-        <Pressable
-          style={[
-            styles.buttonBase,
-            /* styles.buttonHalf, */
-            creatorOrJoinedCheck()
-              ? { backgroundColor: 'lightgray' }
+        <View
+          style={{
+            flexDirection: 'row',
+          }}
+        >
+          {
+            props.creator === app.currentUser.id ?
+              <Pressable
+                style={[
+                  styles.buttonBase,
+                  /* styles.buttonHalf, */
+                ]}
+                onPress={
+                  () => {
+                    /* console.log(`${props._id}`); */
+                    mutate({ id: props._id });
+                  }
+                }
+              >
+                <Text style={styles.text}>Delete</Text>
+              </Pressable>
               : null
-          ]}
-          onPress={
-            () => {
+          }
+          <Pressable
+            style={[
+              styles.buttonBase,
+              /* styles.buttonHalf, */
+              creatorOrJoinedCheck()
+                ? { backgroundColor: 'lightgray' }
+                : null,
+              {
+                marginLeft: 20,
+              },
+            ]}
+            onPress={
+              () => {
+                {
+                  creatorOrJoinedCheck()
+                    ?
+                    alert("You already joined this activity!")
+                    :
+                    alert("Activity joined!")
+                }
+              }
+            }
+          >
+            <Text style={styles.text}>
               {
                 creatorOrJoinedCheck()
                   ?
-                  alert("You already joined this activity!")
+                  "Already Joined"
                   :
-                  alert("Activity joined!")
+                  "Join"
               }
-            }
-          }
-        >
-          <Text style={styles.text}>
-            {
-              creatorOrJoinedCheck()
-                ?
-                "Already Joined"
-                :
-                "Join"
-            }
-          </Text>
-        </Pressable>
+            </Text>
+          </Pressable>
+        </View>
       </View>
     </View >
   )

@@ -4,6 +4,7 @@ import {
 import {
   useQuery,
   useMutation,
+  useQueryClient,
 } from "react-query";
 
 import {
@@ -25,6 +26,7 @@ import { app } from '../utils/realm';
  * */
 
 const createActivity = () => {
+  const queryClient = useQueryClient();
   const createActivityQuery = gql`
     mutation InsertOneActivity(
       $name: String,
@@ -92,6 +94,10 @@ const createActivity = () => {
     } catch (err) {
       console.log(err);
     }
+  }, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("activities");
+    },
   });
 };
 
@@ -150,7 +156,7 @@ const getActivities = () => {
       }
     }
   `;
-  return useQuery("activites", async () => {
+  return useQuery("activities", async () => {
     try {
       const data = await client.request(getActivitiesQuery);
       // console.log(`${JSON.stringify(data)}`);
@@ -158,6 +164,8 @@ const getActivities = () => {
     } catch (err) {
       console.error(err);
     }
+  }, {
+    cacheTime: 10 * 1000,
   });
 };
 
@@ -228,6 +236,7 @@ const updateActivity = () => {
 };
 
 const deleteActivity = () => {
+  const queryClient = useQueryClient();
   const deleteActivityQuery = gql`
     mutation DeleteActivity($id: ObjectId) {
       deleteOneActivity(
@@ -260,6 +269,10 @@ const deleteActivity = () => {
     } catch (err) {
       console.log(err);
     }
+  }, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("activities");
+    },
   });
 };
 
