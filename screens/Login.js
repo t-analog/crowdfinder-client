@@ -19,10 +19,10 @@ const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* show variable only for debugging */}
-      <Text>
-        Value of email: {username}{"\n"}
-        Value of password: {password}
-      </Text>
+      {/* <Text> */}
+      {/*   Value of email: {username}{"\n"} */}
+      {/*   Value of password: {password} */}
+      {/* </Text> */}
       <Image
         style={styles.logo}
         source={require('../assets/cflogo.png')}
