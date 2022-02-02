@@ -179,12 +179,6 @@ const CreateActivity = () => {
             </Pressable>
           </View>
         </View>
-        
-        <View
-              style={{
-                height: 150,
-              }}
-            />
       </BottomDrawer>
     </View>
   );
