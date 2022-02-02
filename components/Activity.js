@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
+  Alert,
   Pressable,
 } from 'react-native';
 
@@ -10,18 +11,23 @@ import { app } from '../utils/realm';
 import { MapContext } from '../utils/globalState'
 import {
   deleteActivity,
-  joinActivity,
+  updateActivityParticipant,
 } from '../utils/activity';
 
 const Activity = (props) => {
   const [mapState, setMapState] = React.useContext(MapContext);
   const { mutate: deleteActivityMutate, error: deleteActivityError } = deleteActivity();
-  const { mutate: joinActivityMutate, error: joinActivityError } = joinActivity();
-  const creatorOrJoinedCheck = () => (
-    props.creator === app.currentUser.id || props.participants.includes(app.currentUser.id)
+  const { mutate: updateActivityParticipantMutate, error: updateActivityParticipantError } = updateActivityParticipant();
+  const creatorCheck = () => (
+    props.creator === app.currentUser.id
       ? true
       : false
-  )
+  );
+  const joinedCheck = () => (
+    props.participants.includes(app.currentUser.id)
+      ? true
+      : false
+  );
 
   return (
     <View style={{
@@ -124,7 +130,22 @@ const Activity = (props) => {
                 onPress={
                   () => {
                     /* console.log(`${props._id}`); */
-                    deleteActivityMutate({ id: props._id });
+                    /* deleteActivityMutate({ id: props._id }); */
+                    Alert.alert(
+                      "Deleting Activity..",
+                      "Do you want to delete this activity?",
+                      [
+                        {
+                          text: "Yes",
+                          onPress: () => {
+                            deleteActivityMutate({ id: props._id });
+                          }
+                        },
+                        {
+                          text: "No",
+                        },
+                      ]
+                    );
                   }
                 }
               >
@@ -136,7 +157,7 @@ const Activity = (props) => {
             style={[
               styles.buttonBase,
               /* styles.buttonHalf, */
-              creatorOrJoinedCheck()
+              creatorCheck() || joinedCheck()
                 ? { backgroundColor: 'lightgray' }
                 : null,
               {
@@ -146,28 +167,61 @@ const Activity = (props) => {
             onPress={
               () => {
                 /* { */
-                /*   creatorOrJoinedCheck() */
+                /*   creatorCheck() || joinedCheck() */
                 /*     ? */
                 /*     alert("You already joined this activity!") */
                 /*     : */
                 /*     alert("Activity joined!") */
                 /* } */
-                if (creatorOrJoinedCheck()) {
-                  alert("You already joined this activity!");
+                if (creatorCheck()) {
+                  alert("You already joined your own activity!");
+                } else if (joinedCheck()) {
+                  Alert.alert(
+                    "Leaving Activity..",
+                    "Do you want to leave this activity?",
+                    [
+                      {
+                        text: "Yes",
+                        onPress: () => {
+                          updateActivityParticipantMutate({
+                            action: "leave",
+                            id: props._id,
+                            participants: props.participants,
+                          });
+                        }
+                      },
+                      {
+                        text: "No",
+                      },
+                    ]
+                  );
                 } else {
-                  joinActivityMutate({
-                    id: props._id,
-                    participants: props.participants,
-                  });
-                  /* console.log(`${JSON.stringify(props.participants)}`); */
-                  /* alert("Activity joined!"); */
+                  Alert.alert(
+                    "Joining Activity..",
+                    "Do you want to join this activity?",
+                    [
+                      {
+                        text: "Yes",
+                        onPress: () => {
+                          updateActivityParticipantMutate({
+                            action: "join",
+                            id: props._id,
+                            participants: props.participants,
+                          });
+                        }
+                      },
+                      {
+                        text: "No",
+                      },
+                    ]
+                  );
                 }
               }
             }
           >
             <Text style={styles.text}>
               {
-                creatorOrJoinedCheck()
+                creatorCheck() || joinedCheck()
                   ?
                   "Already Joined"
                   :

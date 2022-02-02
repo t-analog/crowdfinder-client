@@ -276,10 +276,10 @@ const deleteActivity = () => {
   });
 };
 
-const joinActivity = () => {
+const updateActivityParticipant = () => {
   const queryClient = useQueryClient();
-  const joinActivityQuery = gql`
-    mutation JoinActivity(
+  const updateActivityParticipantQuery = gql`
+    mutation UpdateActivityParticipant(
       $id: ObjectId
       $participants: [String],
     ) {
@@ -307,15 +307,20 @@ const joinActivity = () => {
     }
   `;
   return useMutation(async ({
+    action,
     id,
     participants,
   }) => {
     const vars = {
       "id": id,
-      "participants": participants.concat(app.currentUser.id),
+      "participants": action === "join"
+        ?
+        participants.concat(app.currentUser.id)
+        :
+        participants.filter(participant => participant !== app.currentUser.id),
     };
     try {
-      const data = await client.request(joinActivityQuery, vars);
+      const data = await client.request(updateActivityParticipantQuery, vars);
       return data;
     } catch (err) {
       console.log(err);
@@ -333,5 +338,5 @@ export {
   getActivities,
   updateActivity,
   deleteActivity,
-  joinActivity
+  updateActivityParticipant,
 };
