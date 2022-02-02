@@ -48,7 +48,7 @@ const CreateActivity = () => {
       alert("Please enter the category for this activity!");
       return false;
     }
-    else if (typeof(capacity) !== Number || capacity <= 0) {
+    else if (Number(capacity) <= 0) {
       alert("Please justify the valid capacity for this activity!");
       return false;
     }
@@ -129,6 +129,7 @@ const CreateActivity = () => {
           />
           <TextInput
             autoCapitalize="none"
+            keyboardType="numeric"
             placeholder="Capacity"
             placeholderTextColor
             style={[
