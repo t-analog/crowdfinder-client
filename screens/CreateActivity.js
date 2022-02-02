@@ -48,7 +48,7 @@ const CreateActivity = () => {
       alert("Please enter the category for this activity!");
       return false;
     }
-    else if (capacity == "" || capacity <= 0) {
+    else if (typeof(capacity) !== Number || capacity <= 0) {
       alert("Please justify the valid capacity for this activity!");
       return false;
     }
