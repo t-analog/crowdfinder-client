@@ -15,7 +15,6 @@ import {
 } from '../utils/activity';
 
 const Activity = (props) => {
-  const [mapState, setMapState] = React.useContext(MapContext);
   const { mutate: deleteActivityMutate, error: deleteActivityError } = deleteActivity();
   const { mutate: updateActivityParticipantMutate, error: updateActivityParticipantError } = updateActivityParticipant();
   const creatorCheck = () => (
@@ -129,8 +128,6 @@ const Activity = (props) => {
                 ]}
                 onPress={
                   () => {
-                    /* console.log(`${props._id}`); */
-                    /* deleteActivityMutate({ id: props._id }); */
                     Alert.alert(
                       "Deleting Activity..",
                       "Do you want to delete this activity?",
@@ -166,13 +163,6 @@ const Activity = (props) => {
             ]}
             onPress={
               () => {
-                /* { */
-                /*   creatorCheck() || joinedCheck() */
-                /*     ? */
-                /*     alert("You already joined this activity!") */
-                /*     : */
-                /*     alert("Activity joined!") */
-                /* } */
                 if (creatorCheck()) {
                   alert("You already joined your own activity!");
                 } else if (joinedCheck()) {
