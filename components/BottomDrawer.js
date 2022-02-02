@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useNavigation, useFocusEffect } from '@react-navigation/native'
+import { useFocusEffect } from '@react-navigation/native'
 
 import styles from '../styles/stylesheet';
 import { MapContext } from '../utils/globalState'
@@ -65,7 +65,11 @@ const BottomDrawer = (props) => {
   const animateMapWithDrawer = (state) => {
     props.mapRef.current.animateCamera({
       center: {
-        latitude: state === "open" ? mapState.latitude - 0.008 : mapState.latitude + 0.008,
+        latitude: state === "open"
+          ?
+          mapState.latitude - (mapState.latitudeDelta * 1 / 3)
+          :
+          mapState.latitude + (mapState.latitudeDelta * 1 / 3),
         longitude: mapState.longitude,
       }
     }, { duration: 1000 })
