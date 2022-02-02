@@ -4,10 +4,20 @@ import {
   Text,
   Pressable,
 } from 'react-native';
+import MapView from 'react-native-maps';
 
 import styles from '../styles/stylesheet';
+import { app } from '../utils/realm';
+import { MapContext } from '../utils/globalState'
 
 const Activity = (props) => {
+  const [mapState, setMapState] = React.useContext(MapContext);
+  const creatorOrJoinedCheck = () => (
+    props.creator === app.currentUser.id || props.participants.includes(app.currentUser.id)
+      ? true
+      : false
+  )
+
   return (
     <View style={{
 
@@ -46,9 +56,6 @@ const Activity = (props) => {
               <Category text={element} />
             </View>
         ))}
-        {/* <Text> */}
-        {/*   {typeof (props.categories)} {props.categories.length} */}
-        {/* </Text> */}
       </View>
       <View style={[
         styles.flexStart,
@@ -56,7 +63,35 @@ const Activity = (props) => {
         styles.emptyBoxSmall,
         styles.marginTop
       ]}>
-        <Text>Lat: {props.location.latitude}, Long: {props.location.longitude}</Text>
+        <Pressable
+          onPress={() => {
+            /* console.log(`${JSON.stringify(mapState)}`); */
+            props.mapRef.current.animateCamera({
+              center: {
+                latitude: props.location.latitude - 0.007,
+                longitude: props.location.longitude,
+              }
+            }, { duration: 1000 })
+          }}
+        >
+          <Text>Lat: {props.location.latitude}, Long: {props.location.longitude}</Text>
+        </Pressable>
+      </View>
+      <View style={[
+        styles.flexStart,
+        styles.emptyBoxBase,
+        styles.emptyBoxSmall,
+        styles.marginTop
+      ]}>
+        <Text>
+          {
+            props.creator === app.currentUser.id
+              ?
+              "You are the creator of this activity!"
+              :
+              props.creator
+          }
+        </Text>
       </View>
       <View style={[
         styles.spaceBetween,
@@ -67,21 +102,40 @@ const Activity = (props) => {
           styles.emptyBoxBase,
           styles.emptyBoxSmall
         ]}>
-          <Text>{typeof (props.participants) === "undefined" ? 0 : props.participants.length} of {props.capacity} joined</Text>
+          <Text>{props.participants.length} of {props.capacity} joined</Text>
         </View>
         <Pressable
           style={[
             styles.buttonBase,
             /* styles.buttonHalf, */
+            creatorOrJoinedCheck()
+              ? { backgroundColor: 'lightgray' }
+              : null
           ]}
           onPress={
-            () => alert('Joined!')
+            () => {
+              {
+                creatorOrJoinedCheck()
+                  ?
+                  alert("You already joined this activity!")
+                  :
+                  alert("Activity joined!")
+              }
+            }
           }
         >
-          <Text style={styles.text}>Join</Text>
+          <Text style={styles.text}>
+            {
+              creatorOrJoinedCheck()
+                ?
+                "Already Joined"
+                :
+                "Join"
+            }
+          </Text>
         </Pressable>
       </View>
-    </View>
+    </View >
   )
 };
 
@@ -92,5 +146,6 @@ const Category = (props) => {
     </View>
   )
 };
+
 
 export default Activity;

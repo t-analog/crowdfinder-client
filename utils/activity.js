@@ -77,7 +77,7 @@ const createActivity = () => {
       "name": name,
       "partition": `activity=${app.currentUser.id}`,
       "description": description,
-      "creator": app.currentUser.customData.name,
+      "creator": app.currentUser.id,
       "capacity": parseInt(capacity),
       "categories": categories.split(' '),
       "participants": [],

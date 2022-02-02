@@ -24,6 +24,7 @@ import {
 } from '../utils/activity';
 
 const ActivityNearby = () => {
+  const mapRef = React.useRef(null);
   const [mapState, setMapState] = React.useContext(MapContext);
 
   const { status, data, error, isFetching } = getActivities();
@@ -31,6 +32,7 @@ const ActivityNearby = () => {
   return (
     <View style={styles.mapContainer}>
       <MapView
+        ref={mapRef}
         style={styles.map}
         region={mapState}
         onRegionChangeComplete={setMapState}
@@ -41,6 +43,8 @@ const ActivityNearby = () => {
             data.activities.map((element, index) => (
               <Marker
                 key={index}
+                title={element.name}
+                description={element.description}
                 coordinate={{
                   latitude: element.location.latitude,
                   longitude: element.location.longitude,
@@ -71,12 +75,8 @@ const ActivityNearby = () => {
                       ?
                       <View key={index}>
                         <Activity
-                          name={element.name}
-                          description={element.description}
-                          capacity={element.capacity}
-                          categories={element.categories}
-                          participants={element.participants}
-                          location={element.location}
+                          mapRef={mapRef}
+                          {...element}
                         />
                       </View>
                       :
@@ -90,12 +90,8 @@ const ActivityNearby = () => {
                         ]}
                       >
                         <Activity
-                          name={element.name}
-                          description={element.description}
-                          capacity={element.capacity}
-                          categories={element.categories}
-                          participants={element.participants}
-                          location={element.location}
+                          mapRef={mapRef}
+                          {...element}
                         />
                       </View>
                   ))}
