@@ -15,6 +15,7 @@ import {
 } from '../utils/activity';
 
 const Activity = (props) => {
+  const [mapState, setMapState] = React.useContext(MapContext);
   const { mutate: deleteActivityMutate, error: deleteActivityError } = deleteActivity();
   const { mutate: updateActivityParticipantMutate, error: updateActivityParticipantError } = updateActivityParticipant();
   const creatorCheck = () => (
@@ -75,10 +76,9 @@ const Activity = (props) => {
       ]}>
         <Pressable
           onPress={() => {
-            /* console.log(`${JSON.stringify(mapState)}`); */
             props.mapRef.current.animateCamera({
               center: {
-                latitude: props.location.latitude - 0.008,
+                latitude: props.location.latitude - (mapState.latitudeDelta * 1 / 3),
                 longitude: props.location.longitude,
               }
             }, { duration: 1000 })

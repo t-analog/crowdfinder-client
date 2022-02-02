@@ -91,7 +91,7 @@ const Profile = ({ navigation }) => {
           <Text style={styles.header}>Your Profile</Text>
           <Image
             style={styles.profileImage}
-            source={require('../assets/profile.jpeg')} />
+            source={require('../assets/doodle54.png')} />
         </View>
         <View style={styles.contentCenter}>
           <Text style={{

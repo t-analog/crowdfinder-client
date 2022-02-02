@@ -1,19 +1,24 @@
 import React from 'react';
 import { register } from '../utils/user';
-import { View, Text, Pressable, TextInput, StyleSheet } from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  TextInput,
+} from 'react-native';
 import styles from '../styles/stylesheet';
 
-const RegisterAccount= ({ navigation }) => {
+const RegisterAccount = ({ navigation }) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   return (
     <View style={styles.container}>
-      <Text>
-        Value of username: {username}{"\n"}
-        Value of password: {password}{"\n"}
-        Value of confirmPassword: {confirmPassword}
-      </Text>
+      {/* <Text> */}
+      {/*   Value of username: {username}{"\n"} */}
+      {/*   Value of password: {password}{"\n"} */}
+      {/*   Value of confirmPassword: {confirmPassword} */}
+      {/* </Text> */}
       <TextInput
         style={[styles.textInputBase, styles.textInputSmall]}
         autoCapitalize="none"

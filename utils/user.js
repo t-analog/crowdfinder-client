@@ -5,6 +5,7 @@ import {
 import {
   useQuery,
   useMutation,
+  useQueryClient,
 } from "react-query";
 
 import {
@@ -115,6 +116,7 @@ const getCustomUserData = () => {
 };
 
 const updateCustomUserData = () => {
+  const queryClient = useQueryClient();
   const updateCustomUserDataQuery = gql`
     mutation UpdateCustomUserData(
       $id: String,
@@ -159,6 +161,10 @@ const updateCustomUserData = () => {
     } catch (err) {
       console.log(err);
     }
+  }, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("user");
+    },
   });
 }
 

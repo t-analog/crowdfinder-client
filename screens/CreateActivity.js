@@ -48,7 +48,7 @@ const CreateActivity = () => {
       alert("Please enter the category for this activity!");
       return false;
     }
-    else if (typeof(capacity) !== Number || capacity <= 0) {
+    else if (Number(capacity) <= 0) {
       alert("Please justify the valid capacity for this activity!");
       return false;
     }
@@ -73,6 +73,7 @@ const CreateActivity = () => {
         style={styles.map}
         region={mapState}
         onRegionChangeComplete={setMapState}
+        showsUserLocation
         onPress={(e) => {
           /* console.log(`Map pressed! ${JSON.stringify(e.nativeEvent)}`); */
           /* console.log(`Value of activityMarker: ${JSON.stringify(activityMarker)}`); */
@@ -129,6 +130,7 @@ const CreateActivity = () => {
           />
           <TextInput
             autoCapitalize="none"
+            keyboardType="numeric"
             placeholder="Capacity"
             placeholderTextColor
             style={[
