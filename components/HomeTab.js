@@ -7,8 +7,6 @@ import ActivityNearby from '../screens/ActivityNearby';
 import ProfileStack from '../components/ProfileStack';
 import CreateActivity from '../screens/CreateActivity';
 
-import { MapContext } from '../utils/globalState'
-
 const Tab = createBottomTabNavigator();
 
 const HomeTab = () => {
@@ -24,6 +22,8 @@ const HomeTab = () => {
         enableHighAccuracy: true,
         timeout: 300000,
         maximumAge: 300000,
+        forceRequestLocation: true,
+        showLocationDialog: true,
       }
     );
   });
