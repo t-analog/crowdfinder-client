@@ -2,12 +2,32 @@ import React from 'react';
 import {
   View,
   Text,
+  Alert,
   Pressable,
 } from 'react-native';
 
 import styles from '../styles/stylesheet';
+import { app } from '../utils/realm';
+import { MapContext } from '../utils/globalState'
+import {
+  deleteActivity,
+  updateActivityParticipant,
+} from '../utils/activity';
 
 const Activity = (props) => {
+  const { mutate: deleteActivityMutate, error: deleteActivityError } = deleteActivity();
+  const { mutate: updateActivityParticipantMutate, error: updateActivityParticipantError } = updateActivityParticipant();
+  const creatorCheck = () => (
+    props.creator === app.currentUser.id
+      ? true
+      : false
+  );
+  const joinedCheck = () => (
+    props.participants.includes(app.currentUser.id)
+      ? true
+      : false
+  );
+
   return (
     <View style={{
 
@@ -46,9 +66,6 @@ const Activity = (props) => {
               <Category text={element} />
             </View>
         ))}
-        {/* <Text> */}
-        {/*   {typeof (props.categories)} {props.categories.length} */}
-        {/* </Text> */}
       </View>
       <View style={[
         styles.flexStart,
@@ -56,7 +73,35 @@ const Activity = (props) => {
         styles.emptyBoxSmall,
         styles.marginTop
       ]}>
-        <Text>Lat: {props.location.latitude}, Long: {props.location.longitude}</Text>
+        <Pressable
+          onPress={() => {
+            /* console.log(`${JSON.stringify(mapState)}`); */
+            props.mapRef.current.animateCamera({
+              center: {
+                latitude: props.location.latitude - 0.008,
+                longitude: props.location.longitude,
+              }
+            }, { duration: 1000 })
+          }}
+        >
+          <Text>Lat: {props.location.latitude}, Long: {props.location.longitude}</Text>
+        </Pressable>
+      </View>
+      <View style={[
+        styles.flexStart,
+        styles.emptyBoxBase,
+        styles.emptyBoxSmall,
+        styles.marginTop
+      ]}>
+        <Text>
+          {
+            props.creator === app.currentUser.id
+              ?
+              "You are the creator of this activity!"
+              :
+              props.creator
+          }
+        </Text>
       </View>
       <View style={[
         styles.spaceBetween,
@@ -67,21 +112,116 @@ const Activity = (props) => {
           styles.emptyBoxBase,
           styles.emptyBoxSmall
         ]}>
-          <Text>{typeof (props.participants) === "undefined" ? 0 : props.participants.length} of {props.capacity} joined</Text>
+          <Text>{props.participants.length} of {props.capacity} joined</Text>
         </View>
-        <Pressable
-          style={[
-            styles.buttonBase,
-            /* styles.buttonHalf, */
-          ]}
-          onPress={
-            () => alert('Joined!')
-          }
+        <View
+          style={{
+            flexDirection: 'row',
+          }}
         >
-          <Text style={styles.text}>Join</Text>
-        </Pressable>
+          {
+            props.creator === app.currentUser.id ?
+              <Pressable
+                style={[
+                  styles.buttonBase,
+                  /* styles.buttonHalf, */
+                ]}
+                onPress={
+                  () => {
+                    Alert.alert(
+                      "Deleting Activity..",
+                      "Do you want to delete this activity?",
+                      [
+                        {
+                          text: "Yes",
+                          onPress: () => {
+                            deleteActivityMutate({ id: props._id });
+                          }
+                        },
+                        {
+                          text: "No",
+                        },
+                      ]
+                    );
+                  }
+                }
+              >
+                <Text style={styles.text}>Delete</Text>
+              </Pressable>
+              : null
+          }
+          <Pressable
+            style={[
+              styles.buttonBase,
+              /* styles.buttonHalf, */
+              creatorCheck() || joinedCheck()
+                ? { backgroundColor: 'lightgray' }
+                : null,
+              {
+                marginLeft: 20,
+              },
+            ]}
+            onPress={
+              () => {
+                if (creatorCheck()) {
+                  alert("You already joined your own activity!");
+                } else if (joinedCheck()) {
+                  Alert.alert(
+                    "Leaving Activity..",
+                    "Do you want to leave this activity?",
+                    [
+                      {
+                        text: "Yes",
+                        onPress: () => {
+                          updateActivityParticipantMutate({
+                            action: "leave",
+                            id: props._id,
+                            participants: props.participants,
+                          });
+                        }
+                      },
+                      {
+                        text: "No",
+                      },
+                    ]
+                  );
+                } else {
+                  Alert.alert(
+                    "Joining Activity..",
+                    "Do you want to join this activity?",
+                    [
+                      {
+                        text: "Yes",
+                        onPress: () => {
+                          updateActivityParticipantMutate({
+                            action: "join",
+                            id: props._id,
+                            participants: props.participants,
+                          });
+                        }
+                      },
+                      {
+                        text: "No",
+                      },
+                    ]
+                  );
+                }
+              }
+            }
+          >
+            <Text style={styles.text}>
+              {
+                creatorCheck() || joinedCheck()
+                  ?
+                  "Already Joined"
+                  :
+                  "Join"
+              }
+            </Text>
+          </Pressable>
+        </View>
       </View>
-    </View>
+    </View >
   )
 };
 
@@ -92,5 +232,6 @@ const Category = (props) => {
     </View>
   )
 };
+
 
 export default Activity;
