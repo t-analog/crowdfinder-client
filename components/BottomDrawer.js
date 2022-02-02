@@ -11,6 +11,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 
 import styles from '../styles/stylesheet';
+import { MapContext } from '../utils/globalState'
 
 const { width, height } = Dimensions.get('window');
 
@@ -22,14 +23,11 @@ const drawer = {
   },
 }
 
-const BottomDrawer = ({ children }) => {
+const BottomDrawer = (props) => {
   const pan = useRef(new Animated.Value(drawer.state.closed)).current;
   const [drawerState, setDrawerState] = useState(drawer.state.closed);
-  // const navigation = useNavigation();
-  // React.useEffect(() => {
-  //   const unsubscribe = navigation.addListener('blur', () => console.log(`BottomDrawer unfocused`));
-  //   return unsubscribe;
-  // }, [navigation]);
+  const [mapState, setMapState] = React.useContext(MapContext);
+
   useFocusEffect(
     React.useCallback(() => {
       const unsubscribe = () => {
@@ -54,13 +52,24 @@ const BottomDrawer = ({ children }) => {
   const drawerNextState = () => {
     if (drawerState == drawer.state.closed) {
       drawerAnimateMove(pan, drawer.state.open);
+      animateMapWithDrawer("open");
       setDrawerState(drawer.state.open);
     }
     else if (drawerState == drawer.state.open) {
       drawerAnimateMove(pan, drawer.state.closed);
+      animateMapWithDrawer("closed");
       setDrawerState(drawer.state.closed);
     }
   };
+
+  const animateMapWithDrawer = (state) => {
+    props.mapRef.current.animateCamera({
+      center: {
+        latitude: state === "open" ? mapState.latitude - 0.008 : mapState.latitude + 0.008,
+        longitude: mapState.longitude,
+      }
+    }, { duration: 1000 })
+  }
 
   return (
     <View style={styles.drawerContainer}>
@@ -74,7 +83,6 @@ const BottomDrawer = ({ children }) => {
         <Pressable
           style={styles.drawerPressable}
           onPress={() => {
-            /* console.log(`${drawerState}`); */
             drawerNextState();
           }}
         >
@@ -92,7 +100,7 @@ const BottomDrawer = ({ children }) => {
           }
         </Pressable>
         <View style={styles.drawer}>
-          {children}
+          {props.children}
         </View>
       </Animated.View>
     </View>

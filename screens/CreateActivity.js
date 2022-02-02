@@ -15,6 +15,7 @@ import BottomDrawer from '../components/BottomDrawer';
 import { MapContext } from '../utils/globalState'
 
 const CreateActivity = () => {
+  const mapRef = React.useRef(null);
   const [mapState, setMapState] = React.useContext(MapContext);
   const [activityMarker, setActivityMarker] = React.useState({
     latitude: 0,
@@ -55,6 +56,7 @@ const CreateActivity = () => {
   return (
     <View style={styles.mapContainer}>
       <MapView
+        ref={mapRef}
         style={styles.map}
         region={mapState}
         onRegionChangeComplete={setMapState}
@@ -69,7 +71,9 @@ const CreateActivity = () => {
           coordinate={activityMarker}
         />
       </MapView>
-      <BottomDrawer>
+      <BottomDrawer
+        mapRef={mapRef}
+      >
         <View style={styles.container}>
           <Text style={styles.header}>Create Activity</Text>
           <TextInput

@@ -4,7 +4,6 @@ import {
   Text,
   Pressable,
 } from 'react-native';
-import MapView from 'react-native-maps';
 
 import styles from '../styles/stylesheet';
 import { app } from '../utils/realm';
@@ -68,7 +67,7 @@ const Activity = (props) => {
             /* console.log(`${JSON.stringify(mapState)}`); */
             props.mapRef.current.animateCamera({
               center: {
-                latitude: props.location.latitude - 0.007,
+                latitude: props.location.latitude - 0.008,
                 longitude: props.location.longitude,
               }
             }, { duration: 1000 })

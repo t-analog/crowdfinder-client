@@ -6,7 +6,6 @@ import React from 'react';
 import {
   Text,
   View,
-  Pressable,
   ScrollView,
 } from 'react-native';
 import {
@@ -55,7 +54,9 @@ const ActivityNearby = () => {
           : null
         }
       </MapView>
-      <BottomDrawer>
+      <BottomDrawer
+        mapRef={mapRef}
+      >
         <View style={styles.container}>
           <Text style={styles.header}>Activity Nearby</Text>
           <ScrollView
