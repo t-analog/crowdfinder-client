@@ -276,10 +276,62 @@ const deleteActivity = () => {
   });
 };
 
+const joinActivity = () => {
+  const queryClient = useQueryClient();
+  const joinActivityQuery = gql`
+    mutation JoinActivity(
+      $id: ObjectId
+      $participants: [String],
+    ) {
+      updateOneActivity(
+        query: {
+          _id: $id
+        }
+        set: {
+          participants: $participants
+        }
+      ) {
+        _id
+        name
+        _partition
+        capacity
+        creator
+        description
+        categories
+        participants
+        location {
+          latitude
+          longitude
+        }
+      }
+    }
+  `;
+  return useMutation(async ({
+    id,
+    participants,
+  }) => {
+    const vars = {
+      "id": id,
+      "participants": participants.concat(app.currentUser.id),
+    };
+    try {
+      const data = await client.request(joinActivityQuery, vars);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("activities");
+    },
+  });
+};
+
 export {
   createActivity,
   getActivity,
   getActivities,
   updateActivity,
-  deleteActivity
+  deleteActivity,
+  joinActivity
 };

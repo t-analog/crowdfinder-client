@@ -8,11 +8,15 @@ import {
 import styles from '../styles/stylesheet';
 import { app } from '../utils/realm';
 import { MapContext } from '../utils/globalState'
-import { deleteActivity } from '../utils/activity';
+import {
+  deleteActivity,
+  joinActivity,
+} from '../utils/activity';
 
 const Activity = (props) => {
   const [mapState, setMapState] = React.useContext(MapContext);
-  const { mutate, error } = deleteActivity();
+  const { mutate: deleteActivityMutate, error: deleteActivityError } = deleteActivity();
+  const { mutate: joinActivityMutate, error: joinActivityError } = joinActivity();
   const creatorOrJoinedCheck = () => (
     props.creator === app.currentUser.id || props.participants.includes(app.currentUser.id)
       ? true
@@ -120,7 +124,7 @@ const Activity = (props) => {
                 onPress={
                   () => {
                     /* console.log(`${props._id}`); */
-                    mutate({ id: props._id });
+                    deleteActivityMutate({ id: props._id });
                   }
                 }
               >
@@ -141,12 +145,22 @@ const Activity = (props) => {
             ]}
             onPress={
               () => {
-                {
-                  creatorOrJoinedCheck()
-                    ?
-                    alert("You already joined this activity!")
-                    :
-                    alert("Activity joined!")
+                /* { */
+                /*   creatorOrJoinedCheck() */
+                /*     ? */
+                /*     alert("You already joined this activity!") */
+                /*     : */
+                /*     alert("Activity joined!") */
+                /* } */
+                if (creatorOrJoinedCheck()) {
+                  alert("You already joined this activity!");
+                } else {
+                  joinActivityMutate({
+                    id: props._id,
+                    participants: props.participants,
+                  });
+                  /* console.log(`${JSON.stringify(props.participants)}`); */
+                  /* alert("Activity joined!"); */
                 }
               }
             }
