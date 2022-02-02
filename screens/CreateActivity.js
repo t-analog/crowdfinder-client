@@ -47,12 +47,8 @@ const CreateActivity = () => {
       alert("Please enter the category for this activity!");
       return false;
     }
-    else if (capacity == "") {
-      alert("Please justify the capacity for this activity!");
-      return false;
-    }
-    else if (activityMarker.latitude == "" && activityMarker.longitude == "") {
-      alert("Invalid Location!");
+    else if (capacity == "" || capacity <= 0) {
+      alert("Please justify the valid capacity for this activity!");
       return false;
     }
     mutate({
@@ -183,6 +179,12 @@ const CreateActivity = () => {
             </Pressable>
           </View>
         </View>
+        
+        <View
+              style={{
+                height: 150,
+              }}
+            />
       </BottomDrawer>
     </View>
   );
