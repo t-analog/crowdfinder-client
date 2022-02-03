@@ -188,6 +188,11 @@ const CreateActivity = () => {
                 <Text style={styles.text}>Confirm</Text>
               </Pressable>
             </View>
+            <View
+              style={{
+                height: 140,
+              }}
+            />
           </ScrollView>
         </View>
       </BottomDrawer>
