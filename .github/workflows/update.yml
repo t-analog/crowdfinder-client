@@ -1,11 +1,11 @@
-name: update
+name: build
 on:
   push:
     branches:
       - develop-v2
 jobs:
   update:
-    name: EAS Update
+    name: EAS Build
     runs-on: ubuntu-latest
     steps:
       - name: Check for EXPO_TOKEN
@@ -26,5 +26,5 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
       - name: Install dependencies
         run: yarn install
-      - name: Publish update
-        run: eas update --auto
+      - name: Publish build
+        run: eas build -p android --profile preview
