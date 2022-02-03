@@ -8,8 +8,10 @@ import {
   Pressable,
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+
 import { useTogglePasswordVisibility } from '../components/TogglePassword';
 import styles from '../styles/stylesheet';
+import { version } from '../package.json'
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = React.useState("");
@@ -85,6 +87,16 @@ const Login = ({ navigation }) => {
           <Text style={styles.text}>Login</Text>
         </Pressable>
       </View>
+      <Text
+        style={{
+          position: 'absolute',
+          bottom: 20,
+          alignSelf: 'center',
+          color: 'lightgray',
+        }}
+      >
+        Version {version}
+      </Text>
     </View>
   );
 }
