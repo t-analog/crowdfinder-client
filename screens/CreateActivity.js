@@ -90,100 +90,105 @@ const CreateActivity = () => {
       >
         <View style={styles.container}>
           <Text style={styles.header}>Create Activity</Text>
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Name"
-            placeholderTextColor
-            style={[
-              styles.textInputBase,
-              styles.textInputSmall
-            ]}
-            underlineColorAndroid="transparent"
-            onChangeText={setName}
-            value={name}
-          />
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Description"
-            placeholderTextColor
-            style={[
-              styles.textInputBase,
-              styles.textInputBig,
-              styles.marginTop
-            ]}
-            underlineColorAndroid="transparent"
-            onChangeText={setDescription}
-            value={description}
-          />
-          <TextInput
-            autoCapitalize="none"
-            placeholder="Category"
-            placeholderTextColor
-            style={[
-              styles.textInputBase,
-              styles.textInputSmall,
-              styles.marginTop
-            ]}
-            onChangeText={setCategories}
-            underlineColorAndroid="transparent"
-            value={categories}
-          />
-          <TextInput
-            autoCapitalize="none"
-            keyboardType="numeric"
-            placeholder="Capacity"
-            placeholderTextColor
-            style={[
-              styles.textInputBase,
-              styles.textInputSmall,
-              styles.marginTop
-            ]}
-            onChangeText={setCapacity}
-            underlineColorAndroid="transparent"
-            value={capacity}
-          />
-          <TextInput
-            autoCapitalize="none"
-            editable={false}
-            placeholder="Location"
-            placeholderTextColor
-            style={[
-              styles.textInputBase,
-              styles.textInputSmall,
-              styles.marginTop,
-              {
-                color: 'black',
-              }]}
-            underlineColorAndroid="transparent"
-            value={`Lat: ${JSON.stringify(activityMarker.latitude)}, Long: ${JSON.stringify(activityMarker.longitude)}`}
-          />
-          <View style={[
-            styles.spaceBetween,
-            styles.marginTop
-          ]}>
-            <Pressable
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.scrollView}
+          >
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Name"
+              placeholderTextColor
               style={[
-                styles.buttonBase,
-                styles.buttonHalf
+                styles.textInputBase,
+                styles.textInputSmall
               ]}
-              onPress={() => {
-                clearText();
-              }}
-            >
-              <Text style={styles.text}>Cancel</Text>
-            </Pressable>
-            <Pressable
+              underlineColorAndroid="transparent"
+              onChangeText={setName}
+              value={name}
+            />
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Description"
+              placeholderTextColor
               style={[
-                styles.buttonBase,
-                styles.buttonHalf
+                styles.textInputBase,
+                styles.textInputBig,
+                styles.marginTop
               ]}
-              onPress={() => {
-                createActivityTrigger();
-              }}
-            >
-              <Text style={styles.text}>Confirm</Text>
-            </Pressable>
-          </View>
+              underlineColorAndroid="transparent"
+              onChangeText={setDescription}
+              value={description}
+            />
+            <TextInput
+              autoCapitalize="none"
+              placeholder="Category"
+              placeholderTextColor
+              style={[
+                styles.textInputBase,
+                styles.textInputSmall,
+                styles.marginTop
+              ]}
+              onChangeText={setCategories}
+              underlineColorAndroid="transparent"
+              value={categories}
+            />
+            <TextInput
+              autoCapitalize="none"
+              keyboardType="numeric"
+              placeholder="Capacity"
+              placeholderTextColor
+              style={[
+                styles.textInputBase,
+                styles.textInputSmall,
+                styles.marginTop
+              ]}
+              onChangeText={setCapacity}
+              underlineColorAndroid="transparent"
+              value={capacity}
+            />
+            <TextInput
+              autoCapitalize="none"
+              editable={false}
+              placeholder="Location"
+              placeholderTextColor
+              style={[
+                styles.textInputBase,
+                styles.textInputSmall,
+                styles.marginTop,
+                {
+                  color: 'black',
+                }]}
+              underlineColorAndroid="transparent"
+              value={`Lat: ${JSON.stringify(activityMarker.latitude)}, Long: ${JSON.stringify(activityMarker.longitude)}`}
+            />
+            <View style={[
+              styles.spaceBetween,
+              styles.marginTop
+            ]}>
+              <Pressable
+                style={[
+                  styles.buttonBase,
+                  styles.buttonHalf
+                ]}
+                onPress={() => {
+                  clearText();
+                }}
+              >
+                <Text style={styles.text}>Cancel</Text>
+              </Pressable>
+              <Pressable
+                style={[
+                  styles.buttonBase,
+                  styles.buttonHalf
+                ]}
+                onPress={() => {
+                  createActivityTrigger();
+                }}
+              >
+                <Text style={styles.text}>Confirm</Text>
+              </Pressable>
+            </View>
+          </ScrollView>
         </View>
       </BottomDrawer>
     </View>
