@@ -85,3 +85,4 @@ yarn-debug.log*
 .eslintcache
 
 *.env
+*.apk
