@@ -3,6 +3,7 @@ import { register } from '../utils/user';
 import {
   Text,
   View,
+  Alert,
   Pressable,
   TextInput,
 } from 'react-native';
@@ -23,7 +24,7 @@ const RegisterAccount = ({ navigation }) => {
         style={[styles.textInputBase, styles.textInputSmall]}
         autoCapitalize="none"
         onChangeText={setUsername}
-        placeholder="Email/Username"
+        placeholder="Email"
         placeholderTextColor="black"
         underlineColorAndroid="transparent"
       />
@@ -50,7 +51,11 @@ const RegisterAccount = ({ navigation }) => {
         onPress={
           async () => {
             if (password != confirmPassword) {
-              console.error("Password and Confirm Password don't match");
+              /* console.error("Password and Confirm Password don't match"); */
+              Alert.alert(
+                "Failed to register",
+                `Password and Confirm Password don't match!`
+              )
               return;
             }
             const user = await register({ username, password });

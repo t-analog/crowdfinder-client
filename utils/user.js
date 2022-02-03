@@ -7,6 +7,7 @@ import {
   useMutation,
   useQueryClient,
 } from "react-query";
+import { Alert } from 'react-native';
 
 import {
   client,
@@ -28,7 +29,11 @@ const register = async ({ username, password }) => {
       password
     });
   } catch (err) {
-    console.error(`Failed to register: ${err.message}`);
+    // console.error(`Failed to register: ${err.message}`);
+    Alert.alert(
+      "Failed to register",
+      `${err.message}`
+    )
     return false;
   }
   const credentials = Realm.Credentials.emailPassword(
@@ -62,7 +67,11 @@ const login = async ({ username, password }) => {
     const user = await app.logIn(credentials);
     return user.accessToken;
   } catch (err) {
-    console.error(`Failed to login: ${err.message}`);
+    // console.error(`Failed to login: ${err.message}`);
+    Alert.alert(
+      "Failed to login",
+      `${err.message}`
+    )
     return false;
   }
 };
@@ -79,7 +88,11 @@ const logout = async () => {
     await user.logOut();
     return !user.isLoggedIn;
   } catch (err) {
-    console.error(`Failed to logout: ${err.message}`);
+    // console.error(`Failed to logout: ${err.message}`);
+    Alert.alert(
+      "Failed to logout",
+      `${err.message}`
+    )
     return false;
   }
 }
@@ -110,7 +123,11 @@ const getCustomUserData = () => {
       const data = await client.request(getCustomUserDataQuery, vars);
       return data;
     } catch (err) {
-      console.log(err);
+      // console.error(err);
+      Alert.alert(
+        "Error!",
+        `${err.message}`
+      );
     }
   });
 };
@@ -159,7 +176,11 @@ const updateCustomUserData = () => {
       const data = await client.request(updateCustomUserDataQuery, vars);
       return data;
     } catch (err) {
-      console.log(err);
+      // console.error(err);
+      Alert.alert(
+        "Error!",
+        `${err.message}`
+      );
     }
   }, {
     onSuccess: () => {

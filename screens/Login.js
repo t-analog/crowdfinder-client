@@ -12,8 +12,8 @@ import { useTogglePasswordVisibility } from '../components/TogglePassword';
 import styles from '../styles/stylesheet';
 
 const Login = ({ navigation }) => {
-  const [username, setUsername] = React.useState("second@second");
-  const [password, setPassword] = React.useState("password");
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
     useTogglePasswordVisibility();
   return (

@@ -129,7 +129,7 @@ const Activity = (props) => {
                 onPress={
                   () => {
                     Alert.alert(
-                      "Deleting Activity..",
+                      "Deleting Activity",
                       "Do you want to delete this activity?",
                       [
                         {
@@ -167,7 +167,7 @@ const Activity = (props) => {
                   alert("You already joined your own activity!");
                 } else if (joinedCheck()) {
                   Alert.alert(
-                    "Leaving Activity..",
+                    "Leaving Activity",
                     "Do you want to leave this activity?",
                     [
                       {
@@ -187,7 +187,7 @@ const Activity = (props) => {
                   );
                 } else {
                   Alert.alert(
-                    "Joining Activity..",
+                    "Joining Activity",
                     "Do you want to join this activity?",
                     [
                       {

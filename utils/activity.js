@@ -6,6 +6,7 @@ import {
   useMutation,
   useQueryClient,
 } from "react-query";
+import { Alert } from 'react-native';
 
 import {
   client,
@@ -92,7 +93,11 @@ const createActivity = () => {
       const data = await client.request(createActivityQuery, vars);
       return data;
     } catch (err) {
-      console.log(err);
+      // console.error(err);
+      Alert.alert(
+        "Error!",
+        `${err.message}`
+      );
     }
   }, {
     onSuccess: () => {
@@ -132,7 +137,11 @@ const getActivity = () => {
       const data = await client.request(getActivityQuery, vars);
       return data;
     } catch (err) {
-      console.log(err);
+      // console.error(err);
+      Alert.alert(
+        "Error!",
+        `${err.message}`
+      );
     }
   });
 };
@@ -162,7 +171,11 @@ const getActivities = () => {
       // console.log(`${JSON.stringify(data)}`);
       return data;
     } catch (err) {
-      console.error(err);
+      // console.error(err);
+      Alert.alert(
+        "Error!",
+        `${err.message}`
+      );
     }
   }, {
     cacheTime: 10 * 1000,
@@ -230,7 +243,11 @@ const updateActivity = () => {
       const data = await client.request(updateActivityQuery, vars);
       return data;
     } catch (err) {
-      console.log(err);
+      // console.error(err);
+      Alert.alert(
+        "Error!",
+        `${err.message}`
+      );
     }
   });
 };
@@ -267,7 +284,11 @@ const deleteActivity = () => {
       const data = await client.request(deleteActivityQuery, vars);
       return data;
     } catch (err) {
-      console.log(err);
+      // console.error(err);
+      Alert.alert(
+        "Error!",
+        `${err.message}`
+      );
     }
   }, {
     onSuccess: () => {
@@ -323,7 +344,11 @@ const updateActivityParticipant = () => {
       const data = await client.request(updateActivityParticipantQuery, vars);
       return data;
     } catch (err) {
-      console.log(err);
+      // console.error(err);
+      Alert.alert(
+        "Error!",
+        `${err.message}`
+      );
     }
   }, {
     onSuccess: () => {
