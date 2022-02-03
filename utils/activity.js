@@ -179,6 +179,7 @@ const getActivities = () => {
     }
   }, {
     cacheTime: 10 * 1000,
+    staleTime: 10 * 1000,
   });
 };
 
